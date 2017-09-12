@@ -46,11 +46,11 @@ export default class App extends Component {
         <Scene key="MyServices" component={ MyServices } initial={ false } hideNavBar={ true }/>
         <Scene key="MyServicesDetail" component={ MyServicesDetail } initial={ false } hideNavBar={ true }/>
         <Scene key="StartProject" component={ StartProject } initial={ false } hideNavBar={ true }/>
-        <Scene key="Ticket" component={ Ticket } initial={ false } hideNavBar={ true }/>
+        <Scene key="Ticket" component={ Ticket } initial={ true } hideNavBar={ true }/>
         <Scene key="Profile" component={ Profile } initial={ false } hideNavBar={ true }/>
         <Scene key="Offers" component={ Offers } initial={ false } hideNavBar={ true }/>
         <Scene key="OffersDetail" component={ OffersDetail } initial={ false } hideNavBar={ true }/>
-        <Scene key="Services" component={ Services } initial={ true } hideNavBar={ true } />
+        <Scene key="Services" component={ Services } initial={ false } hideNavBar={ true } />
         <Scene key="ServicesDetail" component={ ServicesDetail } initial={ false } hideNavBar={ true } />
       </Scene>
     );

@@ -115,6 +115,7 @@ class Profile extends Component {
                     style={styles.input}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
+                    keyboardType="numeric"
                     value={ this.state.phone }
                     onChangeText={ (text) => this.setState({ phone: text }) }
                     onSubmitEditing={ () => this.refs.email.focus() }
@@ -131,6 +132,7 @@ class Profile extends Component {
                     style={styles.input}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
+                    keyboardType="email-address"
                     value={ this.state.email }
                     onChangeText={ (text) => this.setState({ email: text }) }
                     onSubmitEditing={ () => this.refs.content.focus() }
