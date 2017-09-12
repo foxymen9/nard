@@ -1,0 +1,1 @@
+export const MENU_SELECTED_ID = 'MENU_SELECTED_ID';
