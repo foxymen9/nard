@@ -115,7 +115,7 @@ class Profile extends Component {
                     style={styles.input}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
-                    keyboardType="numeric"
+                    keyboardType="numbers-and-punctuation"
                     value={ this.state.phone }
                     onChangeText={ (text) => this.setState({ phone: text }) }
                     onSubmitEditing={ () => this.refs.email.focus() }
