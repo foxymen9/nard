@@ -253,8 +253,7 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     width: subWidth,
-    paddingLeft: textPadding,
-    paddingRight: textPadding,
+    paddingHorizontal: textPadding,
   },
   inputContent: {
     fontSize: 14,
@@ -281,9 +280,8 @@ const styles = StyleSheet.create({
   },
   profile: {
     width: subWidth,
-    marginTop: 20,
-    paddingBottom: 20,
-    marginLeft: 20,
+    marginVertical: 20,
+    marginHorizontal: 20,
   },
   textBold: {
     fontWeight: 'bold',

@@ -105,8 +105,7 @@ const styles = StyleSheet.create({
   titleBar: {
     backgroundColor: commonColors.detailTitleBar,
     width: screenWidth,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingVertical: 20,
     paddingLeft: screenWidth * 0.05,
   },
   titleText: {
@@ -119,8 +118,7 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     width: screenWidth,
-    marginTop: 20,
-    marginBottom: 20,
+    marginVertical: 20,
     alignItems: 'center',
   },
   scrollView: {

@@ -184,16 +184,14 @@ const styles = StyleSheet.create({
   listView: {
     height: 50,
     justifyContent: 'space-between',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
     flexDirection: 'row',
   },
   listViewSelect: {
     height: 50,
     justifyContent: 'space-between',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#414141',

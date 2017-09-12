@@ -213,8 +213,7 @@ const styles = StyleSheet.create({
     width: screenWidth,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: screenWidth * 0.1,
-    paddingRight: screenWidth * 0.1,
+    paddingHorizontal: screenWidth * 0.1,
     height: 30,
   },
   titleText: {

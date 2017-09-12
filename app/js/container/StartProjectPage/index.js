@@ -227,8 +227,7 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     width: subWidth,
-    paddingLeft: textPadding,
-    paddingRight: textPadding,
+    paddingHorizontal: textPadding,
   },
   inputContent: {
     fontSize: 14,
