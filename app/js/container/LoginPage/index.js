@@ -138,6 +138,7 @@ class Login extends Component {
                   style={styles.input}
                   underlineColorAndroid="transparent"
                   returnKeyType={ 'next' }
+                  keyboardType="email-address"
                   value={ this.state.email }
                   onChangeText={ (text) => this.setState({ email: text }) }
                   onSubmitEditing={ () => this.refs.phone.focus() }
