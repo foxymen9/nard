@@ -75,16 +75,26 @@ class Container extends Component {
       return (
           <Drawer
               type="overlay"
+              side="right"
               content={menuComponent}
               openDrawerOffset={0.2}
               panCloseMask={null}
               closeDrawerOffset={-3}
               styles={drawerStyles}
               ref={(ref)=>this._drawer = ref}
-              side="right"
+              tapToClose={true}
               tweenHandler={(ratio) => ({
                 main: { opacity: (2 - ratio) / 2 }
               })}
+              onOpen={()=>{
+                this.setState({menuState: true});
+              }}
+              onClose={()=>{
+                this.setState({menuState: false});
+              }}
+              openDrawerOffset={(viewport)=>{
+                return 150
+              }}
           >
             <View style={ styles.container } >
               <View style={ styles.navBar } >
