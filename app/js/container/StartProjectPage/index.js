@@ -45,15 +45,24 @@ class StarProject extends Component {
       name: '',
       phone: '',
       email: '',
-      defaultDepartment: 'Set Department',
+      defaultDepartment: 'Select Department',
       department: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'],
     };
   }
 
   componentWillMount() {
+    const { currentLanguage } = this.props;
+    this.changeDepartmentLanguage(currentLanguage);
   }
 
   componentWillReceiveProps(nextProps) {
+    const { currentLanguage } = nextProps;
+    this.changeDepartmentLanguage(currentLanguage);
+  }
+  
+  changeDepartmentLanguage(currentLanguage) {
+    const { defaultDepartment } = this.state; 
+    this.setState({defaultDepartment: language.department[currentLanguage] });
   }
 
   onStartProject() {
