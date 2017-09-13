@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
   modalDropdown: {
     backgroundColor:  'transparent', 
     marginLeft: inputMargin,
+    width: 210,
   },
   dropdownStyle: {
     width: 180,
