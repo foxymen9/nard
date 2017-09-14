@@ -133,7 +133,9 @@ class MyServices extends Component {
             </View>
           </Image>
         </TouchableHighlight>
-        {listSubView}
+        <View>
+          {listSubView}
+        </View>
       </View>
     )
   }
@@ -143,7 +145,7 @@ class MyServices extends Component {
           rowID != 4 && (
           <View
               key={`${sectionID}-${rowID}`}
-              style={{ height: 4, backgroundColor: '#fff', flex:1}}
+              style={{ height: 4, backgroundColor: commonColors.title, flex:1}}
           />
           )
       );

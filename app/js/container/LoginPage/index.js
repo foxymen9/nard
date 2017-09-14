@@ -298,8 +298,8 @@ const styles = StyleSheet.create({
     marginRight: inputMargin,
   },
   textWrapper: {
-    marginTop: 30,
-    marginBottom: 10,
+    paddingTop: 30,
+    paddingBottom: 10,
     flexDirection: 'row',
     width: subWidth,
     justifyContent: 'space-between',
