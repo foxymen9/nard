@@ -49,38 +49,39 @@ class Menu extends Component {
       //Hide menu when select the current page
       this.props.menuState();
     }
-
-    if (rowID == 0) {   //Our Services
-      //Save current selected menu id
-      this.props.saveMenuSelectedID(rowID);
-      Actions.MyServices();
-    }
-    if (rowID == 1) {   //Special Offers
-      //Save current selected menu id
-      this.props.saveMenuSelectedID(rowID);
-      Actions.Offers();
-    }
-    else if (rowID == 2) {   //My Account
-      this.props.saveMenuSelectedID(rowID);
-      Actions.Profile();
-    }
-    else if (rowID == 3) {   //Ticket
-      this.props.saveMenuSelectedID(rowID);
-      Actions.Ticket();
-    }
-    else if (rowID == 4) {  //Language
-      //Change Language and hide menu
-      const lang = currentLanguage == 'EN' ? 'AR' : 'EN';
-      this.props.changeLanguage(lang);
-      this.props.menuState();
-    }
-    else if (rowID == 5) {  //Visit Nard.sa
-      browser.open("https://www.nard.sa");
-      this.props.menuState();
-    }
-    else if (rowID == 6) {   //Logout
-      this.props.saveMenuSelectedID('null');
-      Actions.Login();
+    
+    switch (rowID) {
+      case "0":
+        this.props.saveMenuSelectedID(rowID);
+        Actions.MyServices();
+        return;
+      case "1":
+        this.props.saveMenuSelectedID(rowID);
+        Actions.Offers();
+        return;
+      case "2":
+        this.props.saveMenuSelectedID(rowID);
+        Actions.Profile();
+        return;
+      case "3":
+        this.props.saveMenuSelectedID(rowID);
+        Actions.Ticket();
+        return;
+      case "4":
+        const lang = currentLanguage == 'EN' ? 'AR' : 'EN';
+        this.props.changeLanguage(lang);
+        this.props.menuState();
+        return;
+      case "5":
+        browser.open("https://www.nard.sa");
+        this.props.menuState();
+        return;
+      case "6":
+        this.props.saveMenuSelectedID('null');
+        Actions.Login();
+        return;
+      default:
+        return;
     }
   }
 
