@@ -39,7 +39,7 @@ class Offers extends Component {
     this.state = {
       dataSource: null,
       rowID: null,
-      backColors: [commonColors.lightYellow, '#1C92D0', '#474747', commonColors.lightYellow],
+      backColors: [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText, commonColors.lightYellow],
     };
   }
 
