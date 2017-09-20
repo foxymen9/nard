@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#EF9C12',
+    backgroundColor: commonColors.lightYellow,
     height: 125,
     paddingTop: 5,
   },

@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   listSubWrapper: {
-    backgroundColor: '#EF9C12',
+    backgroundColor: commonColors.lightYellow,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
