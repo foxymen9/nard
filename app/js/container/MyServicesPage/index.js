@@ -193,7 +193,7 @@ class MyServices extends Component {
           }
         </View>
         <View style={styles.addService}>
-          <TouchableOpacity onPress={()=>{this.onAddService()}}>
+          <TouchableOpacity activeOpacity={ .8 } onPress={()=>{this.onAddService()}}>
             <Image source={ addService } resizeMode="contain" />
           </TouchableOpacity>
         </View>
