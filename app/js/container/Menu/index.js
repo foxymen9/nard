@@ -10,9 +10,9 @@ import {
     RecyclerViewBackedScrollView,
     TouchableOpacity,
     TouchableHighlight,
+    Linking,
 } from 'react-native';
 
-import browser from 'react-native-browser';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -73,7 +73,7 @@ class Menu extends Component {
         this.props.menuState();
         return;
       case "5":
-        browser.open("https://www.nard.sa");
+        Linking.openURL("https://www.nard.sa");
         this.props.menuState();
         return;
       case "6":

@@ -12,10 +12,10 @@ import {
   TouchableOpacity,
   Alert,
   Keyboard,
-  findNodeHandle,  
+  findNodeHandle,
+  Linking,
 } from 'react-native';
 
-import browser from 'react-native-browser';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -90,7 +90,7 @@ class Login extends Component {
   }
 
   onGotoSite() {
-    browser.open("https://www.nard.sa");
+    Linking.openURL("https://www.nard.sa");
   }
 
   //Phone Input
