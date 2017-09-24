@@ -23,7 +23,6 @@ import { Actions } from 'react-native-router-flux';
 import CheckBox from 'react-native-checkbox-heaven';
 import Spinner from 'react-native-loading-spinner-overlay';
 import timer from 'react-native-timer';
-import Video from 'react-native-video';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PhoneInput from 'react-native-phone-input';
 import  ModalPickerImage from '../../utils/ModalPickerImage';
@@ -62,9 +61,6 @@ class Login extends Component {
     this.setState({pickerData: this.refs.phone.getPickerData()});
   }
 
-  componentWillReceiveProps(nextProps) {
-  }
-
   onLogin() {
     Keyboard.dismiss();
     const {email} = this.state;
@@ -78,7 +74,7 @@ class Login extends Component {
   }
 
   onForgotPassword() {
-
+    console.log('forgot password');
   }
 
   onChangeLanguage() {

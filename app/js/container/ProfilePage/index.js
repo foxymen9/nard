@@ -44,7 +44,6 @@ class Profile extends Component {
       name: '',
       phone: '',
       email: '',
-      department: '',
       content: '',
       firstName: 'K',
     };
@@ -72,7 +71,7 @@ class Profile extends Component {
                 <Text  style={ styles.avatarText }>{this.state.firstName}</Text>
               </Image>
               <View style={{flex:0.7}}>
-                <Image source={company} style={ styles.inputImg } resizeMode="center" >
+                <Image source={company} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
                     autoCapitalize="none"
@@ -88,7 +87,7 @@ class Profile extends Component {
                     onSubmitEditing={ () => this.refs.name.focus() }
                   />
                 </Image>
-                <Image source={name} style={ styles.inputImg } resizeMode="center" >
+                <Image source={name} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="name"
                     autoCapitalize="none"
@@ -104,7 +103,7 @@ class Profile extends Component {
                     onSubmitEditing={ () => this.refs.phone.focus() }
                   />
                 </Image>
-                <Image source={phone} style={ styles.inputImg } resizeMode="center" >
+                <Image source={phone} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="phone"
                     autoCapitalize="none"
@@ -121,7 +120,7 @@ class Profile extends Component {
                     onSubmitEditing={ () => this.refs.email.focus() }
                   />
                 </Image>
-                <Image source={email} style={ styles.inputImg } resizeMode="center" >
+                <Image source={email} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="email"
                     autoCapitalize="none"
@@ -143,7 +142,7 @@ class Profile extends Component {
                     activeOpacity={ .5 }
                     onPress={ () => this.conUpdate() }
                   >
-                    <Image source={ update } style={ styles.button } resizeMode="center" >
+                    <Image source={ update } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
                     </Image>
                   </TouchableOpacity>

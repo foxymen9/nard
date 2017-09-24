@@ -35,7 +35,7 @@ const language = {
     "startProject": {"EN": "START A PROJECT", "AR": "بدء مشروع جديد"},
     "fullName": {"EN": "Full Name", "AR": "الإسم الكامل"},
     "phone": {"EN": "Telephone Number", "AR": "رقم الجوال"},
-    "department": {"EN": "Select Department", "AR": "إختر القسم "},
+    "department_txt": {"EN": "Select Department", "AR": "إختر القسم "},
     "content": {"EN": "Enter your text...", "AR": "أكتب رسالتك"},
     "startNewProject": {"EN": "Start a new project", "AR": "بدء مشروع جديد"},
     //Ticket Page

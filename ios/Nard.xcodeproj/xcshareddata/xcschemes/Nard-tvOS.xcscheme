@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "Nard-tvOS.app"
-               BlueprintName = "Nard-tvOS"
-               ReferencedContainer = "container:Nard.xcodeproj">
+               BuildableName = "nard-tvOS.app"
+               BlueprintName = "nard-tvOS"
+               ReferencedContainer = "container:nard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "Nard-tvOSTests.xctest"
-               BlueprintName = "Nard-tvOSTests"
-               ReferencedContainer = "container:Nard.xcodeproj">
+               BuildableName = "nard-tvOSTests.xctest"
+               BlueprintName = "nard-tvOSTests"
+               ReferencedContainer = "container:nard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "Nard-tvOSTests.xctest"
-               BlueprintName = "Nard-tvOSTests"
-               ReferencedContainer = "container:Nard.xcodeproj">
+               BuildableName = "nard-tvOSTests.xctest"
+               BlueprintName = "nard-tvOSTests"
+               ReferencedContainer = "container:nard.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "Nard-tvOS.app"
-            BlueprintName = "Nard-tvOS"
-            ReferencedContainer = "container:Nard.xcodeproj">
+            BuildableName = "nard-tvOS.app"
+            BlueprintName = "nard-tvOS"
+            ReferencedContainer = "container:nard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "Nard-tvOS.app"
-            BlueprintName = "Nard-tvOS"
-            ReferencedContainer = "container:Nard.xcodeproj">
+            BuildableName = "nard-tvOS.app"
+            BlueprintName = "nard-tvOS"
+            ReferencedContainer = "container:nard.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "Nard-tvOS.app"
-            BlueprintName = "Nard-tvOS"
-            ReferencedContainer = "container:Nard.xcodeproj">
+            BuildableName = "nard-tvOS.app"
+            BlueprintName = "nard-tvOS"
+            ReferencedContainer = "container:nard.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

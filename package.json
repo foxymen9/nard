@@ -1,36 +1,31 @@
 {
-  "name": "Nard",
-  "version": "0.1.0",
+  "name": "nard",
+  "version": "0.0.1",
   "private": true,
-  "devDependencies": {
-    "react-native-scripts": "1.1.0",
-    "jest-expo": "~19.0.0",
-    "react-test-renderer": "16.0.0-alpha.12"
-  },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
-  },
-  "jest": {
-    "preset": "jest-expo"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
   },
   "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.48.4"
+  },
+  "devDependencies": {
+    "babel-jest": "21.0.2",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.1.0",
+    "react-test-renderer": "16.0.0-alpha.12",
     "axios": "^0.16.2",
     "base-64": "^0.1.0",
     "expo": "^19.0.0",
     "react": "16.0.0-alpha.12",
-    "react-native": "^0.46.1",
+    "react-native": "0.48.4",
     "react-native-browser": "^0.6.2",
     "react-native-check-box": "^2.0.0",
     "react-native-checkbox-heaven": "^0.1.4",
     "react-native-drawer": "^2.5.0",
     "react-native-drawer-menu": "^0.2.4",
     "react-native-fetch-blob": "^0.10.8",
-    "react-native-i18n": "^2.0.4",
     "react-native-keyboard-aware-scroll-view": "^0.3.0",
     "react-native-loading-spinner-overlay": "^0.5.1",
     "react-native-modal-dropdown": "^0.5.0",
@@ -42,9 +37,11 @@
     "react-native-side-menu": "^1.1.0",
     "react-native-timer": "^1.3.1",
     "react-native-vector-icons": "^4.3.0",
-    "react-native-video": "^2.0.0",
-    "react-redux": "^5.0.6",
+    "react-redux": "^3.5.2",
     "redux-thunk": "^2.2.0",
     "underscore": "^1.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }

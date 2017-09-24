@@ -32,7 +32,7 @@ import Container from '../Container';
 const name = require('../../../assets/imgs/start_project/full_name.png');
 const email = require('../../../assets/imgs/start_project/mail.png');
 const phone = require('../../../assets/imgs/start_project/phone.png');
-const department = require('../../../assets/imgs/start_project/click.png');
+const department_img = require('../../../assets/imgs/start_project/click.png');
 const content = require('../../../assets/imgs/start_project/text_field.png');
 const submit = require('../../../assets/imgs/main/yellow_button.png');
 const arrow = require('../../../assets/imgs/start_project/down_arrow.png');
@@ -46,7 +46,7 @@ class StarProject extends Component {
       phone: '',
       email: '',
       defaultDepartment: 'Select Department',
-      department: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'],
+      departments: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'],
     };
   }
 
@@ -62,7 +62,7 @@ class StarProject extends Component {
   
   changeDepartmentLanguage(currentLanguage) {
     const { defaultDepartment } = this.state; 
-    this.setState({defaultDepartment: language.department[currentLanguage] });
+    this.setState({defaultDepartment: language.department_txt[currentLanguage] });
   }
 
   onStartProject() {
@@ -70,8 +70,8 @@ class StarProject extends Component {
   }
 
   onSelectDepartment(index){
-    const { department } = this.state;
-    this.setState({ defaultDepartment: department[index] });
+    const { departments } = this.state;
+    this.setState({ defaultDepartment: departments[index] });
   }
 
   render() {
@@ -82,7 +82,7 @@ class StarProject extends Component {
         <View style={ styles.container } >
           <KeyboardAwareScrollView>
             <View style={ styles.subContainer } >
-              <Image source={name} style={ styles.inputImg } resizeMode="center">
+              <Image source={name} style={ styles.inputImg } resizeMode="contain">
                 <TextInput
                   ref="name"
                   autoCapitalize="none"
@@ -98,7 +98,7 @@ class StarProject extends Component {
                   onSubmitEditing={ () => this.refs.phone.focus() }
                 />
               </Image>
-              <Image source={phone} style={ styles.inputImg } resizeMode="center" >
+              <Image source={phone} style={ styles.inputImg } resizeMode="contain" >
                 <TextInput
                   ref="phone"
                   autoCapitalize="none"
@@ -115,7 +115,7 @@ class StarProject extends Component {
                   onSubmitEditing={ () => this.refs.email.focus() }
                 />
               </Image>
-              <Image source={email} style={ styles.inputImg }  resizeMode="center">
+              <Image source={email} style={ styles.inputImg }  resizeMode="contain">
                 <TextInput
                   ref="email"
                   autoCapitalize="none"
@@ -132,8 +132,8 @@ class StarProject extends Component {
                   onSubmitEditing={ () => this.refs.content.focus() }
                 />
               </Image>
-              <Image source={department} style={ styles.inputImg }  resizeMode="center" >
-                <ModalDropdown options={this.state.department}  
+              <Image source={department_img} style={ styles.inputImg }  resizeMode="contain" >
+                <ModalDropdown options={this.state.departments}  
                               style={styles.modalDropdown} 
                               dropdownStyle={styles.dropdownStyle} 
                               onSelect={(index)=>this.onSelectDepartment(index)}
@@ -144,7 +144,7 @@ class StarProject extends Component {
                   </View>
                 </ModalDropdown>
               </Image>
-              <Image source={content} style={ styles.inputImgContent }  resizeMode="center" >
+              <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper}>
                   <TextInput
                     ref="content"
@@ -170,7 +170,7 @@ class StarProject extends Component {
                   activeOpacity={ .5 }
                   onPress={ () => this.onStartProject() }
                 >
-                  <Image source={ submit } style={ styles.button }  resizeMode="center">
+                  <Image source={ submit } style={ styles.button }  resizeMode="contain">
                     <Text style={ styles.textButton }>{language.startNewProject[currentLanguage]}</Text>
                   </Image>
                 </TouchableOpacity>

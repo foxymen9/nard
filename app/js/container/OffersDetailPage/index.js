@@ -39,7 +39,6 @@ class OffersDetail extends Component {
       name: '',
       phone: '',
       email: '',
-      department: '',
     };
   }
 

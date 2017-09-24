@@ -77,7 +77,6 @@ class Container extends Component {
               type="overlay"
               side="right"
               content={menuComponent}
-              openDrawerOffset={0.2}
               panCloseMask={null}
               closeDrawerOffset={-3}
               styles={drawerStyles}
@@ -95,6 +94,7 @@ class Container extends Component {
               openDrawerOffset={(viewport)=>{
                 return 150
               }}
+              useInteractionManager={true}
           >
             <View style={ styles.container } >
               <View style={ styles.navBar } >
@@ -111,7 +111,7 @@ class Container extends Component {
                       style={ styles.menu }
                       onPress={ () => this.onChangeMenuState() }
                     >
-                      <Image source={ menu } resizeMode="center" style={styles.menuIcon} />  
+                      <Image source={ menu } resizeMode="contain" style={styles.menuIcon} />  
                     </TouchableOpacity>
                   </View>
                 : <View>
@@ -121,7 +121,7 @@ class Container extends Component {
                       style={ styles.menu }
                       onPress={ () => this.onChangeMenuState() }
                     >
-                      <Image source={ menu } resizeMode="center" style={styles.menuIcon} />  
+                      <Image source={ menu } resizeMode="contain" style={styles.menuIcon} />  
                     </TouchableOpacity>
                     {(pageTitle === 'ourServicesDetail' || pageTitle === 'offersDetail' || serviceDetail == "true") && (
                       <TouchableOpacity
@@ -130,7 +130,7 @@ class Container extends Component {
                         onPress={ () => this.onBack() }
                       >
                         <View >
-                          <Image source={ back } resizeMode="center" style={styles.backIcon} />  
+                          <Image source={ back } resizeMode="contain" style={styles.backIcon} />  
                         </View>
                       </TouchableOpacity>
                     )}

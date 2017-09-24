@@ -32,7 +32,6 @@ import Container from '../Container';
 const name = require('../../../assets/imgs/start_project/full_name.png');
 const email = require('../../../assets/imgs/start_project/mail.png');
 const phone = require('../../../assets/imgs/start_project/phone.png');
-const department = require('../../../assets/imgs/start_project/click.png');
 const content = require('../../../assets/imgs/start_project/text_field.png');
 const submit = require('../../../assets/imgs/main/yellow_button.png');
 
@@ -44,7 +43,6 @@ class ServicesDetail extends Component {
       name: '',
       phone: '',
       email: '',
-      department: '',
     };
   }
 

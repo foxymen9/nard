@@ -135,7 +135,7 @@ class Menu extends Component {
             style={ styles.menu }
             onPress={ () => this.onChangeMenuState() }
           >
-            <Image source={ menu } resizeMode="center" style={styles.menuIcon} />  
+            <Image source={ menu } resizeMode="contain" style={ styles.menuIcon } />  
           </TouchableOpacity>
         </View>
         <View style={ styles.body }>
@@ -205,9 +205,11 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 40,
     position: 'absolute',
-    width: 50,
-    height: 50,
   },
+  menuIcon: {
+    height: 30,
+    width: 30,
+  }
 });
 
 export default connect(state => ({
