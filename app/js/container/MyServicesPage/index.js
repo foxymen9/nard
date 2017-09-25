@@ -128,7 +128,7 @@ class MyServices extends Component {
         <TouchableHighlight onPress={()=>{this.onItemSelect(rowData, rowID)}}>
           <Image source={ this.state.rowID == rowID ? rowData.image_select : rowData.image } style={ styles.serviceImage } >
             <View style={styles.listView}>
-              <Text  style={styles.serviceTitle}>{rowData.title}</Text>
+              <Text  style={[styles.serviceTitle, styles.titleStyle]}>{rowData.title}</Text>
               { this.state.rowID != rowID && (
               <View style={styles.rightWrapper}>
                 <Text  style={styles.serviceTitle}>{this.state.totalCount[rowID]}</Text>
@@ -246,6 +246,9 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 26,
     backgroundColor: 'transparent',
+  },
+  titleStyle: {
+    width: screenWidth - 100,
   },
   arrow: {
     marginLeft: 25,

@@ -24,9 +24,9 @@ const language = {
     "sslText": {"EN": "SSL & CDN", "AR": "الحماية CDN & SSL"},
     "chatText": {"EN": "LIVE CHATTING", "AR": "الدعم المباشر"},
     "kenticoText": {"EN": "KENTICO CMS & EMS", "AR": "Kentico كينتيكو"},
-    "amcText": {"EN": "Annual Maintenance Contact", "AR": "تطبيقات الجوال"},
+    "amcText": {"EN": "ANNUAL MAINTENANCE", "AR": "تطبيقات الجوال"},
     //Menu
-    "menuHome": {"EN": "Home", "AR": ""},
+    "menuHome": {"EN": "Home", "AR": "الصفحة الرئيسية"},
     "menuOurServices": {"EN": "My Services", "AR": "خدماتي"},
     "menuOffer": {"EN": "Special Offers", "AR": "العروض"},
     "menuEditProfile": {"EN": "My Account", "AR": "حسابي"},

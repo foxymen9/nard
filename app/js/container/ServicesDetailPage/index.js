@@ -40,23 +40,19 @@ const mobile = require('../../../assets/imgs/services_detail/mobile.png');
 const maintenance = require('../../../assets/imgs/services_detail/maintenance.png');
 const logo = require('../../../assets/imgs/services_detail/logo.png');
 
+import WebSitePage from './subPages/website';
+import EcommercePage from './subPages/ecommerce';
+import LogoDesignPage from './subPages/logo';
+import MultiMediaPage from './subPages/multimedia';
+import ContentPage from './subPages/content';
+import SeoPage from './subPages/seo';
+import AnnualPage from './subPages/annual';
+import KenticoPage from './subPages/kentico';
+import MobilePage from './subPages/kentico';
+
 class ServicesDetail extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      avatars: [
-        { avatar: web, backColor: commonColors.serviceWebColor },
-        { avatar: cart, backColor: commonColors.detailTitleBar },
-        { avatar: logo, backColor: commonColors.serviceLogoColor },
-        { avatar: video, backColor: commonColors.lightYellow },
-        { avatar: content, backColor: commonColors.serviceContentColor },
-        { avatar: search, backColor: commonColors.serviceSeoColor },
-        { avatar: maintenance , backColor: commonColors.serviceMaintanenceColor },
-        { avatar: kentico, backColor: commonColors.serviceKenticoColor },
-        { avatar: mobile, backColor: commonColors.serviceMobileColor }
-      ],
-    };
   }
 
   componentWillMount() {
@@ -70,11 +66,45 @@ class ServicesDetail extends Component {
   }
   
   render() {
-    const { currentLanguage, titleKey, rowID } = this.props;
-    const { avatars } = this.state;
+    const { currentLanguage, titleKey, rowID, title } = this.props;
+    const avatars = [
+        { avatar: web, backColor: commonColors.serviceWebColor },
+        { avatar: cart, backColor: commonColors.detailTitleBar },
+        { avatar: logo, backColor: commonColors.serviceLogoColor },
+        { avatar: video, backColor: commonColors.lightYellow },
+        { avatar: content, backColor: commonColors.serviceContentColor },
+        { avatar: search, backColor: commonColors.serviceSeoColor },
+        { avatar: maintenance , backColor: commonColors.serviceMaintanenceColor },
+        { avatar: kentico, backColor: commonColors.serviceKenticoColor },
+        { avatar: mobile, backColor: commonColors.serviceMobileColor }
+    ];
+
+    const serviceTitle = [
+      language.sWebsite[currentLanguage],
+      language.sEcommerce[currentLanguage],
+      language.sLogoDesign[currentLanguage],
+      language.sMultimediaCD[currentLanguage],
+      language.sContentSolution[currentLanguage],
+      language.sSeo[currentLanguage],
+      language.sMaintanence[currentLanguage],
+      language.sKentico[currentLanguage],
+      language.sMobile[currentLanguage],
+    ];
+
+    const data = [
+        <WebSitePage />,
+        <EcommercePage />,
+        <LogoDesignPage />,
+        <MultiMediaPage />,
+        <ContentPage />,
+        <SeoPage />,
+        <AnnualPage />,
+        <KenticoPage />,
+        <MobilePage />
+    ];
 
     return (
-      <Container currentLanguage={currentLanguage} pageTitle={titleKey} serviceDetail="true">
+      <Container currentLanguage={currentLanguage} pageTitle={"services"} serviceDetail="true">
         <View style={ styles.container } >
           <View style={ styles.container } >
             <View style={{ 
@@ -87,32 +117,13 @@ class ServicesDetail extends Component {
             >
               <Image source={ avatars[rowID].avatar } style={ styles.avatar} resizeMod="center" />
               <View style={styles.rightWrapper}>
-                <Text style={styles.titleText}>CONTENT</Text>
-                <Text style={styles.boldText}>SOLUTIONS</Text>
+                <Text style={styles.boldText}>{serviceTitle[rowID]}</Text>
               </View>
             </View>
             <ScrollView>
               <View style={ styles.subContainer}>
                 <View style={styles.scrollView}>
-                  <Text style={styles.contentText}>
-                    [192.1252.146.32]
-                    ns1.s482.sureaserver.com
-                    To point your domain name to the new server,
-                    please change its name server (DNS) to:
-                    ns1.s482.sureaserver.com
-                    [192.1252.146.32]
-                    ns1.s482.sureaserver.com
-                    To point your domain name to the new server,
-                    please change its name server (DNS) to:
-                    ns1.s482.sureaserver.com
-                    [192.1252.146.32]
-                    ns1.s482.sureaserver.com
-                    To point your domain name to the new server,
-                    please change its name server (DNS) to:
-                    ns1.s482.sureaserver.com
-                    [192.1252.146.32]
-                    ns1.s482.sureaserver.com
-                  </Text>
+                  {data[rowID]}
                 </View>
               </View>
             </ScrollView>
@@ -153,11 +164,6 @@ const styles = StyleSheet.create({
   scrollView: {
     flex:1,
     width: screenWidth * 0.9,
-  },
-  contentText: {
-    fontSize: 14,
-    lineHeight: 20,
-    color: commonColors.grayTitleText,
   },
 });
 

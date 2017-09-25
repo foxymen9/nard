@@ -52,6 +52,7 @@ class Services extends Component {
   }
 
   componentWillMount() {
+    this.props.saveMenuSelectedID(null);
   }
 
   componentWillReceiveProps(nextProps) {
