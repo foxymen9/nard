@@ -28,6 +28,7 @@ import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
+import { saveMenuSelectedID } from '../Menu/actions';
 
 const name = require('../../../assets/imgs/start_project/full_name.png');
 const email = require('../../../assets/imgs/start_project/mail.png');
@@ -53,6 +54,7 @@ class StarProject extends Component {
   componentWillMount() {
     const { currentLanguage } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
+    this.props.saveMenuSelectedID('null');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -268,4 +270,4 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   currentLanguage: state.login.currentLanguage,
-}),{ })(StarProject);
+}),{ saveMenuSelectedID })(StarProject);
