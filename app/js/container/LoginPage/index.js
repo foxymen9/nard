@@ -114,7 +114,7 @@ class Login extends Component {
             activeOpacity={ .5 }
             onPress={ () => this.onChangeLanguage() }
           >
-            <Image source={ languageIcon } resizeMode="center" style={styles.languageIcon} />  
+            <Image source={ languageIcon } resizeMode="contain" style={styles.languageIcon} />  
           </TouchableOpacity>
         </View>
         <KeyboardAwareScrollView>

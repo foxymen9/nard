@@ -31,6 +31,8 @@ import { } from './actions';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
+import { saveMenuSelectedID } from '../Menu/actions';
+
 const background = require('../../../assets/imgs/main/back.png');
 const imgBlue = require('../../../assets/imgs/main/blue_button.png');
 const imgYellow = require('../../../assets/imgs/main/yellow_button.png');
@@ -43,6 +45,10 @@ class Main extends Component {
     this.state = {
       menuState: false,
     };
+  }
+
+  componentWillMount() {
+    this.props.saveMenuSelectedID(0);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -153,4 +159,4 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   currentLanguage: state.login.currentLanguage,
-}),{ })(Main);
+}),{ saveMenuSelectedID })(Main);

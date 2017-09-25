@@ -55,8 +55,8 @@ class Container extends Component {
   };
 
   gotoLoginPage() {
-    this.props.saveMenuSelectedID('null');
-    Actions.Main();
+    // this.props.saveMenuSelectedID('null');
+    // Actions.Main();
   }
 
   onBack() {

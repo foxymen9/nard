@@ -14,7 +14,7 @@ const language = {
     "mainPageContent_b": {"EN": "PIONEER OF WEBSITES DEVELOPMENT", "AR": "رواد تصميم المواقع في"},
     "mainPageContent_n": {"EN": " IN KINGDOM OF SAUDI ARABIA", "AR": " المملكة العربية السعودية"},
     //Our Services Page
-    "ourServices": {"EN": "OUR SERVICES", "AR": "خدماتنا"},
+    "ourServices": {"EN": "MY SERVICES", "AR": "خدماتي"},
     "ourServicesDetail": {"EN": "SERVICE DETAILS", "AR": "تفاصيل الخدمة"},
     "serviceName": {"EN": "Service Name", "AR": "إسم الخدمة"},
     "totalCount": {"EN": "Total Count", "AR": "إجمالي الخدمات"},
@@ -24,6 +24,7 @@ const language = {
     "sslText": {"EN": "SSL & CDN", "AR": "الحماية CDN & SSL"},
     "chatText": {"EN": "LIVE CHATTING", "AR": "الدعم المباشر"},
     //Menu
+    "menuHome": {"EN": "Home", "AR": ""},
     "menuOurServices": {"EN": "My Services", "AR": "خدماتي"},
     "menuOffer": {"EN": "Special Offers", "AR": "العروض"},
     "menuEditProfile": {"EN": "My Account", "AR": "حسابي"},

@@ -53,30 +53,34 @@ class Menu extends Component {
     switch (rowID) {
       case "0":
         this.props.saveMenuSelectedID(rowID);
-        Actions.MyServices();
+        Actions.Main();
         return;
       case "1":
         this.props.saveMenuSelectedID(rowID);
-        Actions.Offers();
+        Actions.MyServices();
         return;
       case "2":
         this.props.saveMenuSelectedID(rowID);
-        Actions.Profile();
+        Actions.Offers();
         return;
       case "3":
         this.props.saveMenuSelectedID(rowID);
-        Actions.Ticket();
+        Actions.Profile();
         return;
       case "4":
+        this.props.saveMenuSelectedID(rowID);
+        Actions.Ticket();
+        return;
+      case "5":
         const lang = currentLanguage == 'EN' ? 'AR' : 'EN';
         this.props.changeLanguage(lang);
         this.props.menuState();
         return;
-      case "5":
+      case "6":
         Linking.openURL("https://www.nard.sa");
         this.props.menuState();
         return;
-      case "6":
+      case "7":
         this.props.saveMenuSelectedID('null');
         Actions.Login();
         return;
@@ -111,7 +115,9 @@ class Menu extends Component {
 
   render() {
     const {currentLanguage} = this.props;
-    const menuItems = [language.menuOurServices[currentLanguage], 
+    const menuItems = [
+                        language.menuHome[currentLanguage],
+                        language.menuOurServices[currentLanguage], 
                         language.menuOffer[currentLanguage], 
                         language.menuEditProfile[currentLanguage],
                         language.menuTicket[currentLanguage],  

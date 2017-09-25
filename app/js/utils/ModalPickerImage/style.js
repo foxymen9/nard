@@ -8,7 +8,7 @@ const PADDING = 8;
 const BORDER_RADIUS = 5;
 const FONT_SIZE = 16;
 const HIGHLIGHT_COLOR = 'rgba(0,118,255,0.9)';
-const OPTION_CONTAINER_HEIGHT = 400;
+const OPTION_CONTAINER_HEIGHT = 250;
 
 export default StyleSheet.create({
 
@@ -29,7 +29,7 @@ export default StyleSheet.create({
 
     cancelContainer: {
         left:width*0.1,
-        top:(height-OPTION_CONTAINER_HEIGHT)/2 + 10
+        top:(height-OPTION_CONTAINER_HEIGHT)/2 + 30
     },
 
     selectStyle: {

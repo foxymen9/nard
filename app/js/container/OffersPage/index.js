@@ -44,7 +44,7 @@ class Offers extends Component {
   }
 
   componentWillMount() {
-    this.props.saveMenuSelectedID(1);
+    this.props.saveMenuSelectedID(2);
   }
 
   componentWillReceiveProps(nextProps) {
