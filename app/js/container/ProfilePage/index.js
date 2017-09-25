@@ -34,6 +34,7 @@ const email = require('../../../assets/imgs/start_project/mail.png');
 const phone = require('../../../assets/imgs/start_project/phone.png');
 const company = require('../../../assets/imgs/start_project/company.png');
 const update = require('../../../assets/imgs/main/yellow_button.png');
+const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 
 class Profile extends Component {
   constructor(props) {
@@ -138,14 +139,16 @@ class Profile extends Component {
                   />
                 </Image>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity
-                    activeOpacity={ .5 }
-                    onPress={ () => this.conUpdate() }
+                  <TouchableHighlight
+                    onShowUnderlay={()=>this.setState({pressStatus: true})}
+                    onHideUnderlay={()=>this.setState({pressStatus: false})}
+                    underlayColor={'#fff'}
+                    onPress={ () => this.onUpdate() }
                   >
-                    <Image source={ update } style={ styles.button } resizeMode="contain" >
+                    <Image source={ this.state.pressStatus ? pressBtn : update } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
                     </Image>
-                  </TouchableOpacity>
+                  </TouchableHighlight>
                 </View>
               </View>
             </View>

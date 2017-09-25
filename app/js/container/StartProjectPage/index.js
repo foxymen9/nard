@@ -37,6 +37,7 @@ const department_img = require('../../../assets/imgs/start_project/click.png');
 const content = require('../../../assets/imgs/start_project/text_field.png');
 const submit = require('../../../assets/imgs/main/yellow_button.png');
 const arrow = require('../../../assets/imgs/start_project/down_arrow.png');
+const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 
 class StarProject extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class StarProject extends Component {
       name: '',
       phone: '',
       email: '',
+      pressStatus: false,
       defaultDepartment: 'Select Department',
       departments: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'],
     };
@@ -168,14 +170,17 @@ class StarProject extends Component {
                 </View>
               </Image>
               <View style={styles.buttonWrapper}>
-                <TouchableOpacity
+                <TouchableHighlight
                   activeOpacity={ .5 }
+                  onShowUnderlay={()=>this.setState({pressStatus: true})}
+                  onHideUnderlay={()=>this.setState({pressStatus: false})}
+                  underlayColor={'#fff'}
                   onPress={ () => this.onStartProject() }
                 >
-                  <Image source={ submit } style={ styles.button }  resizeMode="contain">
+                  <Image source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button }  resizeMode="contain">
                     <Text style={ styles.textButton }>{language.startNewProject[currentLanguage]}</Text>
                   </Image>
-                </TouchableOpacity>
+                </TouchableHighlight>
               </View>
             </View>
           </KeyboardAwareScrollView>

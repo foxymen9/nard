@@ -42,6 +42,10 @@ const ssl = require('../../../assets/imgs/my_services/ssl.png');
 const ssl_select = require('../../../assets/imgs/my_services/ssl_select.png');
 const chat = require('../../../assets/imgs/my_services/chat.png');
 const chat_select = require('../../../assets/imgs/my_services/chat_select.png');
+const amc = require('../../../assets/imgs/my_services/amc.png');
+const amc_select = require('../../../assets/imgs/my_services/amc_select.png');
+const kentico = require('../../../assets/imgs/my_services/kentico.png');
+const kentico_select = require('../../../assets/imgs/my_services/kentico_select.png');
 
 class MyServices extends Component {
   constructor(props) {
@@ -50,7 +54,7 @@ class MyServices extends Component {
     this.state = {
       dataSource: null,
       rowID: null,
-      totalCount: [2, 3, 2, 4, 1],
+      totalCount: [2, 3, 2, 4, 0, 0, 4],
       endList: false,
     };
   }
@@ -142,7 +146,7 @@ class MyServices extends Component {
 
   _renderSeparator (sectionID, rowID, adjacentRowHighlighted) {
       return (
-          rowID != 4 && (
+          rowID != 6 && (
           <View
               key={`${sectionID}-${rowID}`}
               style={{ height: 4, backgroundColor: commonColors.title, flex:1}}
@@ -160,7 +164,9 @@ class MyServices extends Component {
       {id: 2, title: language.domainText[currentLanguage], image: domain, image_select: domain_select},
       {id: 3, title: language.smsText[currentLanguage], image: sms, image_select: sms_select},
       {id: 4, title: language.sslText[currentLanguage], image: ssl, image_select: ssl_select},
-      {id: 5, title: language.chatText[currentLanguage], image: chat, image_select: chat_select},
+      {id: 5, title: language.amcText[currentLanguage], image: amc, image_select: amc_select},
+      {id: 6, title: language.kenticoText[currentLanguage], image: kentico, image_select: kentico_select},
+      {id: 7, title: language.chatText[currentLanguage], image: chat, image_select: chat_select},
     ];
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(serviceItems);

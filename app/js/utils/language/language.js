@@ -13,7 +13,7 @@ const language = {
                         "AR": "تصميم المواقع/تطبيقات الجوال/تصميم الشعارات/ التسويق الإلكتروني"},
     "mainPageContent_b": {"EN": "PIONEER OF WEBSITES DEVELOPMENT", "AR": "رواد تصميم المواقع في"},
     "mainPageContent_n": {"EN": " IN KINGDOM OF SAUDI ARABIA", "AR": " المملكة العربية السعودية"},
-    //Our Services Page
+    //My Services Page
     "ourServices": {"EN": "MY SERVICES", "AR": "خدماتي"},
     "ourServicesDetail": {"EN": "SERVICE DETAILS", "AR": "تفاصيل الخدمة"},
     "serviceName": {"EN": "Service Name", "AR": "إسم الخدمة"},
@@ -23,6 +23,8 @@ const language = {
     "smsText": {"EN": "SMS", "AR": "الرسائل القصيرة"},
     "sslText": {"EN": "SSL & CDN", "AR": "الحماية CDN & SSL"},
     "chatText": {"EN": "LIVE CHATTING", "AR": "الدعم المباشر"},
+    "kenticoText": {"EN": "KENTICO CMS & EMS", "AR": "Kentico كينتيكو"},
+    "amcText": {"EN": "Annual Maintenance Contact", "AR": "تطبيقات الجوال"},
     //Menu
     "menuHome": {"EN": "Home", "AR": ""},
     "menuOurServices": {"EN": "My Services", "AR": "خدماتي"},

@@ -36,6 +36,7 @@ const department_img = require('../../../assets/imgs/start_project/click.png');
 const content = require('../../../assets/imgs/start_project/text_field.png');
 const submit = require('../../../assets/imgs/main/yellow_button.png');
 const arrow = require('../../../assets/imgs/start_project/down_arrow.png');
+const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 
 class Ticket extends Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class Ticket extends Component {
     this.setState({defaultDepartment: language.department_txt[currentLanguage] });
   }
 
-  onStartProject() {
+  onSubmit() {
 
   }
 
@@ -177,14 +178,16 @@ class Ticket extends Component {
               </View>
               <View style={ styles.subView } >
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity
-                    activeOpacity={ .5 }
-                    onPress={ () => this.onStartProject() }
+                  <TouchableHighlight
+                    onShowUnderlay={()=>this.setState({pressStatus: true})}
+                    onHideUnderlay={()=>this.setState({pressStatus: false})}
+                    underlayColor={'#fff'}
+                    onPress={ () => this.onSubmit() }
                   >
-                    <Image source={ submit } style={ styles.button } resizeMode="contain" >
+                    <Image source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.submit[currentLanguage]}</Text>
                     </Image>
-                  </TouchableOpacity>
+                  </TouchableHighlight>
                 </View>
               </View>
               <View style={ styles.subView } >

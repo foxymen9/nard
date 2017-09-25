@@ -30,6 +30,7 @@ import language from '../../utils/language/language';
 import Container from '../Container';
 
 const apply = require('../../../assets/imgs/main/yellow_button.png');
+const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 
 class OffersDetail extends Component {
   constructor(props) {
@@ -92,14 +93,16 @@ class OffersDetail extends Component {
                       ns1.s482.sureaserver.com
                     </Text>
                   </View>
-                  <TouchableOpacity
-                    activeOpacity={ .5 }
+                  <TouchableHighlight
+                    onShowUnderlay={()=>this.setState({pressStatus: true})}
+                    onHideUnderlay={()=>this.setState({pressStatus: false})}
+                    underlayColor={'#fff'}
                     onPress={ () => this.onApply() }
                   >
-                    <Image source={ apply } style={ styles.button } resizeMode="contain">
+                    <Image source={ this.state.pressStatus ? pressBtn : apply } style={ styles.button } resizeMode="contain">
                       <Text style={ styles.textButton }>{language.apply[currentLanguage]}</Text>
                     </Image>
-                  </TouchableOpacity>
+                  </TouchableHighlight>
                 </View>
               </ScrollView>
             </View>
