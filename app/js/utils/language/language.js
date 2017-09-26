@@ -34,6 +34,7 @@ const language = {
     "menuVisitNard": {"EN": "Visit Nard.sa", "AR": "زيارة Nard.sa"},
     "menuLanguage": {"EN": "Language : العربية", "AR": "اللغة : EN"},
     "menuLogout": {"EN": "Log out", "AR": "تسجيل الخروج"},
+    "menuLogin": {"EN": "Login page", "AR": "صفحة تسجيل الدخول"},
     //Start a Project Page
     "startProject": {"EN": "START A PROJECT", "AR": "بدء مشروع جديد"},
     "fullName": {"EN": "Full Name", "AR": "الإسم الكامل"},

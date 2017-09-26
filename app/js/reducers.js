@@ -1,7 +1,7 @@
-import login from './container/LoginPage/reducer';
+import auth from './container/LoginPage/reducer';
 import menu from './container/Menu/reducer';
 
 export {
-  login,
+  auth,
   menu,
 };

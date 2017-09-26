@@ -13,7 +13,8 @@ import {
   ListView,
   Keyboard,
   findNodeHandle,  
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -44,7 +45,9 @@ class Offers extends Component {
   }
 
   componentWillMount() {
-    this.props.saveMenuSelectedID(2);
+    AsyncStorage.getItem("loggin").then((value) => {
+      value == "true" ? this.props.saveMenuSelectedID(2) : this.props.saveMenuSelectedID(1);
+    }).done();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -166,5 +169,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.login.currentLanguage,
+  currentLanguage: state.auth.currentLanguage,
 }),{ saveMenuSelectedID })(Offers);

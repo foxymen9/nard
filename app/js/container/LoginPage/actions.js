@@ -1,5 +1,8 @@
 import * as types from './actionTypes';
 import axios from 'axios';
+import {
+  AsyncStorage,
+} from 'react-native';
 
 export function logIn(data) {
     // return {
@@ -14,7 +17,14 @@ export function logIn(data) {
       
     // };
     return {
-      type: types.LOGIN_REQUEST,
+      type: types.LOGIN_SUCCESS,
+    };
+}
+
+export function logout() {
+    AsyncStorage.setItem("loggin", "false");
+    return {
+      type: types.LOGOUT_SUCCESS,
     };
 }
 

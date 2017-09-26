@@ -277,5 +277,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.login.currentLanguage,
+  currentLanguage: state.auth.currentLanguage,
 }),{ })(ContentPage);

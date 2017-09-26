@@ -70,7 +70,7 @@ class StarProject extends Component {
   }
 
   onStartProject() {
-    Actions.MyServices();
+    // Actions.MyServices();
   }
 
   onSelectDepartment(index){
@@ -274,5 +274,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.login.currentLanguage,
+  currentLanguage: state.auth.currentLanguage,
 }),{ saveMenuSelectedID })(StarProject);

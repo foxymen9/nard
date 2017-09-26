@@ -14,6 +14,7 @@ import {
   Keyboard,
   findNodeHandle,
   Linking,
+  AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -59,6 +60,14 @@ class Login extends Component {
 
   componentDidMount() {
     this.setState({pickerData: this.refs.phone.getPickerData()});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {loggin} = nextProps;
+    if (loggin) {
+      AsyncStorage.setItem("loggin", "true");
+      Actions.Main();
+    }
   }
 
   onLogin() {
@@ -374,6 +383,7 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  loading: state.login.loading,
-  currentLanguage: state.login.currentLanguage,
+  loading: state.auth.loading,
+  loggin: state.auth.loggin,
+  currentLanguage: state.auth.currentLanguage,
 }),{ logIn, changeLanguage })(Login);

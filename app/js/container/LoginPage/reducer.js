@@ -5,10 +5,11 @@ const initialState = {
   error: null,
   signupStatus: null,
   loginResult: null,
+  loggin: false,
   currentLanguage: 'EN',
 };
 
-export default function login(state = initialState, action = {}) {
+export default function auth(state = initialState, action = {}) {
   switch (action.type) {
     /**************************/
     /* LogIn
@@ -17,19 +18,30 @@ export default function login(state = initialState, action = {}) {
       return {
         ...state,
         loading: true,
+        loggin: false,
         error: null,
       };
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
-        loginResult: action.result.data,
+        loggin: true,
+        // loginResult: action.result.data,
       };
     case types.LOGIN_ERROR:
       return {
         ...state,
         loading: false,
+        loggin: false,
         error: action.error,
+      };
+    /**************************/
+    /* Log Out
+    /**************************/
+    case types.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loggin: false,
       };
     /**************************/
     /* Change Language(EN, AR)
