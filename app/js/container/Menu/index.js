@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     TouchableHighlight,
     Linking,
+    Keyboard,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -169,7 +170,7 @@ class Menu extends Component {
             language.menuTicket[currentLanguage],  
             language.menuLanguage[currentLanguage],
             language.menuVisitNard[currentLanguage],
-            language.menuLogin[currentLanguage]];
+            language.menuLogout[currentLanguage]];
     }
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(menuItems);

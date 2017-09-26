@@ -54,14 +54,14 @@ class OffersDetail extends Component {
   }
   
   render() {
-    const { currentLanguage } = this.props;
+    const { currentLanguage, rowID } = this.props;
+    const backColors = [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText, commonColors.lightYellow];
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="offersDetail">
         <View style={ styles.container } >
-          
             <View style={ styles.container } >
-              <View style={ styles.titleBar}>
+              <View style={ [styles.titleBar, {backgroundColor: backColors[rowID]}]}>
                 <Text style={styles.titleText}>HOSTING</Text>
                 <Text style={styles.boldText}>FOR ALL CUSTOMERS</Text>
               </View>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleBar: {
-    backgroundColor: commonColors.detailTitleBar,
+    // backgroundColor: commonColors.detailTitleBar,
     width: screenWidth,
     paddingVertical: 20,
     paddingLeft: screenWidth * 0.05,

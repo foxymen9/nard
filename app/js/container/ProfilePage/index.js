@@ -56,7 +56,7 @@ class Profile extends Component {
   componentWillReceiveProps(nextProps) {
   }
 
-  conUpdate() {
+  onUpdate() {
 
   }
 

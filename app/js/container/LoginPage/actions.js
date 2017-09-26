@@ -22,6 +22,7 @@ export function logIn(data) {
 }
 
 export function logout() {
+    //Save login status (false) to AsyncStorage after loggout
     AsyncStorage.setItem("loggin", "false");
     return {
       type: types.LOGOUT_SUCCESS,

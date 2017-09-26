@@ -65,6 +65,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     const {loggin} = nextProps;
     if (loggin) {
+      //Save login status (true) to AsyncStorage after succeffully logged in
       AsyncStorage.setItem("loggin", "true");
       Actions.Main();
     }

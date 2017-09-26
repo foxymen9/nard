@@ -44,6 +44,8 @@ class Container extends Component {
   onChangeMenuState() {
     const {menuState} = this.state;
 
+    Keyboard.dismiss();
+
     if (menuState) {
       this.setState({menuState: false});
       this._drawer.close();

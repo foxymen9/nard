@@ -62,7 +62,7 @@ class Offers extends Component {
   }
 
   onItemSelect(data, rowID) {
-    Actions.OffersDetail();
+    Actions.OffersDetail({rowID: rowID});
   }
 
   handleScroll(event) {
