@@ -30,6 +30,7 @@ import Container from '../Container';
 import { saveMenuSelectedID } from '../Menu/actions';
 
 const arrow = require('../../../assets/imgs/my_services/arrow.png');
+const arrow_ar = require('../../../assets/imgs/my_services/arrow_ar.png');
 const scrollArrowDown = require('../../../assets/imgs/my_services/scroll_arrow.png');
 const scrollArrowUp = require('../../../assets/imgs/my_services/scroll_arrow_up.png');
 
@@ -90,6 +91,28 @@ class Offers extends Component {
     )
   }
 
+  _renderRow_ar (rowData, sectionID, rowID, highlightRow) {
+    return (
+      <View style={{
+                  backgroundColor: this.state.backColors[rowID],
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: screenWidth,
+                  height: (screenHeight-12-navBar) / 4,}}
+      >
+        <TouchableOpacity onPress={()=>{this.onItemSelect(rowData, rowID)}}>
+          <View style={styles.listView}>
+            <Image source={ arrow_ar } style={ styles.arrow } />
+            <View style={styles.titleWrapper_ar}>
+              <Text  style={styles.offerTitle_ar}>{rowData.title}</Text>
+              <Text  style={styles.offerSubTitle_ar}>{rowData.subTitle}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   _renderSeparator (sectionID, rowID, adjacentRowHighlighted) {
       return (
           rowID != 3 && (
@@ -118,7 +141,8 @@ class Offers extends Component {
     return (
       <Container currentLanguage={currentLanguage} pageTitle="offers">
         <View style={ styles.container } >
-          <ListView
+          {currentLanguage=='EN'
+          ?<ListView
             ref='listview'
             dataSource={dataSource}
             renderRow={this._renderRow.bind(this)}
@@ -126,6 +150,15 @@ class Offers extends Component {
             onScroll = {(event)=>this.handleScroll(event)}
             onEndReached={()=>this.onEndReached()}
           />
+          :<ListView
+            ref='listview'
+            dataSource={dataSource}
+            renderRow={this._renderRow_ar.bind(this)}
+            renderSeparator={this._renderSeparator}
+            onScroll = {(event)=>this.handleScroll(event)}
+            onEndReached={()=>this.onEndReached()}
+          />
+          }
         </View>
       </Container>
     );
@@ -148,6 +181,9 @@ const styles = StyleSheet.create({
   titleWrapper: {
     paddingRight: 40,
   },
+  titleWrapper_ar: {
+    paddingLeft: 40,
+  },
   offerTitle: {
     color: commonColors.title,
     fontSize: 20,
@@ -155,10 +191,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginBottom: 5,
   },
+  offerTitle_ar: {
+    color: commonColors.title,
+    fontSize: 20,
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
+    marginBottom: 5,
+    textAlign: 'right',
+  },
   offerSubTitle: {
     color: commonColors.title,
     fontSize: 18,
     backgroundColor: 'transparent',
+  },
+  offerSubTitle_ar: {
+    color: commonColors.title,
+    fontSize: 18,
+    backgroundColor: 'transparent',
+    textAlign: 'right',
   },
   arrow: {
   },

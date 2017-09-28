@@ -30,9 +30,13 @@ import Container from '../Container';
 
 const avatar = require('../../../assets/imgs/profile/avatar.png');
 const name = require('../../../assets/imgs/start_project/full_name.png');
+const name_ar = require('../../../assets/imgs/start_project/full_name_ar.png');
 const email = require('../../../assets/imgs/start_project/mail.png');
+const email_ar = require('../../../assets/imgs/start_project/mail_ar.png');
 const phone = require('../../../assets/imgs/start_project/phone.png');
+const phone_ar = require('../../../assets/imgs/start_project/phone_ar.png');
 const company = require('../../../assets/imgs/start_project/company.png');
+const company_ar = require('../../../assets/imgs/start_project/company_ar.png');
 const update = require('../../../assets/imgs/main/yellow_button.png');
 const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 
@@ -71,7 +75,8 @@ class Profile extends Component {
               <Image source={avatar} style={ styles.avatar } resizeMode="contain" >
                 <Text  style={ styles.avatarText }>{this.state.firstName}</Text>
               </Image>
-              <View style={{flex:0.7}}>
+              {currentLanguage == 'EN'
+              ?<View style={{flex:0.7}}>
                 <Image source={company} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
@@ -151,6 +156,87 @@ class Profile extends Component {
                   </TouchableHighlight>
                 </View>
               </View>
+              :<View style={{flex:0.7}}>
+                <Image source={company_ar} style={ styles.inputImg } resizeMode="contain" >
+                  <TextInput
+                    ref="company"
+                    autoCapitalize="none"
+                    autoCorrect={ false }
+                    placeholder={language.company[currentLanguage]}
+                    placeholderTextColor={ commonColors.placeholderTextGray }
+                    textAlign="right"
+                    style={styles.input_ar}
+                    underlineColorAndroid="transparent"
+                    returnKeyType={ 'next' }
+                    value={ this.state.company }
+                    onChangeText={ (text) => this.setState({ company: text }) }
+                    onSubmitEditing={ () => this.refs.name.focus() }
+                  />
+                </Image>
+                <Image source={name_ar} style={ styles.inputImg } resizeMode="contain" >
+                  <TextInput
+                    ref="name"
+                    autoCapitalize="none"
+                    autoCorrect={ false }
+                    placeholder={language.fullName[currentLanguage]}
+                    placeholderTextColor={ commonColors.placeholderTextGray }
+                    textAlign="right"
+                    style={styles.input_ar}
+                    underlineColorAndroid="transparent"
+                    returnKeyType={ 'next' }
+                    value={ this.state.name }
+                    onChangeText={ (text) => this.setState({ name: text }) }
+                    onSubmitEditing={ () => this.refs.phone.focus() }
+                  />
+                </Image>
+                <Image source={phone_ar} style={ styles.inputImg } resizeMode="contain" >
+                  <TextInput
+                    ref="phone"
+                    autoCapitalize="none"
+                    autoCorrect={ false }
+                    placeholder={language.phone[currentLanguage]}
+                    placeholderTextColor={ commonColors.placeholderTextGray }
+                    textAlign="right"
+                    style={styles.input_ar}
+                    underlineColorAndroid="transparent"
+                    returnKeyType={ 'next' }
+                    keyboardType="numbers-and-punctuation"
+                    value={ this.state.phone }
+                    onChangeText={ (text) => this.setState({ phone: text }) }
+                    onSubmitEditing={ () => this.refs.email.focus() }
+                  />
+                </Image>
+                <Image source={email_ar} style={ styles.inputImg } resizeMode="contain" >
+                  <TextInput
+                    ref="email"
+                    autoCapitalize="none"
+                    autoCorrect={ false }
+                    placeholder={language.email[currentLanguage]}
+                    placeholderTextColor={ commonColors.placeholderTextGray }
+                    textAlign="right"
+                    style={styles.input_ar}
+                    underlineColorAndroid="transparent"
+                    returnKeyType={ 'next' }
+                    keyboardType="email-address"
+                    value={ this.state.email }
+                    onChangeText={ (text) => this.setState({ email: text }) }
+                    onSubmitEditing={ () => this.refs.content.focus() }
+                  />
+                </Image>
+                <View style={styles.buttonWrapper}>
+                  <TouchableHighlight
+                    onShowUnderlay={()=>this.setState({pressStatus: true})}
+                    onHideUnderlay={()=>this.setState({pressStatus: false})}
+                    underlayColor={'#fff'}
+                    onPress={ () => this.onUpdate() }
+                  >
+                    <Image source={ this.state.pressStatus ? pressBtn : update } style={ styles.button } resizeMode="contain" >
+                      <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
+                    </Image>
+                  </TouchableHighlight>
+                </View>
+              </View>
+              }
             </View>
           </KeyboardAwareScrollView>
         </View>
