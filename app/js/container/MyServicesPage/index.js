@@ -29,6 +29,7 @@ import Container from '../Container';
 import { saveMenuSelectedID } from '../Menu/actions';
 
 const arrow = require('../../../assets/imgs/my_services/arrow.png');
+const arrow_ar = require('../../../assets/imgs/my_services/arrow_ar.png');
 const scrollArrowDown = require('../../../assets/imgs/my_services/scroll_arrow.png');
 const scrollArrowUp = require('../../../assets/imgs/my_services/scroll_arrow_up.png');
 const addService = require('../../../assets/imgs/my_services/add_service.png');
@@ -111,7 +112,7 @@ class MyServices extends Component {
               <View style={ styles.listSubWrapper } >
                 <View style={ styles.listSubView } >
                   <Text  style={styles.serviceSubTitle}>www.domain1.com</Text>
-                  <View style={styles.rightWrapper}>
+                  <View style={styles.rightSubWrapper}>
                     <Text  style={styles.serviceSubTitleDate}>03/02/2019</Text>
                     <Image source={ arrow } style={ styles.subArrow } />
                   </View>
@@ -134,6 +135,54 @@ class MyServices extends Component {
                 <Text  style={styles.serviceTitle}>{this.state.totalCount[rowID]}</Text>
                 <Image source={ arrow } style={ styles.arrow } />
               </View> )}
+            </View>
+          </Image>
+        </TouchableHighlight>
+        <View>
+          {listSubView}
+        </View>
+      </View>
+    )
+  }
+
+  _renderRow_ar (rowData, sectionID, rowID, highlightRow) {
+    const listSubView = [];
+
+    if (this.state.rowID == rowID) {
+      for (let i = 0; i < this.state.totalCount[rowID]; i ++) {
+        listSubView.push(
+          <TouchableHighlight onPress={()=>this.onServiceSubItem()} key={i}>
+            <View>
+              <View
+                style={{ height: 2, backgroundColor: '#D6811D'}}
+              />
+              <View style={ styles.listSubWrapper } >
+                <View style={ styles.listSubView } >
+                  <View style={styles.rightSubWrapper}>
+                    <Image source={ arrow_ar } style={ styles.subArrow_ar } />
+                    <Text  style={styles.serviceSubTitleDate}>03/02/2019</Text>
+                  </View>
+                  <Text  style={styles.serviceSubTitle}>www.domain1.com</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableHighlight>
+        );
+      }
+    }
+
+    return (
+      <View>
+        <TouchableHighlight onPress={()=>{this.onItemSelect(rowData, rowID)}}>
+          <Image source={ this.state.rowID == rowID ? rowData.image_select : rowData.image } style={ styles.serviceImage } >
+            <View style={styles.listView}>
+              { this.state.rowID != rowID ?
+              <View style={styles.rightWrapper}>
+                <Image source={ arrow_ar } style={ styles.arrow_ar } />
+                <Text  style={styles.serviceTitle}>{this.state.totalCount[rowID]}</Text>
+              </View>
+              :<View style={{width: 50}} />}
+              <Text  style={[styles.serviceTitle, styles.titleStyle_ar]}>{rowData.title}</Text>
             </View>
           </Image>
         </TouchableHighlight>
@@ -174,7 +223,8 @@ class MyServices extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="ourServices">
-        <View style={ styles.container } >
+        {currentLanguage == 'EN'
+        ?<View style={ styles.container } >
           <View style={styles.titleWrapper}>
             <Text style={styles.titleText}>{language.serviceName[currentLanguage]}</Text>
             <Text style={styles.titleText}>{language.totalCount[currentLanguage]}</Text>
@@ -188,6 +238,21 @@ class MyServices extends Component {
             onEndReached={()=>this.onEndReached()}
           />
         </View>
+        :<View style={ styles.container } >
+          <View style={styles.titleWrapper}>
+            <Text style={styles.titleText}>{language.totalCount[currentLanguage]}</Text>
+            <Text style={styles.titleText}>{language.serviceName[currentLanguage]}</Text>
+          </View>
+          <ListView
+            ref='listview'
+            dataSource={dataSource}
+            renderRow={this._renderRow_ar.bind(this)}
+            renderSeparator={this._renderSeparator}
+            onScroll = {(event)=>this.handleScroll(event)}
+            onEndReached={()=>this.onEndReached()}
+          />
+        </View>
+        }
         <View style={styles.scrollArrow}>
           {this.state.endList ?
             <TouchableOpacity onPress={()=>{this.onScrollUp()}}>
@@ -241,6 +306,11 @@ const styles = StyleSheet.create({
   },
   rightWrapper: {
     flexDirection: 'row',
+    width: 50,
+  },
+  rightSubWrapper: {
+    flexDirection: 'row',
+    width: 100,
   },
   serviceTitle: {
     color: commonColors.title,
@@ -248,10 +318,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   titleStyle: {
-    width: screenWidth - 100,
+    width: screenWidth * 0.85 - 60,
+  },
+  titleStyle_ar: {
+    width: screenWidth * 0.85 - 60,
+    textAlign: 'right',
   },
   arrow: {
     marginLeft: 25,
+    marginTop: 2,
+  },
+  arrow_ar: {
+    marginRight: 25,
     marginTop: 2,
   },
   listSubWrapper: {
@@ -279,6 +357,9 @@ const styles = StyleSheet.create({
   },
   subArrow: {
     marginLeft: 25,
+  },
+  subArrow_ar: {
+    marginRight: 25,
   },
   addService: {
     position: 'absolute',

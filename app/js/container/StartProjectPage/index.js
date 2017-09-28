@@ -31,9 +31,13 @@ import Container from '../Container';
 import { saveMenuSelectedID } from '../Menu/actions';
 
 const name = require('../../../assets/imgs/start_project/full_name.png');
+const name_ar = require('../../../assets/imgs/start_project/full_name_ar.png');
 const email = require('../../../assets/imgs/start_project/mail.png');
+const email_ar = require('../../../assets/imgs/start_project/mail_ar.png');
 const phone = require('../../../assets/imgs/start_project/phone.png');
+const phone_ar = require('../../../assets/imgs/start_project/phone_ar.png');
 const department_img = require('../../../assets/imgs/start_project/click.png');
+const department_img_ar = require('../../../assets/imgs/start_project/click_ar.png');
 const content = require('../../../assets/imgs/start_project/text_field.png');
 const submit = require('../../../assets/imgs/main/yellow_button.png');
 const arrow = require('../../../assets/imgs/start_project/down_arrow.png');
@@ -85,7 +89,8 @@ class StarProject extends Component {
       <Container currentLanguage={currentLanguage} pageTitle="startProject">
         <View style={ styles.container } >
           <KeyboardAwareScrollView>
-            <View style={ styles.subContainer } >
+            {currentLanguage == 'EN'
+            ?<View style={ styles.subContainer } >
               <Image source={name} style={ styles.inputImg } resizeMode="contain">
                 <TextInput
                   ref="name"
@@ -183,6 +188,105 @@ class StarProject extends Component {
                 </TouchableHighlight>
               </View>
             </View>
+            :<View style={ styles.subContainer } >
+              <Image source={name_ar} style={ styles.inputImg } resizeMode="contain">
+                <TextInput
+                  ref="name"
+                  autoCapitalize="none"
+                  autoCorrect={ false }
+                  placeholder={language.fullName[currentLanguage]}
+                  placeholderTextColor={ commonColors.placeholderTextGray }
+                  textAlign="right"
+                  style={styles.input_ar}
+                  underlineColorAndroid="transparent"
+                  returnKeyType={ 'next' }
+                  value={ this.state.name }
+                  onChangeText={ (text) => this.setState({ name: text }) }
+                  onSubmitEditing={ () => this.refs.phone.focus() }
+                />
+              </Image>
+              <Image source={phone_ar} style={ styles.inputImg } resizeMode="contain" >
+                <TextInput
+                  ref="phone"
+                  autoCapitalize="none"
+                  autoCorrect={ false }
+                  placeholder={language.phone[currentLanguage]}
+                  placeholderTextColor={ commonColors.placeholderTextGray }
+                  textAlign="right"
+                  style={styles.input_ar}
+                  underlineColorAndroid="transparent"
+                  returnKeyType={ 'next' }
+                  keyboardType="numbers-and-punctuation"
+                  value={ this.state.phone }
+                  onChangeText={ (text) => this.setState({ phone: text }) }
+                  onSubmitEditing={ () => this.refs.email.focus() }
+                />
+              </Image>
+              <Image source={email_ar} style={ styles.inputImg }  resizeMode="contain">
+                <TextInput
+                  ref="email"
+                  autoCapitalize="none"
+                  autoCorrect={ false }
+                  placeholder={language.email[currentLanguage]}
+                  placeholderTextColor={ commonColors.placeholderTextGray }
+                  textAlign="right"
+                  style={styles.input_ar}
+                  underlineColorAndroid="transparent"
+                  returnKeyType={ 'next' }
+                  keyboardType="email-address"
+                  value={ this.state.email }
+                  onChangeText={ (text) => this.setState({ email: text }) }
+                  onSubmitEditing={ () => this.refs.content.focus() }
+                />
+              </Image>
+              <Image source={department_img_ar} style={ styles.inputImg }  resizeMode="contain" >
+                <ModalDropdown options={this.state.departments}  
+                              style={ styles.modalDropdown_ar } 
+                              dropdownStyle={ styles.dropdownStyle_ar } 
+                              onSelect={ (index) => this.onSelectDepartment(index) }
+                >
+                  <View style={ styles.dropdown_ar }>
+                    <Image source={arrow} resizeMode="center" />
+                    <Text style={styles.dropdownText}>{ this.state.defaultDepartment }</Text>
+                  </View>
+                </ModalDropdown>
+              </Image>
+              <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
+                <View style={styles.contentWrapper_ar}>
+                  <TextInput
+                    ref="content"
+                    autoCapitalize="none"
+                    autoCorrect={ false }
+                    placeholder={language.content[currentLanguage]}
+                    placeholderTextColor={ commonColors.placeholderTextGray }
+                    textAlign="right"
+                    style={styles.inputContent}
+                    underlineColorAndroid="transparent"
+                    returnKeyType={ 'next' }
+                    value={ this.state.content }
+                    onChangeText={ (text) => this.setState({ content: text }) }
+                    onSubmitEditing={ () => this.refs.content.focus() }
+                    maxLength={200}
+                    multiline={true}
+                    numberOfLines={50}
+                  />
+                </View>
+              </Image>
+              <View style={styles.buttonWrapper}>
+                <TouchableHighlight
+                  activeOpacity={ .5 }
+                  onShowUnderlay={()=>this.setState({pressStatus: true})}
+                  onHideUnderlay={()=>this.setState({pressStatus: false})}
+                  underlayColor={'#fff'}
+                  onPress={ () => this.onStartProject() }
+                >
+                  <Image source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button }  resizeMode="contain">
+                    <Text style={ styles.textButton }>{language.startNewProject[currentLanguage]}</Text>
+                  </Image>
+                </TouchableHighlight>
+              </View>
+            </View>
+            }
           </KeyboardAwareScrollView>
         </View>
       </Container>
@@ -216,6 +320,18 @@ const styles = StyleSheet.create({
     marginLeft: inputMargin,
     width: 210,
   },
+  modalDropdown_ar: {
+    backgroundColor:  'transparent', 
+    marginRight: inputMargin,
+    width: subWidth - inputMargin,
+  },
+  dropdownStyle: {
+    width: 180,
+  },
+  dropdownStyle_ar: {
+    width: 180,
+    marginLeft: 80,
+  },
   dropdownStyle: {
     width: 180,
   },
@@ -223,6 +339,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  dropdown_ar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 60,
   },
   dropdownText: {
     color: commonColors.placeholderTextGray,
@@ -247,6 +369,10 @@ const styles = StyleSheet.create({
   contentWrapper: {
     width: subWidth,
     paddingHorizontal: textPadding,
+  },
+  contentWrapper_ar: {
+    width: subWidth,
+    paddingRight: textPadding,
   },
   inputContent: {
     fontSize: 14,

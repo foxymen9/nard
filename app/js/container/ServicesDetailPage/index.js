@@ -107,19 +107,33 @@ class ServicesDetail extends Component {
       <Container currentLanguage={currentLanguage} pageTitle={"services"} serviceDetail="true">
         <View style={ styles.container } >
           <View style={ styles.container } >
-            <View style={{ 
+            {currentLanguage == 'EN'
+            ?<View style={{ 
                       backgroundColor: avatars[rowID].backColor,
                       width: screenWidth,
                       height: 80,
                       paddingLeft: screenWidth * 0.05,
                       flexDirection: 'row',
-                      alignItems: 'center'}}
-            >
+                      alignItems: 'center'}}>
               <Image source={ avatars[rowID].avatar } style={ styles.avatar} resizeMod="center" />
               <View style={styles.rightWrapper}>
                 <Text style={styles.boldText}>{serviceTitle[rowID]}</Text>
               </View>
             </View>
+            :<View style={{ 
+                      backgroundColor: avatars[rowID].backColor,
+                      width: screenWidth,
+                      height: 80,
+                      paddingHorizontal: screenWidth * 0.05,
+                      flexDirection: 'row',
+                      justifyContent: 'flex-end',
+                      alignItems: 'center'}}>
+              <View style={styles.rightWrapper_ar}>
+                <Text style={styles.boldText}>{serviceTitle[rowID]}</Text>
+              </View>
+              <Image source={ avatars[rowID].avatar } style={ styles.avatar} resizeMod="center" />
+            </View>
+            }
             <ScrollView>
               <View style={ styles.subContainer}>
                 <View style={styles.scrollView}>
@@ -143,6 +157,9 @@ const styles = StyleSheet.create({
   },
   rightWrapper: {
     marginLeft: 20,
+  },
+  rightWrapper_ar: {
+    marginRight: 20,
   },
   titleText: {
     fontSize: 16,

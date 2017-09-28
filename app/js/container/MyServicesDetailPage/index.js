@@ -57,7 +57,8 @@ class ServicesDetail extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="ourServicesDetail">
-        <View style={ styles.container } >
+        {currentLanguage == 'EN'
+        ?<View style={ styles.container } >
           <View style={ styles.titleBar}>
             <Text style={styles.titleText}>Domain name: <Text style={styles.boldText}>www.domain1.com</Text></Text>
             <Text style={styles.titleText}>Capacity: <Text style={styles.boldText}>100 GB</Text></Text>
@@ -87,6 +88,37 @@ class ServicesDetail extends Component {
             </View>
           </ScrollView>
         </View>
+        :<View style={ styles.container } >
+          <View style={ styles.titleBar}>
+            <Text style={styles.titleText_ar}><Text style={styles.boldText}>www.domain1.com</Text> :Domain name</Text>
+            <Text style={styles.titleText_ar}><Text style={styles.boldText}>100 GB</Text> :Capacity </Text>
+            <Text style={styles.titleText_ar}><Text style={styles.boldText}>08.19.2019</Text> :Expiration date</Text>
+          </View>
+          <ScrollView>
+            <View style={ styles.subContainer}>
+              <View style={styles.scrollView}>
+                <Text style={styles.importantText_ar}>IMPORTANT:</Text>
+                <Text style={styles.contentText_ar}>
+                  To point your domain name to the new server,
+                  please change its name server (DNS) to:
+                  ns1.s482.sureaserver.com
+                  [192.1252.146.32]
+                  ns1.s482.sureaserver.com
+                  [192.1252.146.32]
+                  You should be able to do this throughan online domain management interface provided by your domain register/
+
+                  Plese contacat them for futher hlep with changing your domain name servers. 
+                  Pleaase note that the domain registration for brakat.com is not currently
+                  hadled by our company, and you will have to renew it at the current register.
+
+                  Website URL: https://brakaat.com or
+                  http://www.brakat.com
+                </Text>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+        }
       </Container>
     );
   }
@@ -104,12 +136,18 @@ const styles = StyleSheet.create({
     backgroundColor: commonColors.detailTitleBar,
     width: screenWidth,
     paddingVertical: 20,
-    paddingLeft: screenWidth * 0.05,
+    paddingHorizontal: screenWidth * 0.05,
   },
   titleText: {
     fontSize: 16,
     color: commonColors.title,
     lineHeight: 20,
+  },
+  titleText_ar: {
+    fontSize: 16,
+    color: commonColors.title,
+    lineHeight: 20,
+    textAlign: 'right',
   },
   boldText: {
     fontWeight: 'bold',
@@ -127,10 +165,21 @@ const styles = StyleSheet.create({
     color: commonColors.grayTitleText,
     fontWeight: 'bold',
   },
+  importantText_ar: {
+    color: commonColors.grayTitleText,
+    fontWeight: 'bold',
+    textAlign: 'right'
+  },
   contentText: {
     fontSize: 14,
     color: commonColors.grayTitleText,
     lineHeight: 30,
+  },
+  contentText_ar: {
+    fontSize: 14,
+    color: commonColors.grayTitleText,
+    lineHeight: 30,
+    textAlign: 'right',
   }
 });
 

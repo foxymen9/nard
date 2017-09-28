@@ -38,6 +38,7 @@ const mobile = require('../../../assets/imgs/services/mobile.png');
 const seo = require('../../../assets/imgs/services/seo.png');
 const web = require('../../../assets/imgs/services/web.png');
 const arrow = require('../../../assets/imgs/services/arrow.png');
+const arrow_ar = require('../../../assets/imgs/services/arrow_ar.png');
 
 const lists = [web, eCommerce, logoDesign, media, content, seo, maintenance, kentico, mobile];
 
@@ -81,6 +82,19 @@ class Services extends Component {
       </TouchableOpacity>
     )
   }
+  _renderRow_ar (rowData, sectionID, rowID, highlightRow) {
+    return (
+      <TouchableOpacity onPress={()=>{this.onItemSelect(rowData, rowID)}} style={styles.listWrapper}>
+        <View style={styles.listView}>
+          <Image source={ arrow_ar } style={ styles.arrow} />
+          <View style={styles.leftView}>
+            <Text  style={styles.title_ar}>{rowData.title}</Text>
+            <Image source={ lists[rowID] } style={ styles.avatar} />
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
 
   _renderSeparator (sectionID, rowID, adjacentRowHighlighted) {
     return (
@@ -115,7 +129,8 @@ class Services extends Component {
     return (
       <Container currentLanguage={currentLanguage} pageTitle="services">
         <View style={ styles.container } >
-          <ListView
+          {currentLanguage == 'EN'
+          ?<ListView
             ref='listview'
             dataSource={dataSource}
             renderRow={this._renderRow.bind(this)}
@@ -123,6 +138,15 @@ class Services extends Component {
             onScroll = {(event)=>this.handleScroll(event)}
             onEndReached={()=>this.onEndReached()}
           />
+          :<ListView
+            ref='listview'
+            dataSource={dataSource}
+            renderRow={this._renderRow_ar.bind(this)}
+            renderSeparator={this._renderSeparator}
+            onScroll = {(event)=>this.handleScroll(event)}
+            onEndReached={()=>this.onEndReached()}
+          />
+          }
         </View>
       </Container>
     );
@@ -157,6 +181,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: 'transparent',
     marginLeft: 20,
+  },
+  title_ar: {
+    color: '#000',
+    fontSize: 16,
+    backgroundColor: 'transparent',
+    marginRight: 20,
   },
 });
 

@@ -50,6 +50,7 @@ class Menu extends Component {
     if (rowID == menuSelectedID) {
       //Hide menu when select the current page
       this.props.menuState();
+      return;
     }
     
     if (loggin) {
@@ -150,7 +151,7 @@ class Menu extends Component {
   }
 
   render() {
-    const {currentLanguage, loggin} = this.props;
+    const {currentLanguage, loggin, menuSelectedID} = this.props;
     let menuItems = [];
     
     if (loggin) {

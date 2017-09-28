@@ -37,21 +37,21 @@ class Container extends Component {
     super(props);
 
     this.state = {
-      menuState: false,
+      menuStatus: false,
     };
   }
 
   onChangeMenuState() {
-    const {menuState} = this.state;
+    const {menuStatus} = this.state;
 
     Keyboard.dismiss();
 
-    if (menuState) {
-      this.setState({menuState: false});
+    if (menuStatus) {
+      this.setState({menuStatus: false});
       this._drawer.close();
     }
     else {
-      this.setState({menuState: true});
+      this.setState({menuStatus: true});
       this._drawer.open();
     }
   };
@@ -71,7 +71,7 @@ class Container extends Component {
         drawer: { shadowColor: '#000', shadowOpacity: 0.8, shadowRadius: 5},
       }
       const { currentLanguage, pageTitle, serviceDetail } = this.props;
-      const { menuState } = this.state;
+      const { menuStatus } = this.state;
       const menuComponent = <Menu currentLanguage={currentLanguage} menuState={()=>this.onChangeMenuState()} />;
 
       return (
@@ -88,10 +88,10 @@ class Container extends Component {
                 main: { opacity: (2 - ratio) / 2 }
               })}
               onOpen={()=>{
-                this.setState({menuState: true});
+                this.setState({menuStatus: true});
               }}
               onClose={()=>{
-                this.setState({menuState: false});
+                this.setState({menuStatus: false});
               }}
               openDrawerOffset={(viewport)=>{
                 return 150
