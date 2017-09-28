@@ -12,6 +12,7 @@ import {
     TouchableHighlight,
     Linking,
     Keyboard,
+    AsyncStorage
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -38,14 +39,21 @@ class Menu extends Component {
         userName: 'Khalid El Kamel',
         dataSource: null,
         rowID: null,
+        loggin: false,
     }
   }
 
   componentWillMount() {
+    AsyncStorage.getItem("loggin").then((value) => {
+      if (value == "true") {
+        this.setState({loggin: true});
+      }
+    }).done();
   }
 
   onItemSelect(data, rowID) {
-    const {currentLanguage, menuSelectedID, loggin} = this.props;
+    const {currentLanguage, menuSelectedID} = this.props;
+    const {loggin} = this.state;
 
     if (rowID == menuSelectedID) {
       //Hide menu when select the current page
@@ -151,7 +159,8 @@ class Menu extends Component {
   }
 
   render() {
-    const {currentLanguage, loggin, menuSelectedID} = this.props;
+    const {currentLanguage, menuSelectedID} = this.props;
+    const {loggin} = this.state;
     let menuItems = [];
     
     if (loggin) {
@@ -277,5 +286,4 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   menuSelectedID: state.menu.menuSelectedID,
-  loggin: state.auth.loggin,
 }),{ changeLanguage, saveMenuSelectedID, logout })(Menu);

@@ -50,6 +50,7 @@ export default function auth(state = initialState, action = {}) {
       return {
         ...state,
         currentLanguage: action.data,
+        loggin: false,
       };
     default:
       return state;
