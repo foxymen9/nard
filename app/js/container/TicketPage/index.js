@@ -50,7 +50,7 @@ class Ticket extends Component {
       name: '',
       phone: '',
       email: '',
-      defaultDepartment: 'Select Department',
+      defaultDepartment: 'Select a service',
       departments: [],
     };
   }

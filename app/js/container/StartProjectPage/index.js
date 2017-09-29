@@ -52,7 +52,7 @@ class StarProject extends Component {
       phone: '',
       email: '',
       pressStatus: false,
-      defaultDepartment: 'Select Department',
+      defaultDepartment: 'Select a service',
       departments: []
     };
   }
