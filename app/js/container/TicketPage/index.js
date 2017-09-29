@@ -51,18 +51,38 @@ class Ticket extends Component {
       phone: '',
       email: '',
       defaultDepartment: 'Select Department',
-      departments: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'],
+      departments: [],
     };
   }
 
   componentWillMount() {
     const { currentLanguage } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
+    this.setState({
+      departments: [language.sWebsite[currentLanguage], 
+                    language.sEcommerce[currentLanguage], 
+                    language.sLogoDesign[currentLanguage],
+                    language.sMultimediaCD[currentLanguage],
+                    language.sContentSolution[currentLanguage],
+                    language.sSeo[currentLanguage],
+                    language.sMaintanence[currentLanguage],
+                    language.sKentico[currentLanguage],
+                    language.sMobile[currentLanguage]]});
   }
 
   componentWillReceiveProps(nextProps) {
     const { currentLanguage } = nextProps;
     this.changeDepartmentLanguage(currentLanguage);
+    this.setState({
+      departments: [language.sWebsite[currentLanguage], 
+                    language.sEcommerce[currentLanguage], 
+                    language.sLogoDesign[currentLanguage],
+                    language.sMultimediaCD[currentLanguage],
+                    language.sContentSolution[currentLanguage],
+                    language.sSeo[currentLanguage],
+                    language.sMaintanence[currentLanguage],
+                    language.sKentico[currentLanguage],
+                    language.sMobile[currentLanguage]]});
   }
   
   changeDepartmentLanguage(currentLanguage) {

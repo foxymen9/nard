@@ -71,7 +71,7 @@ class ServicesDetail extends Component {
         { avatar: web, backColor: commonColors.serviceWebColor },
         { avatar: cart, backColor: commonColors.detailTitleBar },
         { avatar: logo, backColor: commonColors.serviceLogoColor },
-        { avatar: video, backColor: commonColors.lightYellow },
+        { avatar: video, backColor: commonColors.serviceMediaColor },
         { avatar: content, backColor: commonColors.serviceContentColor },
         { avatar: search, backColor: commonColors.serviceSeoColor },
         { avatar: maintenance , backColor: commonColors.serviceMaintanenceColor },

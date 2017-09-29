@@ -107,24 +107,16 @@ class Menu extends Component {
           this.props.saveMenuSelectedID(rowID);
           Actions.Main();
           return;
-        case "1": //Spepcial Services
-          this.props.saveMenuSelectedID(rowID);
-          Actions.Offers();
-          return;
-        case "2": //Support Ticket
-          this.props.saveMenuSelectedID(rowID);
-          Actions.Ticket();
-          return;
-        case "3": //Language
+        case "1": //Language
           const lang = currentLanguage == 'EN' ? 'AR' : 'EN';
           this.props.changeLanguage(lang);
           this.props.menuState();
           return;
-        case "4": //Vist site (nard.sa)
+        case "2": //Vist site (nard.sa)
           Linking.openURL("https://www.nard.sa");
           this.props.menuState();
           return;
-        case "5": //Login page
+        case "3": //Login page
           this.props.saveMenuSelectedID('null');
           Actions.Login();
           return;
@@ -175,9 +167,7 @@ class Menu extends Component {
             language.menuLogout[currentLanguage]];
     } else {
       menuItems = [
-            language.menuHome[currentLanguage],
-            language.menuOffer[currentLanguage], 
-            language.menuTicket[currentLanguage],  
+            language.menuHome[currentLanguage], 
             language.menuLanguage[currentLanguage],
             language.menuVisitNard[currentLanguage],
             language.menuLogout[currentLanguage]];

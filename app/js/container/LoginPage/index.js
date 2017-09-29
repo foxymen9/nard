@@ -257,8 +257,9 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.9,
   },
   languageIcon: {
-    height: 20,
-    width: 20,
+    height: 30,
+    marginTop: 5,
+    width: 30,
   },
   menuIcon: {
     height: 20,

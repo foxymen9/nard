@@ -15,3 +15,4 @@ export const serviceMaintanenceColor = '#329B00';
 export const serviceKenticoColor = '#A722D3';
 export const serviceMobileColor = '#6B3CB5';
 export const serviceContentColor = '#F07226';
+export const serviceMediaColor = '#FFCF06';
