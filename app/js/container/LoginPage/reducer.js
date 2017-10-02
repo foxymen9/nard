@@ -4,13 +4,35 @@ const initialState = {
   loading: false,
   error: null,
   signupStatus: null,
-  loginResult: null,
+  userInfoResult: null,
   loggin: false,
+  apiToken: null,
   currentLanguage: 'EN',
 };
 
 export default function auth(state = initialState, action = {}) {
   switch (action.type) {
+    /**************************/
+    /* Get auth token
+    /**************************/
+    case types.TOKEN_REQUEST:
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    case types.TOKEN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        apiToken: action.result.data,
+      };
+    case types.TOKEN_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     /**************************/
     /* LogIn
     /**************************/
@@ -26,9 +48,9 @@ export default function auth(state = initialState, action = {}) {
         ...state,
         loading: false,
         loggin: true,
-        // loginResult: action.result.data,
+        userInfoResult: action.result.data,
       };
-    case types.LOGIN_ERROR:
+    case types.LOGIN_FAILED:
       return {
         ...state,
         loading: false,

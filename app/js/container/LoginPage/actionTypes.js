@@ -1,9 +1,16 @@
 /**************************/
+/* Get API Token
+/**************************/
+export const TOKEN_REQUEST = 'TOKEN_REQUEST';
+export const TOKEN_SUCCESS = 'TOKEN_SUCCESS';
+export const TOKEN_FAILED = 'TOKEN_FAILED';
+
+/**************************/
 /* LogIn
 /**************************/
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
 
 /**************************/
 /* LogOut

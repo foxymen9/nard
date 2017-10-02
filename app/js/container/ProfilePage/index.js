@@ -28,17 +28,17 @@ import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth } f
 import language from '../../utils/language/language';
 import Container from '../Container';
 
-const avatar = require('../../../assets/imgs/profile/avatar.png');
-const name = require('../../../assets/imgs/start_project/full_name.png');
-const name_ar = require('../../../assets/imgs/start_project/full_name_ar.png');
-const email = require('../../../assets/imgs/start_project/mail.png');
-const email_ar = require('../../../assets/imgs/start_project/mail_ar.png');
-const phone = require('../../../assets/imgs/start_project/phone.png');
-const phone_ar = require('../../../assets/imgs/start_project/phone_ar.png');
-const company = require('../../../assets/imgs/start_project/company.png');
-const company_ar = require('../../../assets/imgs/start_project/company_ar.png');
-const update = require('../../../assets/imgs/main/yellow_button.png');
-const pressBtn = require('../../../assets/imgs/main/blue_button.png');
+const avatar_img = require('../../../assets/imgs/profile/avatar.png');
+const name_img = require('../../../assets/imgs/start_project/full_name.png');
+const name_img_ar = require('../../../assets/imgs/start_project/full_name_ar.png');
+const email_img = require('../../../assets/imgs/start_project/mail.png');
+const email_img_ar = require('../../../assets/imgs/start_project/mail_ar.png');
+const phone_img = require('../../../assets/imgs/start_project/phone.png');
+const phone_img_ar = require('../../../assets/imgs/start_project/phone_ar.png');
+const company_img = require('../../../assets/imgs/start_project/company.png');
+const company_img_ar = require('../../../assets/imgs/start_project/company_ar.png');
+const update_img = require('../../../assets/imgs/main/yellow_button.png');
+const pressBtn_img = require('../../../assets/imgs/main/blue_button.png');
 
 class Profile extends Component {
   constructor(props) {
@@ -65,19 +65,34 @@ class Profile extends Component {
   }
 
   render() {
-    const { currentLanguage } = this.props;
+    const { currentLanguage, userInfoResult } = this.props;
+    const userData = userInfoResult.data;
+    let {company, name, phone, email, content, firstname} = this.state;
+
+    if (currentLanguage == 'EN') {
+      company = userData.client_descriptions[1].company_name;
+      name = userData.client_descriptions[1].title;
+      phone = userData.client_data.mobile;
+      email = userData.client_data.email;
+    }
+    else {
+      company = userData.client_descriptions[2].company_name;
+      name = userData.client_descriptions[2].title;
+      phone = userData.client_data.mobile;
+      email = userData.client_data.email;
+    }
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null">
         <View style={ styles.container } >
           <KeyboardAwareScrollView>
             <View style={ styles.subContainer } >
-              <Image source={avatar} style={ styles.avatar } resizeMode="contain" >
+              <Image source={avatar_img} style={ styles.avatar } resizeMode="contain" >
                 <Text  style={ styles.avatarText }>{this.state.firstName}</Text>
               </Image>
               {currentLanguage == 'EN'
               ?<View style={{flex:0.7}}>
-                <Image source={company} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={company_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
                     autoCapitalize="none"
@@ -88,12 +103,12 @@ class Profile extends Component {
                     style={styles.input}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
-                    value={ this.state.company }
+                    value={ company }
                     onChangeText={ (text) => this.setState({ company: text }) }
                     onSubmitEditing={ () => this.refs.name.focus() }
                   />
                 </Image>
-                <Image source={name} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={name_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="name"
                     autoCapitalize="none"
@@ -104,12 +119,12 @@ class Profile extends Component {
                     style={styles.input}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
-                    value={ this.state.name }
+                    value={ name }
                     onChangeText={ (text) => this.setState({ name: text }) }
                     onSubmitEditing={ () => this.refs.phone.focus() }
                   />
                 </Image>
-                <Image source={phone} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={phone_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="phone"
                     autoCapitalize="none"
@@ -121,12 +136,12 @@ class Profile extends Component {
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
                     keyboardType="numbers-and-punctuation"
-                    value={ this.state.phone }
+                    value={ phone }
                     onChangeText={ (text) => this.setState({ phone: text }) }
                     onSubmitEditing={ () => this.refs.email.focus() }
                   />
                 </Image>
-                <Image source={email} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={email_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="email"
                     autoCapitalize="none"
@@ -138,7 +153,7 @@ class Profile extends Component {
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
                     keyboardType="email-address"
-                    value={ this.state.email }
+                    value={ email }
                     onChangeText={ (text) => this.setState({ email: text }) }
                     onSubmitEditing={ () => this.refs.content.focus() }
                   />
@@ -150,14 +165,14 @@ class Profile extends Component {
                     underlayColor={'#fff'}
                     onPress={ () => this.onUpdate() }
                   >
-                    <Image source={ this.state.pressStatus ? pressBtn : update } style={ styles.button } resizeMode="contain" >
+                    <Image source={ this.state.pressStatus ? pressBtn_img : update_img } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
                     </Image>
                   </TouchableHighlight>
                 </View>
               </View>
               :<View style={{flex:0.7}}>
-                <Image source={company_ar} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={company_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
                     autoCapitalize="none"
@@ -168,12 +183,12 @@ class Profile extends Component {
                     style={styles.input_ar}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
-                    value={ this.state.company }
+                    value={ company }
                     onChangeText={ (text) => this.setState({ company: text }) }
                     onSubmitEditing={ () => this.refs.name.focus() }
                   />
                 </Image>
-                <Image source={name_ar} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={name_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="name"
                     autoCapitalize="none"
@@ -184,12 +199,12 @@ class Profile extends Component {
                     style={styles.input_ar}
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
-                    value={ this.state.name }
+                    value={ name }
                     onChangeText={ (text) => this.setState({ name: text }) }
                     onSubmitEditing={ () => this.refs.phone.focus() }
                   />
                 </Image>
-                <Image source={phone_ar} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={phone_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="phone"
                     autoCapitalize="none"
@@ -201,12 +216,12 @@ class Profile extends Component {
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
                     keyboardType="numbers-and-punctuation"
-                    value={ this.state.phone }
+                    value={ phone }
                     onChangeText={ (text) => this.setState({ phone: text }) }
                     onSubmitEditing={ () => this.refs.email.focus() }
                   />
                 </Image>
-                <Image source={email_ar} style={ styles.inputImg } resizeMode="contain" >
+                <Image source={email_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="email"
                     autoCapitalize="none"
@@ -218,7 +233,7 @@ class Profile extends Component {
                     underlineColorAndroid="transparent"
                     returnKeyType={ 'next' }
                     keyboardType="email-address"
-                    value={ this.state.email }
+                    value={ email }
                     onChangeText={ (text) => this.setState({ email: text }) }
                     onSubmitEditing={ () => this.refs.content.focus() }
                   />
@@ -230,7 +245,7 @@ class Profile extends Component {
                     underlayColor={'#fff'}
                     onPress={ () => this.onUpdate() }
                   >
-                    <Image source={ this.state.pressStatus ? pressBtn : update } style={ styles.button } resizeMode="contain" >
+                    <Image source={ this.state.pressStatus ? pressBtn_img : update_img } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
                     </Image>
                   </TouchableHighlight>
@@ -305,5 +320,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
+  userInfoResult: state.auth.userInfoResult,
   currentLanguage: state.auth.currentLanguage,
 }),{ })(Profile);

@@ -111,7 +111,6 @@ export default class ModalPicker extends BaseComponent {
     }
 
     renderOption(option) {
-        console.log('OPTIONS', option);
       //Saudi Arabia, UAE, Morocco, Spain, Singapore, Palastin
       if (option.dialCode == '+966' || (option.dialCode == '+212' && option.label.indexOf('Western Sahara')) || option.dialCode == '+34' || 
                 option.dialCode == '+65' || option.dialCode == '+970' || option.dialCode == '+971') 

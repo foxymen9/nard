@@ -2,7 +2,7 @@ const language = {
     //Login Page
     "rememberMe": {"EN": "Remember Me", "AR": "تذكر اسم المستخدم"},
     "forgotPassword": {"EN": "Forgot Password", "AR": "نسيت كلمة السر"},
-    "login": {"EN": "Log in", "AR": "تسجيل الدخول"},
+    "login_text": {"EN": "Log in", "AR": "تسجيل الدخول"},
     "email": {"EN": "E-mail", "AR": "البريد الإلكتروني"},
     "skip": {"EN": "SKIP", "AR": "تخطي الدخول"},
     "mobileNumber": {"EN": "Mobile Number", "AR": "رقم الجوال"},

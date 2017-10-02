@@ -30,7 +30,7 @@ import  ModalPickerImage from '../../utils/ModalPickerImage';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, subWidth, inputMargin } from '../../styles/commonStyles';
-import { logIn, changeLanguage } from './actions';
+import { getApiToken, userLoginIn, changeLanguage } from './actions';
 import language from '../../utils/language/language';
 
 const background = require('../../../assets/imgs/background/background.png');
@@ -41,7 +41,7 @@ const email = require('../../../assets/imgs/login/mail.png');
 const email_ar = require('../../../assets/imgs/login/mail_ar.png');
 const phone = require('../../../assets/imgs/login/phone.png');
 const phone_ar = require('../../../assets/imgs/login/phone_ar.png');
-const login = require('../../../assets/imgs/login/login.png');
+const login_img = require('../../../assets/imgs/login/login.png');
 const skip = require('../../../assets/imgs/login/skip_arrow.png');
 const check = require('../../../assets/imgs/login/check.png');
 const uncheck = require('../../../assets/imgs/login/uncheck.png');
@@ -55,7 +55,21 @@ class Login extends Component {
       rememberMe: false,
       language: true,   //EN -> AR,
       pickerData: null,
+      apiToken: '',
+      loading: false,
     };
+  }
+
+  componentWillMount() {
+    //get api_token from server after check in AsyncStorage
+    AsyncStorage.getItem("api_token").then((value) => {
+      if (value === null) {
+        this.props.getApiToken();
+      }
+      else {
+        this.setState({apiToken: value});
+      }
+    }).done();
   }
 
   componentDidMount() {
@@ -63,20 +77,49 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {loggin} = nextProps;
-    if (loggin) {
-      //Save login status (true) to AsyncStorage after succeffully logged in
-      AsyncStorage.setItem("loggin", "true");
-      Actions.Main();
+    const { apiToken, loggin, userInfoResult, loading } = nextProps;
+    this.setState({loading: loading});
+
+    //check the api_token in AsyncStorage, If NO save api_token
+    AsyncStorage.getItem("api_token").then((value) => {
+      
+      if (value === null) {
+        if (apiToken && apiToken.success) {
+          AsyncStorage.setItem("api_token", apiToken.api_token);
+          this.setState({apiToken: apiToken.api_token});
+        }
+      }
+    }).done();
+
+    //check userinfo after login button clicked
+    if (loggin && userInfoResult) {
+      console.log('SUCCESS', userInfoResult);
+      if (userInfoResult.error) {
+        AsyncStorage.setItem("loggin", "false");
+        if (userInfoResult.error.login) {    //email and phone invalid
+          alert(userInfoResult.error.login);
+        }
+        if (userInfoResult.error.warning) {  //invalid token
+          AsyncStorage.removeItem("api_token");
+          this.props.getApiToken();
+        }
+        return;
+      }
+      else {
+        AsyncStorage.setItem("loggin", "true");
+        Actions.Main();
+      }
     }
   }
 
   onLogin() {
     Keyboard.dismiss();
-    const {email} = this.state;
+
+    const { apiToken } = this.state;
+    const { email } = this.state;
     const phoneNumber = this.refs.phone.getValue();
-    const data = {email: email, phone: phoneNumber};
-    this.props.logIn(data);
+    const data = { email: email, telephone: phoneNumber };
+    this.props.userLoginIn(data, apiToken);
   }
 
   onRememberMe() {
@@ -113,11 +156,11 @@ class Login extends Component {
   }
   
   render() {
-    const { currentLanguage, loading } = this.props;
+    const { currentLanguage } = this.props;
+    const { loading } = this.state;
 
     return (
       <View style={ styles.main } >
-        <Spinner visible={ loading } />
         <Image source={ background } style={ styles.background } />
         <View style={ styles.navBar } >
           <TouchableOpacity
@@ -203,10 +246,10 @@ class Login extends Component {
               }
               <TouchableOpacity
                 activeOpacity={ .5 }
-                onPress={ () => this.onLogin() }
+                onPressIn={ () => this.onLogin() }
               >
-                <Image source={ login } style={ styles.lognButton } resizeMode="contain">
-                  <Text style={ styles.textButton }>{language.login[currentLanguage]}</Text>
+                <Image source={ login_img } style={ styles.lognButton } resizeMode="contain">
+                  <Text style={ styles.textButton }>{language.login_text[currentLanguage]}</Text>
                 </Image>
               </TouchableOpacity>
             </View>
@@ -385,7 +428,9 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
+  apiToken: state.auth.apiToken,
   loading: state.auth.loading,
   loggin: state.auth.loggin,
+  userInfoResult: state.auth.userInfoResult,
   currentLanguage: state.auth.currentLanguage,
-}),{ logIn, changeLanguage })(Login);
+}),{ getApiToken, userLoginIn, changeLanguage })(Login);
