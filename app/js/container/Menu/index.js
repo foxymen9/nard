@@ -12,16 +12,16 @@ import {
     TouchableHighlight,
     Linking,
     Keyboard,
-    AsyncStorage
+    AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { changeLanguage, logout } from '../LoginPage/actions';
+import { logout } from '../LoginPage/actions';
+import { changeLanguage } from '../LanguageStore/actions';
 import { saveMenuSelectedID } from './actions';
-
 import language from '../../utils/language/language';
 
 import { screenWidth, screenHeight, statusBar } from '../../styles/commonStyles';
@@ -39,28 +39,24 @@ class Menu extends Component {
         userName: 'Khalid El Kamel',
         dataSource: null,
         rowID: null,
-        loggin: false,
     }
   }
 
   componentWillMount() {
-    AsyncStorage.getItem("loggin").then((value) => {
-      if (value == "true") {
-        this.setState({loggin: true});
-      }
-    }).done();
+  }
+
+  componentWillReceiveProps(nextProps) {
   }
 
   onItemSelect(data, rowID) {
-    const {currentLanguage, menuSelectedID} = this.props;
-    const {loggin} = this.state;
+    const {currentLanguage, menuSelectedID, loggin } = this.props;
 
     if (rowID == menuSelectedID) {
       //Hide menu when select the current page
       this.props.menuState();
       return;
     }
-    
+
     if (loggin) {
       switch (rowID) {
         case "0": //Home
@@ -151,8 +147,7 @@ class Menu extends Component {
   }
 
   render() {
-    const {currentLanguage, menuSelectedID} = this.props;
-    const {loggin} = this.state;
+    const {currentLanguage, menuSelectedID, loggin} = this.props;
     let menuItems = [];
     
     if (loggin) {
@@ -275,5 +270,7 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
+  myServicesData: state.menu.myServicesData,
   menuSelectedID: state.menu.menuSelectedID,
+  loggin: state.auth.loggin,
 }),{ changeLanguage, saveMenuSelectedID, logout })(Menu);

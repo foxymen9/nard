@@ -30,7 +30,9 @@ import  ModalPickerImage from '../../utils/ModalPickerImage';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, subWidth, inputMargin } from '../../styles/commonStyles';
-import { getApiToken, userLoginIn, changeLanguage } from './actions';
+import { userLoginIn, saveLoggin } from './actions';
+import { changeLanguage } from '../LanguageStore/actions';
+import { getApiToken, changeTokenStatus } from '../ParentComponent/actions';
 import language from '../../utils/language/language';
 
 const background = require('../../../assets/imgs/background/background.png');
@@ -51,7 +53,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      email: '',
+      email: 'info@nard.sa',
       rememberMe: false,
       language: true,   //EN -> AR,
       pickerData: null,
@@ -62,52 +64,40 @@ class Login extends Component {
 
   componentWillMount() {
     //get api_token from server after check in AsyncStorage
-    AsyncStorage.getItem("api_token").then((value) => {
-      if (value === null) {
-        this.props.getApiToken();
-      }
-      else {
-        this.setState({apiToken: value});
-      }
-    }).done();
+    const {token_status} = this.props;
+    if (!token_status) {
+      this.props.getApiToken();
+    }
   }
-
   componentDidMount() {
     this.setState({pickerData: this.refs.phone.getPickerData()});
   }
 
   componentWillReceiveProps(nextProps) {
-    const { apiToken, loggin, userInfoResult, loading } = nextProps;
+    const { loggin, userInfoResult, loading, token_status, apiToken } = nextProps;
+    const { email } = this.state;
+    const phoneNumber = this.refs.phone.getValue();
+    
     this.setState({loading: loading});
 
-    //check the api_token in AsyncStorage, If NO save api_token
-    AsyncStorage.getItem("api_token").then((value) => {
-      
-      if (value === null) {
-        if (apiToken && apiToken.success) {
-          AsyncStorage.setItem("api_token", apiToken.api_token);
-          this.setState({apiToken: apiToken.api_token});
-        }
-      }
-    }).done();
+    if (!token_status) {
+      this.props.getApiToken();
+      return;
+    }
 
-    //check userinfo after login button clicked
-    if (loggin && userInfoResult) {
-      console.log('SUCCESS', userInfoResult);
-      if (userInfoResult.error) {
-        AsyncStorage.setItem("loggin", "false");
-        if (userInfoResult.error.login) {    //email and phone invalid
-          alert(userInfoResult.error.login);
-        }
-        if (userInfoResult.error.warning) {  //invalid token
-          AsyncStorage.removeItem("api_token");
-          this.props.getApiToken();
-        }
-        return;
-      }
-      else {
-        AsyncStorage.setItem("loggin", "true");
+    if (apiToken && apiToken.success) {
+      this.setState({apiToken: apiToken.api_token});
+    }  
+
+    // check userinfo after login button clicked
+    if (userInfoResult && token_status) {
+      if (!loggin) {
+        this.props.saveLoggin();
+        // AsyncStorage.setItem("login_info", JSON.stringify({email: email, phoneNumber: phoneNumber, client_id: userInfoResult.data.client_data.clients_id}));
         Actions.Main();
+      }
+      else if (userInfoResult.error) {
+        alert("invalid email or phone number");
       }
     }
   }
@@ -127,7 +117,6 @@ class Login extends Component {
   }
 
   onForgotPassword() {
-    console.log('forgot password');
   }
 
   onChangeLanguage() {
@@ -156,124 +145,125 @@ class Login extends Component {
   }
   
   render() {
-    const { currentLanguage } = this.props;
+    const { currentLanguage, apiToken } = this.props;
     const { loading } = this.state;
 
     return (
-      <View style={ styles.main } >
-        <Image source={ background } style={ styles.background } />
-        <View style={ styles.navBar } >
-          <TouchableOpacity
-            activeOpacity={ .5 }
-            onPress={ () => this.onChangeLanguage() }
-          >
-            <Image source={ languageIcon } resizeMode="contain" style={styles.languageIcon} />  
-          </TouchableOpacity>
-        </View>
-        <KeyboardAwareScrollView>
-          <View style={ styles.container } >
-            <View style={ styles.descriptionContainer } >
-              <Image source={ logo } style={ styles.logo } resizeMode="center" />
-            </View>
-            <View style= { styles.inputContainer }>
-              <Image source={email} style={ styles.inputImg } resizeMode="contain" >
-                <TextInput
-                  ref="email"
-                  autoCapitalize="none"
-                  autoCorrect={ false }
-                  placeholder={language.email[currentLanguage]}
-                  placeholderTextColor={ commonColors.placeholderText }
-                  textAlign="left"
-                  style={styles.input}
-                  underlineColorAndroid="transparent"
-                  returnKeyType={ 'next' }
-                  keyboardType="email-address"
-                  value={ this.state.email }
-                  onChangeText={ (text) => this.setState({ email: text }) }
-                  onSubmitEditing={ () => this.refs.phone.focus() }
-                />
-              </Image>
-              <Image source={phone} style={ styles.inputImg }  resizeMode="contain" >
-                <View style={styles.phoneWrapper }>
-                  <PhoneInput 
-                    ref='phone' 
-                    initialCountry='sa'
-                    textStyle={{fontSize: 13, color: commonColors.title}}
-                    onPressFlag={()=>this.onPressFlag()}
-                  />
-                  <ModalPickerImage
-                    ref='myCountryPicker'
-                    data={this.state.pickerData}
-                    onChange={(country)=>{ this.selectCountry(country) }}
-                    cancelText='Cancel'
-                  />
-                </View>
-              </Image>
-              {currentLanguage == "EN" ?
-              <View style={ styles.textWrapper }>
-                <TouchableOpacity
-                  activeOpacity={ .5 }
-                  style={styles.rememberWrapper}
-                  onPress={ () => this.onRememberMe() }
-                >
-                  <Image source={ this.state.rememberMe ? check : uncheck } resizeMode="contain" />
-                  <Text style={ styles.textRememberMe }>{language.rememberMe[currentLanguage]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={ .5 }
-                  onPress={ () => this.onForgotPassword() }
-                >
-                  <Text style={ styles.textForgotPassword }>{language.forgotPassword[currentLanguage]}</Text>
-                </TouchableOpacity>
-              </View>
-              :
-              <View style={ styles.textWrapper }>
-                <TouchableOpacity
-                  activeOpacity={ .5 }
-                  onPress={ () => this.onForgotPassword() }
-                >
-                  <Text style={ styles.textForgotPassword }>{language.forgotPassword[currentLanguage]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={ .5 }
-                  style={styles.rememberWrapper}
-                  onPress={ () => this.onRememberMe() }
-                >
-                  <Text style={ styles.textRememberMeAr }>{language.rememberMe[currentLanguage]}</Text>
-                  <Image source={ this.state.rememberMe ? check : uncheck } resizeMode="contain" />
-                </TouchableOpacity>
-              </View>
-              }
-              <TouchableOpacity
-                activeOpacity={ .5 }
-                onPressIn={ () => this.onLogin() }
-              >
-                <Image source={ login_img } style={ styles.lognButton } resizeMode="contain">
-                  <Text style={ styles.textButton }>{language.login_text[currentLanguage]}</Text>
-                </Image>
-              </TouchableOpacity>
-            </View>
-            <View style={ styles.bottomContainer }>
-              <TouchableOpacity
-                activeOpacity={ .5 }
-                onPress={ () => this.onSkip() }
-              >
-                <View style={styles.skip}>
-                  <Text style={ styles.skipText }>{language.skip[currentLanguage]}</Text>
-                  <Image source={ skip } style={ styles.skipIcon } resizeMode="contain" />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={ .5 }
-                style={styles.siteWrapper}
-                onPress={ () => this.onGotoSite() }
-              >
-                <Text style={ styles.siteText }>www.nard.sa</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={ styles.main } >
+          <Spinner visible={ loading }/>
+          <Image source={ background } style={ styles.background } />
+          <View style={ styles.navBar } >
+            <TouchableOpacity
+              activeOpacity={ .5 }
+              onPress={ () => this.onChangeLanguage() }
+            >
+              <Image source={ languageIcon } resizeMode="contain" style={styles.languageIcon} />  
+            </TouchableOpacity>
           </View>
-        </KeyboardAwareScrollView>
-      </View>
+          <KeyboardAwareScrollView>
+            <View style={ styles.container } >
+              <View style={ styles.descriptionContainer } >
+                <Image source={ logo } style={ styles.logo } resizeMode="center" />
+              </View>
+              <View style= { styles.inputContainer }>
+                <Image source={email} style={ styles.inputImg } resizeMode="contain" >
+                  <TextInput
+                    ref="email"
+                    autoCapitalize="none"
+                    autoCorrect={ false }
+                    placeholder={language.email[currentLanguage]}
+                    placeholderTextColor={ commonColors.placeholderText }
+                    textAlign="left"
+                    style={styles.input}
+                    underlineColorAndroid="transparent"
+                    returnKeyType={ 'next' }
+                    keyboardType="email-address"
+                    value={ this.state.email }
+                    onChangeText={ (text) => this.setState({ email: text }) }
+                    onSubmitEditing={ () => this.refs.phone.focus() }
+                  />
+                </Image>
+                <Image source={phone} style={ styles.inputImg }  resizeMode="contain" >
+                  <View style={styles.phoneWrapper }>
+                    <PhoneInput 
+                      ref='phone' 
+                      initialCountry='sa'
+                      textStyle={{fontSize: 13, color: commonColors.title}}
+                      onPressFlag={()=>this.onPressFlag()}
+                    />
+                    <ModalPickerImage
+                      ref='myCountryPicker'
+                      data={this.state.pickerData}
+                      onChange={(country)=>{ this.selectCountry(country) }}
+                      cancelText='Cancel'
+                    />
+                  </View>
+                </Image>
+                {currentLanguage == "EN" ?
+                <View style={ styles.textWrapper }>
+                  <TouchableOpacity
+                    activeOpacity={ .5 }
+                    style={styles.rememberWrapper}
+                    onPress={ () => this.onRememberMe() }
+                  >
+                    <Image source={ this.state.rememberMe ? check : uncheck } resizeMode="contain" />
+                    <Text style={ styles.textRememberMe }>{language.rememberMe[currentLanguage]}</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    activeOpacity={ .5 }
+                    onPress={ () => this.onForgotPassword() }
+                  >
+                    <Text style={ styles.textForgotPassword }>{language.forgotPassword[currentLanguage]}</Text>
+                  </TouchableOpacity>
+                </View>
+                :
+                <View style={ styles.textWrapper }>
+                  <TouchableOpacity
+                    activeOpacity={ .5 }
+                    onPress={ () => this.onForgotPassword() }
+                  >
+                    <Text style={ styles.textForgotPassword }>{language.forgotPassword[currentLanguage]}</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    activeOpacity={ .5 }
+                    style={styles.rememberWrapper}
+                    onPress={ () => this.onRememberMe() }
+                  >
+                    <Text style={ styles.textRememberMeAr }>{language.rememberMe[currentLanguage]}</Text>
+                    <Image source={ this.state.rememberMe ? check : uncheck } resizeMode="contain" />
+                  </TouchableOpacity>
+                </View>
+                }
+                <TouchableOpacity
+                  activeOpacity={ .5 }
+                  onPressIn={ () => this.onLogin() }
+                >
+                  <Image source={ login_img } style={ styles.lognButton } resizeMode="contain">
+                    <Text style={ styles.textButton }>{language.login_text[currentLanguage]}</Text>
+                  </Image>
+                </TouchableOpacity>
+              </View>
+              <View style={ styles.bottomContainer }>
+                <TouchableOpacity
+                  activeOpacity={ .5 }
+                  onPress={ () => this.onSkip() }
+                >
+                  <View style={styles.skip}>
+                    <Text style={ styles.skipText }>{language.skip[currentLanguage]}</Text>
+                    <Image source={ skip } style={ styles.skipIcon } resizeMode="contain" />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={ .5 }
+                  style={styles.siteWrapper}
+                  onPress={ () => this.onGotoSite() }
+                >
+                  <Text style={ styles.siteText }>www.nard.sa</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAwareScrollView>
+        </View>
     );
   }
 }
@@ -428,9 +418,10 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  apiToken: state.auth.apiToken,
   loading: state.auth.loading,
   loggin: state.auth.loggin,
   userInfoResult: state.auth.userInfoResult,
-  currentLanguage: state.auth.currentLanguage,
-}),{ getApiToken, userLoginIn, changeLanguage })(Login);
+  currentLanguage: state.language.currentLanguage,
+  token_status: state.parent_state.token_status,
+  apiToken: state.parent_state.apiToken,
+}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin })(Login);

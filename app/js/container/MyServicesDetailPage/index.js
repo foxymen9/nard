@@ -16,6 +16,7 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   ScrollView,
+  WebView,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -53,36 +54,23 @@ class ServicesDetail extends Component {
   }
 
   render() {
-    const { currentLanguage } = this.props;
-
+    const { currentLanguage, subData } = this.props;
+    
     return (
       <Container currentLanguage={currentLanguage} pageTitle="ourServicesDetail">
         {currentLanguage == 'EN'
         ?<View style={ styles.container } >
           <View style={ styles.titleBar}>
-            <Text style={styles.titleText}>Domain name: <Text style={styles.boldText}>www.domain1.com</Text></Text>
-            <Text style={styles.titleText}>Capacity: <Text style={styles.boldText}>100 GB</Text></Text>
-            <Text style={styles.titleText}>Expiration date: <Text style={styles.boldText}>08.19.2019</Text></Text>
+            <Text style={styles.titleText}>Domain name: <Text style={styles.boldText}>{subData.domain_name}</Text></Text>
+            <Text style={styles.titleText}>Capacity: <Text style={styles.boldText}>{subData.capacity}</Text></Text>
+            <Text style={styles.titleText}>Expiration date: <Text style={styles.boldText}>{subData.expired_date}</Text></Text>
           </View>
           <ScrollView>
             <View style={ styles.subContainer}>
               <View style={styles.scrollView}>
                 <Text style={styles.importantText}>IMPORTANT:</Text>
                 <Text style={styles.contentText}>
-                  To point your domain name to the new server,
-                  please change its name server (DNS) to:
-                  ns1.s482.sureaserver.com
-                  [192.1252.146.32]
-                  ns1.s482.sureaserver.com
-                  [192.1252.146.32]
-                  You should be able to do this throughan online domain management interface provided by your domain register/
-
-                  Plese contacat them for futher hlep with changing your domain name servers. 
-                  Pleaase note that the domain registration for brakat.com is not currently
-                  hadled by our company, and you will have to renew it at the current register.
-
-                  Website URL: https://brakaat.com or
-                  http://www.brakat.com
+                  {subData.service_details}
                 </Text>
               </View>
             </View>
@@ -90,29 +78,16 @@ class ServicesDetail extends Component {
         </View>
         :<View style={ styles.container } >
           <View style={ styles.titleBar}>
-            <Text style={styles.titleText_ar}><Text style={styles.boldText}>www.domain1.com</Text> :Domain name</Text>
-            <Text style={styles.titleText_ar}><Text style={styles.boldText}>100 GB</Text> :Capacity </Text>
-            <Text style={styles.titleText_ar}><Text style={styles.boldText}>08.19.2019</Text> :Expiration date</Text>
+            <Text style={styles.titleText_ar}> {language.domainText["AR"]}: <Text style={styles.boldText}>{subData.domain_name}</Text></Text>
+            <Text style={styles.titleText_ar}> {language.capacityText["AR"]}: <Text style={styles.boldText}>{subData.capacity}</Text></Text>
+            <Text style={styles.titleText_ar}> {language.expiredDateText["AR"]}: <Text style={styles.boldText}>{subData.expired_date}</Text></Text>
           </View>
           <ScrollView>
             <View style={ styles.subContainer}>
               <View style={styles.scrollView}>
                 <Text style={styles.importantText_ar}>IMPORTANT:</Text>
                 <Text style={styles.contentText_ar}>
-                  To point your domain name to the new server,
-                  please change its name server (DNS) to:
-                  ns1.s482.sureaserver.com
-                  [192.1252.146.32]
-                  ns1.s482.sureaserver.com
-                  [192.1252.146.32]
-                  You should be able to do this throughan online domain management interface provided by your domain register/
-
-                  Plese contacat them for futher hlep with changing your domain name servers. 
-                  Pleaase note that the domain registration for brakat.com is not currently
-                  hadled by our company, and you will have to renew it at the current register.
-
-                  Website URL: https://brakaat.com or
-                  http://www.brakat.com
+                   {subData.service_details}
                 </Text>
               </View>
             </View>
@@ -184,5 +159,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.auth.currentLanguage,
+  currentLanguage: state.language.currentLanguage,
 }),{ })(ServicesDetail);

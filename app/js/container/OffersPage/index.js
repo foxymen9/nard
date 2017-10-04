@@ -16,6 +16,7 @@ import {
   RecyclerViewBackedScrollView,
   AsyncStorage,
 } from 'react-native';
+import Storage from 'react-native-key-value-store';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -28,6 +29,9 @@ import language from '../../utils/language/language';
 import Container from '../Container';
 
 import { saveMenuSelectedID } from '../Menu/actions';
+import { getOffers } from './actions';
+import { logout } from '../LoginPage/actions';
+import { changeTokenStatus } from '../ParentComponent/actions';
 
 const arrow = require('../../../assets/imgs/my_services/arrow.png');
 const arrow_ar = require('../../../assets/imgs/my_services/arrow_ar.png');
@@ -41,17 +45,50 @@ class Offers extends Component {
     this.state = {
       dataSource: null,
       rowID: null,
-      backColors: [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText, commonColors.lightYellow],
+      backColors: [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText],
+      allOffers: [],
+      offerList: [{id: 1, title: '', subTitle: ''}],
     };
   }
 
   componentWillMount() {
-    AsyncStorage.getItem("loggin").then((value) => {
-      value == "true" ? this.props.saveMenuSelectedID(2) : this.props.saveMenuSelectedID(1);
-    }).done();
+    const { userInfoResult, apiToken, loggin } = this.props;
+
+    if (loggin) {
+      this.props.saveMenuSelectedID(2)
+    }
+    else {
+      this.props.saveMenuSelectedID(1);  
+    }
+    const data = {mail: userInfoResult.data.client_data.email};
+    this.props.getOffers(data, apiToken.api_token);
   }
 
   componentWillReceiveProps(nextProps) {
+    const {offersData, userInfoResult, currentLanguage, loggin, token_status, loading} = nextProps;
+
+    this.setState({loading: loading});
+
+    if (offersData) {
+      if (offersData === "token_failed") {
+        if (loggin || token_status) {
+          Actions.Login();
+        }
+        this.props.changeTokenStatus(false);
+        this.props.logout();
+        return;
+      }
+      else {
+        this.setState({allOffers: offersData.data.offers});
+        let data = offersData.data.offers;
+        let index = currentLanguage == "EN" ? 0 : 1;
+        let offerList = [];
+        for (let i = 0; i < data.length; i ++) {
+          offerList.push({id: (i + 1), title: data[i].text[index].title, subTitle: data[i].text[index].title});
+        }
+        this.setState({offerList: offerList, allOffer: data});
+      }
+    }
   }
 
   onAddService() {
@@ -63,7 +100,7 @@ class Offers extends Component {
   }
 
   onItemSelect(data, rowID) {
-    Actions.OffersDetail({rowID: rowID});
+    Actions.OffersDetail({rowID: rowID, offerData: this.state.allOffer});
   }
 
   handleScroll(event) {
@@ -72,17 +109,16 @@ class Offers extends Component {
  _renderRow (rowData, sectionID, rowID, highlightRow) {
     return (
       <View style={{
-                  backgroundColor: this.state.backColors[rowID],
+                  backgroundColor: this.state.backColors[rowID % 3],
                   justifyContent: 'center',
                   alignItems: 'center',
                   width: screenWidth,
-                  height: (screenHeight-12-navBar) / 4,}}
+                  height: (screenHeight-12-navBar) / 4}}
       >
         <TouchableOpacity onPress={()=>{this.onItemSelect(rowData, rowID)}}>
           <View style={styles.listView}>
             <View style={styles.titleWrapper}>
               <Text  style={styles.offerTitle}>{rowData.title}</Text>
-              <Text  style={styles.offerSubTitle}>{rowData.subTitle}</Text>
             </View>
             <Image source={ arrow } style={ styles.arrow } />
           </View>
@@ -94,18 +130,17 @@ class Offers extends Component {
   _renderRow_ar (rowData, sectionID, rowID, highlightRow) {
     return (
       <View style={{
-                  backgroundColor: this.state.backColors[rowID],
+                  backgroundColor: this.state.backColors[rowID % 3],
                   justifyContent: 'center',
                   alignItems: 'center',
                   width: screenWidth,
-                  height: (screenHeight-12-navBar) / 4,}}
+                  height: (screenHeight-12-navBar) / 4}}
       >
         <TouchableOpacity onPress={()=>{this.onItemSelect(rowData, rowID)}}>
           <View style={styles.listView}>
             <Image source={ arrow_ar } style={ styles.arrow } />
             <View style={styles.titleWrapper_ar}>
               <Text  style={styles.offerTitle_ar}>{rowData.title}</Text>
-              <Text  style={styles.offerSubTitle_ar}>{rowData.subTitle}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -126,20 +161,22 @@ class Offers extends Component {
 
   render() {
     const { currentLanguage } = this.props;
+    const { offerList, loading } = this.state;
 
     /* ** data for ListView ** */
-    const serviceItems = [
-      {id: 1, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-      {id: 2, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-      {id: 3, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-      {id: 4, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-    ];
+    // const serviceItems = [
+    //   {id: 1, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
+    //   {id: 2, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
+    //   {id: 3, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
+    //   {id: 4, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
+    // ];
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const dataSource = ds.cloneWithRows(serviceItems);
+    const dataSource = ds.cloneWithRows(offerList);
     /* ************************ */
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="offers">
+        <Spinner visible={ loading }/>
         <View style={ styles.container } >
           {currentLanguage=='EN'
           ?<ListView
@@ -170,7 +207,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: screenWidth,
     height: screenHeight - navBar,
-    backgroundColor: commonColors.lightYellow,
+    backgroundColor: '#fff',
   },
   listView: {
     width: screenWidth * 0.85,
@@ -219,5 +256,12 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.auth.currentLanguage,
-}),{ saveMenuSelectedID })(Offers);
+  currentLanguage: state.language.currentLanguage,
+  offersData: state.offers.data,
+  loading: state.offers.loading,
+
+  userInfoResult: state.auth.userInfoResult,
+  token_status: state.parent_state.token_status,
+  apiToken: state.parent_state.apiToken,
+  loggin: state.auth.loggin,
+}),{ saveMenuSelectedID, getOffers, logout, changeTokenStatus })(Offers);

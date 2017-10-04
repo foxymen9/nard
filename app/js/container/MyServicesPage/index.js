@@ -27,6 +27,9 @@ import language from '../../utils/language/language';
 import Container from '../Container';
 
 import { saveMenuSelectedID } from '../Menu/actions';
+import { getMyServices } from './actions';
+import {logout} from '../LoginPage/actions';
+import { changeTokenStatus } from '../ParentComponent/actions';
 
 const arrow = require('../../../assets/imgs/my_services/arrow.png');
 const arrow_ar = require('../../../assets/imgs/my_services/arrow_ar.png');
@@ -55,24 +58,64 @@ class MyServices extends Component {
     this.state = {
       dataSource: null,
       rowID: null,
-      totalCount: [2, 3, 2, 4, 0, 0, 4],
+      totalCount: [0, 0, 0, 0, 0, 0, 0],
       endList: false,
+      servicesData: [],
+      loading: false,
     };
   }
 
   componentWillMount() {
+    const { userInfoResult, apiToken } = this.props;
+    const data = {client_id: userInfoResult.data.client_data.clients_id};
+    this.props.getMyServices(data, apiToken.api_token);
     this.props.saveMenuSelectedID(1);
   }
 
   componentWillReceiveProps(nextProps) {
+    const {myServices, userInfoResult, currentLanguage, loggin, token_status, loading} = nextProps;
+    const {totalCount} = this.state;
+
+    this.setState({loading: loading});
+
+    if (myServices) {
+      if (myServices === "token_failed") {
+        if (loggin || token_status) {
+          Actions.Login();
+        }
+        this.props.changeTokenStatus(false);
+        this.props.logout();
+        return;
+      }
+      else {
+        // console.log('MY_SERVICES_DATA', myServices );
+        const data = myServices.data.services;
+        
+        const hostingData = {}, domainData = {}, smsData = {}, sslData = {}, maintenanceData = {}, kenticoData = {}, chatData = {};
+        for (let i = 0; i < data.length; i ++) {
+          if (data[i].domain.text[1].title == "Hosting")
+            hostingData = data[i];
+          else if (data[i].domain.text[1].title == "Domain")
+            domainData = data[i];
+        }
+        const serviceSubCount = [];
+        serviceSubCount.push(hostingData.service_count, domainData.service_count, 0, 0, 0, 0, 0);
+        this.setState({totalCount: serviceSubCount});
+
+        const servicesData = [];
+        servicesData.push(hostingData);
+        servicesData.push(domainData);
+        this.setState({servicesData: servicesData});
+      }
+    }
   }
 
   onAddService() {
     Actions.StartProject();
   }
 
-  onServiceSubItem() {
-    Actions.MyServicesDetail();
+  onServiceSubItem(data) {
+    Actions.MyServicesDetail({subData: data});
   }
 
   onScrollDown() {
@@ -100,20 +143,20 @@ class MyServices extends Component {
 
  _renderRow (rowData, sectionID, rowID, highlightRow) {
     const listSubView = [];
-
+    
     if (this.state.rowID == rowID) {
       for (let i = 0; i < this.state.totalCount[rowID]; i ++) {
         listSubView.push(
-          <TouchableHighlight onPress={()=>this.onServiceSubItem()} key={i}>
+          <TouchableHighlight onPress={()=>this.onServiceSubItem(this.state.servicesData[rowID].domain[i])} key={i}>
             <View>
               <View
                 style={{ height: 2, backgroundColor: '#D6811D'}}
               />
               <View style={ styles.listSubWrapper } >
                 <View style={ styles.listSubView } >
-                  <Text  style={styles.serviceSubTitle}>www.domain1.com</Text>
+                  <Text  style={styles.serviceSubTitle}>{this.state.servicesData[rowID].domain[i].domain_name}</Text>
                   <View style={styles.rightSubWrapper}>
-                    <Text  style={styles.serviceSubTitleDate}>03/02/2019</Text>
+                    <Text  style={styles.serviceSubTitleDate}>{this.state.servicesData[rowID].domain[i].expired_date}</Text>
                     <Image source={ arrow } style={ styles.subArrow } />
                   </View>
                 </View>
@@ -151,7 +194,7 @@ class MyServices extends Component {
     if (this.state.rowID == rowID) {
       for (let i = 0; i < this.state.totalCount[rowID]; i ++) {
         listSubView.push(
-          <TouchableHighlight onPress={()=>this.onServiceSubItem()} key={i}>
+          <TouchableHighlight onPress={()=>this.onServiceSubItem(this.state.servicesData[rowID].domain[i])} key={i}>
             <View>
               <View
                 style={{ height: 2, backgroundColor: '#D6811D'}}
@@ -160,9 +203,9 @@ class MyServices extends Component {
                 <View style={ styles.listSubView } >
                   <View style={styles.rightSubWrapper}>
                     <Image source={ arrow_ar } style={ styles.subArrow_ar } />
-                    <Text  style={styles.serviceSubTitleDate}>03/02/2019</Text>
+                    <Text  style={styles.serviceSubTitleDate}>{this.state.servicesData[rowID].domain[i].expired_date}</Text>
                   </View>
-                  <Text  style={styles.serviceSubTitle}>www.domain1.com</Text>
+                  <Text  style={styles.serviceSubTitle}>{this.state.servicesData[rowID].domain[i].domain_name}</Text>
                 </View>
               </View>
             </View>
@@ -205,7 +248,8 @@ class MyServices extends Component {
   }
 
   render() {
-    const { currentLanguage } = this.props;
+    const { currentLanguage, myServices } = this.props;
+    const { loading } = this.state;
 
     /* ** data for ListView ** */
     const serviceItems = [
@@ -223,6 +267,7 @@ class MyServices extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="ourServices">
+        <Spinner visible={ loading }/>
         {currentLanguage == 'EN'
         ?<View style={ styles.container } >
           <View style={styles.titleWrapper}>
@@ -373,5 +418,13 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.auth.currentLanguage,
-}),{ saveMenuSelectedID })(MyServices);
+  currentLanguage: state.language.currentLanguage,
+  menuSelectedID: state.menu.menuSelectedID,
+  myServices: state.my_services.data,
+  loading: state.my_services.loading,
+
+  userInfoResult: state.auth.userInfoResult,
+  token_status: state.parent_state.token_status,
+  apiToken: state.parent_state.apiToken,
+
+}),{ getMyServices, saveMenuSelectedID, logout, changeTokenStatus })(MyServices);

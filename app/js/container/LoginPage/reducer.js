@@ -6,33 +6,10 @@ const initialState = {
   signupStatus: null,
   userInfoResult: null,
   loggin: false,
-  apiToken: null,
-  currentLanguage: 'EN',
 };
 
 export default function auth(state = initialState, action = {}) {
   switch (action.type) {
-    /**************************/
-    /* Get auth token
-    /**************************/
-    case types.TOKEN_REQUEST:
-      return {
-        ...state,
-        error: null,
-        loading: true,
-      };
-    case types.TOKEN_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        apiToken: action.result.data,
-      };
-    case types.TOKEN_FAILED:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
     /**************************/
     /* LogIn
     /**************************/
@@ -44,12 +21,23 @@ export default function auth(state = initialState, action = {}) {
         error: null,
       };
     case types.LOGIN_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        loggin: true,
-        userInfoResult: action.result.data,
-      };
+      if (action.result.data.success) {
+        return {
+          ...state,
+          loggin: true,
+          loading: false,
+          userInfoResult: action.result.data,
+        };  
+      }
+      else if (action.result.data.error.code === "invalid_token") {
+        console.log('LOGIN_FAILED_TOKEN', action.result.data);
+        return {
+          ...state,
+          loggin: false,
+          loading: false,
+          userInfoResult: null,
+        };
+      }
     case types.LOGIN_FAILED:
       return {
         ...state,
@@ -65,15 +53,12 @@ export default function auth(state = initialState, action = {}) {
         ...state,
         loggin: false,
       };
-    /**************************/
-    /* Change Language(EN, AR)
-    /**************************/
-    case types.CHANGE_LANGUAGE:
-      return {
-        ...state,
-        currentLanguage: action.data,
-        loggin: false,
-      };
+
+    case types.SAVE_LOGGIN:
+    return {
+      ...state,
+      loggin: true,
+    };
     default:
       return state;
   }

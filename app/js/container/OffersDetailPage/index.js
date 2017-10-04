@@ -54,44 +54,22 @@ class OffersDetail extends Component {
   }
   
   render() {
-    const { currentLanguage, rowID } = this.props;
-    const backColors = [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText, commonColors.lightYellow];
+    const { currentLanguage, rowID, offerData } = this.props;
+    const backColors = [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText];
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="offersDetail">
         <View style={ styles.container } >
           {currentLanguage == 'EN'
             ?<View style={ styles.container } >
-              <View style={ [styles.titleBar, {backgroundColor: backColors[rowID]}]}>
-                <Text style={styles.titleText}>HOSTING</Text>
-                <Text style={styles.boldText}>FOR ALL CUSTOMERS</Text>
+              <View style={ [styles.titleBar, {backgroundColor: backColors[rowID % 3]}]}>
+                <Text style={styles.boldText}>{offerData[rowID].text[0].title}</Text>
               </View>
               <ScrollView>
                 <View style={ styles.subContainer}>
                   <View style={styles.scrollView}>
-                    <Text style={styles.contentTitleText}>
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                    </Text>
                     <Text style={styles.contentText}>
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
+                      {offerData[rowID].text[0].description}
                     </Text>
                   </View>
                   <TouchableHighlight
@@ -109,35 +87,13 @@ class OffersDetail extends Component {
             </View>
           :<View style={ styles.container } >
               <View style={ [styles.titleBar, {backgroundColor: backColors[rowID]}]}>
-                <Text style={styles.titleText_ar}>HOSTING</Text>
-                <Text style={styles.boldText_ar}>FOR ALL CUSTOMERS</Text>
+                <Text style={styles.boldText_ar}>{offerData[rowID].text[1].title}</Text>
               </View>
               <ScrollView>
                 <View style={ styles.subContainer}>
                   <View style={styles.scrollView}>
-                    <Text style={styles.contentTitleText_ar}>
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                    </Text>
                     <Text style={styles.contentText_ar}>
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
-                      To point your domain name to the new server,
-                      please change its name server (DNS) to:
-                      ns1.s482.sureaserver.com
-                      [192.1252.146.32]
-                      ns1.s482.sureaserver.com
+                      {offerData[rowID].text[0].description}
                     </Text>
                   </View>
                   <TouchableHighlight
@@ -248,5 +204,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.auth.currentLanguage,
+  currentLanguage: state.language.currentLanguage,
 }),{ })(OffersDetail);

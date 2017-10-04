@@ -14,7 +14,8 @@ import {
   ListView,
   Keyboard,
   findNodeHandle,  
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -27,6 +28,9 @@ import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
+import {updateProfile} from './actions';
+import {logout} from '../LoginPage/actions';
+import { changeTokenStatus } from '../ParentComponent/actions';
 
 const avatar_img = require('../../../assets/imgs/profile/avatar.png');
 const name_img = require('../../../assets/imgs/start_project/full_name.png');
@@ -55,32 +59,69 @@ class Profile extends Component {
   }
 
   componentWillMount() {
+    const {userInfoResult, currentLanguage} = this.props;
+
+    if (userInfoResult) {
+      this.setdDataState(userInfoResult.data, currentLanguage);
+    }
+  }
+
+  setdDataState(userData, currentLanguage) {
+    if (currentLanguage == 'EN') {
+      this.setState({company: userData.client_descriptions[1].company_name});
+      this.setState({name: userData.client_descriptions[1].title});
+      this.setState({phone: userData.client_data.mobile});
+      this.setState({email: userData.client_data.email});
+    }
+    else {
+      this.setState({company: userData.client_descriptions[2].company_name});
+      this.setState({name: userData.client_descriptions[2].title});
+      this.setState({phone: userData.client_data.mobile});
+      this.setState({email: userData.client_data.email});
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    const {profileUpdateResult, userInfoResult, currentLanguage, loggin, token_status} = nextProps;
+    // const userData = userInfoResult.data;
+    
+    if (profileUpdateResult) {
+      if (profileUpdateResult === "token_failed") {
+        if (loggin || token_status) {
+          Actions.Login();
+        }
+        this.props.changeTokenStatus(false);
+        this.props.logout();
+        return;
+      }
+      else {
+        alert(profileUpdateResult.success);
+      }
+    }
+
+    if (userInfoResult) {
+      this.setdDataState(userInfoResult.data, currentLanguage);
+    }
   }
 
   onUpdate() {
+    const { currentLanguage, userInfoResult, apiToken } = this.props;
+    const { company, name, phone, email, content, firstname } = this.state;
 
+    const data = {
+      title: name,
+      company_name: company,
+      email: email,
+      mobile: phone,
+      clients_id: userInfoResult.data.client_data.clients_id,
+      language_id: currentLanguage == 'EN' ? 1 : 2,
+    }
+    this.props.updateProfile(data, apiToken.api_token);
   }
 
   render() {
     const { currentLanguage, userInfoResult } = this.props;
-    const userData = userInfoResult.data;
-    let {company, name, phone, email, content, firstname} = this.state;
-
-    if (currentLanguage == 'EN') {
-      company = userData.client_descriptions[1].company_name;
-      name = userData.client_descriptions[1].title;
-      phone = userData.client_data.mobile;
-      email = userData.client_data.email;
-    }
-    else {
-      company = userData.client_descriptions[2].company_name;
-      name = userData.client_descriptions[2].title;
-      phone = userData.client_data.mobile;
-      email = userData.client_data.email;
-    }
+    let { company, name, phone, email, content, firstname } = this.state;
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null">
@@ -321,5 +362,9 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   userInfoResult: state.auth.userInfoResult,
-  currentLanguage: state.auth.currentLanguage,
-}),{ })(Profile);
+  currentLanguage: state.language.currentLanguage,
+  profileUpdateResult: state.profile.data,
+  apiToken: state.parent_state.apiToken,
+  loggin: state.auth.loggin,
+  token_status: state.parent_state.token_status,
+}),{ updateProfile, changeTokenStatus, logout })(Profile);

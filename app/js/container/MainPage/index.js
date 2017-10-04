@@ -12,7 +12,8 @@ import {
   TouchableOpacity,
   Alert,
   Keyboard,
-  findNodeHandle,  
+  findNodeHandle,
+  AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -27,10 +28,10 @@ import PhoneInput from 'react-native-phone-input';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, subWidth } from '../../styles/commonStyles';
-import { } from './actions';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
+import { userLoginIn } from '../LoginPage/actions';
 import { saveMenuSelectedID } from '../Menu/actions';
 
 const background = require('../../../assets/imgs/main/back.png');
@@ -49,7 +50,7 @@ class Main extends Component {
   componentWillMount() {
     this.props.saveMenuSelectedID(0);
   }
-
+  
   componentWillReceiveProps(nextProps) {
   }
 
@@ -157,5 +158,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.auth.currentLanguage,
+  currentLanguage: state.language.currentLanguage,
 }),{ saveMenuSelectedID })(Main);

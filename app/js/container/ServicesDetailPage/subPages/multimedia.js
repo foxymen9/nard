@@ -313,5 +313,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  currentLanguage: state.auth.currentLanguage,
+  currentLanguage: state.language.currentLanguage,
 }),{ })(MultiMediaPage);

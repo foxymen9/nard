@@ -25,6 +25,8 @@ const language = {
     "chatText": {"EN": "LIVE CHATTING", "AR": "الدعم المباشر"},
     "kenticoText": {"EN": "KENTICO CMS & EMS", "AR": "Kentico كينتيكو"},
     "amcText": {"EN": "ANNUAL MAINTENANCE", "AR": "تطبيقات الجوال"},
+    "capacityText": {"EN": "Capacity", "AR": "سعة"},
+    "expiredDateText": {"EN": "Expiration Date", "AR": "تاريخ إنتهاء الصلاحية"},
     //Menu
     "menuHome": {"EN": "Home", "AR": "الصفحة الرئيسية"},
     "menuOurServices": {"EN": "My Services", "AR": "خدماتي"},
