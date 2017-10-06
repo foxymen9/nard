@@ -22,6 +22,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import CheckBox from 'react-native-checkbox-heaven';
+import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import Spinner from 'react-native-loading-spinner-overlay';
 import timer from 'react-native-timer';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -30,7 +31,7 @@ import  ModalPickerImage from '../../utils/ModalPickerImage';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, subWidth, inputMargin } from '../../styles/commonStyles';
-import { userLoginIn, saveLoggin } from './actions';
+import { userLoginIn, saveLoggin, initialStore } from './actions';
 import { changeLanguage } from '../LanguageStore/actions';
 import { getApiToken, changeTokenStatus } from '../ParentComponent/actions';
 import language from '../../utils/language/language';
@@ -61,13 +62,19 @@ class Login extends Component {
       apiTokenState: '',
       loading: false,
       loadingToken: false,
+      tokenFlag: false,
+      apiToken: null,
     };
   }
 
   componentWillMount() {
     //get api_token from server after check in AsyncStorage
     const {token_status} = this.props;
-    if (!token_status) {
+    const {tokenFlag} = this.state;
+
+    if (!token_status && !tokenFlag) {
+      this.setState({tokenFlag: true});
+      console.log('RRRRRRRRRRRRRRRRRRRR')
       this.props.getApiToken();
     }
   }
@@ -83,24 +90,21 @@ class Login extends Component {
     this.setState({loadingToken: loadingToken});
     this.setState({loading: loading});
 
-    if (!token_status) {
-      this.props.getApiToken();
-      return;
-    }
+    // if (apiToken) {
+    //   console.log('LOADING_TOKEN', apiToken);
+    //   this.setState({apiToken: apiToken});
+    // }
 
     // check userinfo after login button clicked
-    if (userInfoResult && token_status) {
-      if (userInfoResult === "token_failed") {
-        this.props.changeTokenStatus(false);
-        this.props.logout();
-        if (loggin || token_status) {
-          Actions.Login();
-        }
-        return;
-      }      
-      else if (userInfoResult.error) {
-        alert("invalid email or phone number");
-        return;
+    if (userInfoResult) {
+      console.log('AAAAAA', loggin);
+      console.log('BBBBBB', loggout);
+      if (userInfoResult.error) {
+        // alert("invalid email or phone number");
+        // setTimeout(()=> {
+        //   Alert.alert("Error",  "invalid email or phone number");
+        // }, 100);
+        
       }
       else if (!loggin && !loggout) {
         this.props.saveLoggin();
@@ -113,17 +117,11 @@ class Login extends Component {
     Keyboard.dismiss();
     const { apiToken } = this.props;
     const { email } = this.state;
+    console.log('API_LOGIN_TOKEN', apiToken)
     
     const phoneNumber = this.refs.phone.getValue();
     const data = { email: email, telephone: phoneNumber };
     this.props.userLoginIn(data, apiToken.api_token);
-  }
-
-  onRememberMe() {
-    this.setState({rememberMe: !this.state.rememberMe});
-  }
-
-  onForgotPassword() {
   }
 
   onChangeLanguage() {
@@ -132,6 +130,14 @@ class Login extends Component {
     this.setState({language: language});
     const lang = language ? 'EN' : 'AR';
     this.props.changeLanguage(lang);
+  }
+
+  onRememberMe() {
+    this.setState({rememberMe: !this.state.rememberMe});
+  }
+
+  onForgotPassword() {
+    const { email } = this.state;
   }
 
   onSkip() {
@@ -154,11 +160,10 @@ class Login extends Component {
   render() {
     const { currentLanguage, apiToken } = this.props;
     const { loading, loadingToken } = this.state;
-
     return (
         <View style={ styles.main } >
-          <Spinner visible={ loadingToken }/>
-          <Spinner visible={ loading }/>
+          <OrientationLoadingOveraly visible={ loadingToken } />
+          <OrientationLoadingOveraly visible={ loading } />
           <Image source={ background } style={ styles.background } />
           <View style={ styles.navBar } >
             <TouchableOpacity
@@ -244,7 +249,7 @@ class Login extends Component {
                 }
                 <TouchableOpacity
                   activeOpacity={ .5 }
-                  onPressIn={ () => this.onLogin() }
+                  onPress={ () => this.onLogin() }
                 >
                   <Image source={ login_img } style={ styles.lognButton } resizeMode="contain">
                     <Text style={ styles.textButton }>{language.login_text[currentLanguage]}</Text>
@@ -434,4 +439,4 @@ export default connect(state => ({
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
   loadingToken: state.parent_state.loadingToken,
-}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout })(Login);
+}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout, initialStore })(Login);

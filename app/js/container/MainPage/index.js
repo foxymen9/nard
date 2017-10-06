@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import CheckBox from 'react-native-checkbox-heaven';
+import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import Spinner from 'react-native-loading-spinner-overlay';
 import timer from 'react-native-timer';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -33,7 +34,7 @@ import Container from '../Container';
 
 import { userLoginIn } from '../LoginPage/actions';
 import { saveMenuSelectedID } from '../Menu/actions';
-import { getServices } from './actions';
+import { getServices, initialStore } from './actions';
 
 const background = require('../../../assets/imgs/main/back.png');
 const imgBlue = require('../../../assets/imgs/main/blue_button.png');
@@ -76,7 +77,7 @@ class Main extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null" >
-          <Spinner visible={ loading }/>
+          <OrientationLoadingOveraly visible={ loading } />
           <Image source={ background } style={ styles.background } >
             <View style={ styles.container } >
               <View style={ styles.wrapper_title }>
@@ -172,4 +173,4 @@ export default connect(state => ({
 
   loading: state.services.loading,
   apiToken: state.parent_state.apiToken,
-}),{ saveMenuSelectedID, getServices })(Main);
+}),{ saveMenuSelectedID, getServices, initialStore })(Main);

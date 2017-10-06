@@ -22,6 +22,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar } from '../../styles/commonStyles';
@@ -29,7 +30,7 @@ import language from '../../utils/language/language';
 import Container from '../Container';
 
 import { saveMenuSelectedID } from '../Menu/actions';
-import { getOffers } from './actions';
+import { getOffers, initialStore } from './actions';
 import { logout } from '../LoginPage/actions';
 import { changeTokenStatus } from '../ParentComponent/actions';
 
@@ -71,9 +72,11 @@ class Offers extends Component {
 
     if (offersData) {
       if (offersData === "token_failed") {
-        this.props.changeTokenStatus(false);
+        if (token_status) {
+          this.props.changeTokenStatus(false);
+        }
         this.props.logout();
-        if (loggin || token_status) {
+        if (!loggin && !token_status) {
           Actions.Login();
         }
         return;
@@ -169,7 +172,7 @@ class Offers extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="offers">
-        <Spinner visible={ loading }/>
+        <OrientationLoadingOveraly visible={ loading } />
         <View style={ styles.container } >
           {currentLanguage=='EN'
           ?<ListView
@@ -257,4 +260,4 @@ export default connect(state => ({
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
   loggin: state.auth.loggin,
-}),{ saveMenuSelectedID, getOffers, logout, changeTokenStatus })(Offers);
+}),{ saveMenuSelectedID, getOffers, logout, changeTokenStatus, initialStore })(Offers);

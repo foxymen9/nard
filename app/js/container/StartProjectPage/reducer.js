@@ -38,6 +38,11 @@ export default function project(state = initialState, action = {}) {
         loading: false,
         error: action.error,
       };
+    case types.INITIAL_STORE:
+      return {
+        ...state,
+        data: null,
+      }
     default:
       return state;
   }

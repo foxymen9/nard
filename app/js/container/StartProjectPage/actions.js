@@ -14,3 +14,9 @@ export function addNewProject(apiToken, data) {
       })
   };
 }
+
+export function initialStore() {
+  return {
+    type: types.INITIAL_STORE,
+  }
+}

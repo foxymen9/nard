@@ -20,6 +20,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -29,7 +30,7 @@ import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, te
 import language from '../../utils/language/language';
 import Container from '../Container';
 
-import { submitTicket } from './actions';
+import { submitTicket, initialStore } from './actions';
 import { logout } from '../LoginPage/actions';
 import { changeTokenStatus } from '../ParentComponent/actions';
 
@@ -113,9 +114,11 @@ class Ticket extends Component {
 
     if (ticketResult) {
       if (ticketResult === "token_failed") {
-        this.props.changeTokenStatus(false);
+        if (token_status) {
+          this.props.changeTokenStatus(false);
+        }
         this.props.logout();
-        if (loggin || token_status) {
+        if (!loggin && !token_status) {
           Actions.Login();
         }
         return;
@@ -164,6 +167,7 @@ class Ticket extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="ticket">
+        <OrientationLoadingOveraly visible={ loading } />
         <View style={ styles.container } >
           <View style={ styles.subContainer } >
             {currentLanguage == 'EN'
@@ -544,4 +548,4 @@ export default connect(state => ({
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
   loggin: state.auth.loggin,
-}),{ submitTicket, logout, changeTokenStatus })(Ticket);
+}),{ submitTicket, logout, changeTokenStatus, initialStore })(Ticket);

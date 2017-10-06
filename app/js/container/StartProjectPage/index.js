@@ -21,6 +21,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -29,7 +30,7 @@ import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, te
 import language from '../../utils/language/language';
 import Container from '../Container';
 import { saveMenuSelectedID } from '../Menu/actions';
-import { addNewProject } from './actions';
+import { addNewProject, initialStore } from './actions';
 import { logout } from '../LoginPage/actions';
 import { changeTokenStatus } from '../ParentComponent/actions';
 
@@ -76,8 +77,9 @@ class StarProject extends Component {
       departments: departments,
     });
 
-    if (userInfoResult)
+    if (userInfoResult && userInfoResult.data.success) {
       this.setdDataState(userInfoResult.data, currentLanguage);
+    }
   }
   
   setdDataState(userData, currentLanguage) {
@@ -110,9 +112,11 @@ class StarProject extends Component {
 
     if (projectResult) {
       if (projectResult === "token_failed") {
-        this.props.changeTokenStatus(false);
+        if (token_status) {
+          this.props.changeTokenStatus(false);
+        }
         this.props.logout();
-        if (loggin || token_status) {
+        if (!loggin && !token_status) {
           Actions.Login();
         }
       }
@@ -158,6 +162,7 @@ class StarProject extends Component {
     
     return (
       <Container currentLanguage={currentLanguage} pageTitle="startProject">
+        <OrientationLoadingOveraly visible={ loading } />
         <View style={ styles.container } >
           <KeyboardAwareScrollView>
             {currentLanguage == 'EN'
@@ -481,4 +486,4 @@ export default connect(state => ({
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
   loggin: state.auth.loggin,
-}),{ saveMenuSelectedID, addNewProject, logout, changeTokenStatus })(StarProject);
+}),{ saveMenuSelectedID, addNewProject, logout, changeTokenStatus, initialStore })(StarProject);

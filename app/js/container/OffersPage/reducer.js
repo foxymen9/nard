@@ -32,6 +32,11 @@ export default function offers(state = initialState, action = {}) {
           data: "token_failed",
         };
       }
+    case types.INITIAL_STORE:
+      return {
+        ...state,
+        data: null,
+      }
     case types.GET_OFFERS_FAILED:
       return {
         ...state,

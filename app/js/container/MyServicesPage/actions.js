@@ -14,3 +14,9 @@ export function getMyServices(data, apiToken) {
       })
   };
 }
+
+export function initialStore() {
+  return {
+    type: types.INITIAL_STORE,
+  }
+}

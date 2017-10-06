@@ -18,6 +18,7 @@ export default function parent_state(state = initialState, action = {}) {
         error: null,
         token_status: false,
         loadingToken: true,
+        apiToken: null,
       };
     case types.TOKEN_SUCCESS:
       return {
@@ -32,9 +33,12 @@ export default function parent_state(state = initialState, action = {}) {
         error: action.error,
         loadingToken: false,
         token_status: false,
+        apiToken: null,
       };
     case types.CHANGE_TOKEN_STATUS:
       return {
+          ...state,
+          loadingToken: false,
           token_status: action.data,
         };
     default:

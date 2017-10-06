@@ -12,3 +12,5 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const SAVE_LOGGIN = 'SAVE_LOGGIN';
 
 export const USER_REGISTER = 'USER_REGISTER';
+
+export const INITIAL_STORE = 'INITIAL_STORE';

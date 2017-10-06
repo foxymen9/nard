@@ -21,6 +21,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -28,7 +29,7 @@ import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
-import {updateProfile} from './actions';
+import {updateProfile, initialStore} from './actions';
 import {logout} from '../LoginPage/actions';
 import { changeTokenStatus } from '../ParentComponent/actions';
 
@@ -55,6 +56,7 @@ class Profile extends Component {
       email: '',
       content: '',
       firstName: 'K',
+      loading: false,
     };
   }
 
@@ -82,14 +84,18 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {profileUpdateResult, userInfoResult, currentLanguage, loggin, token_status} = nextProps;
+    const {profileUpdateResult, userInfoResult, currentLanguage, loggin, loading, token_status} = nextProps;
     // const userData = userInfoResult.data;
+    this.setState({loading: loading});
     
     if (profileUpdateResult) {
       if (profileUpdateResult === "token_failed") {
-        this.props.changeTokenStatus(false);
+        if (token_status) {
+          this.props.changeTokenStatus(false);
+        }
         this.props.logout();
-        if (loggin || token_status) {
+        if (!loggin && !token_status) {
+          this.props.initialStore();
           Actions.Login();
         }
         return;
@@ -121,10 +127,11 @@ class Profile extends Component {
 
   render() {
     const { currentLanguage, userInfoResult } = this.props;
-    let { company, name, phone, email, content, firstname } = this.state;
+    let { company, name, phone, email, content, firstname, loading } = this.state;
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null">
+        <OrientationLoadingOveraly visible={ loading } />
         <View style={ styles.container } >
           <KeyboardAwareScrollView>
             <View style={ styles.subContainer } >
@@ -361,10 +368,11 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
+  loading: state.profile.loading,
   userInfoResult: state.auth.userInfoResult,
   currentLanguage: state.language.currentLanguage,
   profileUpdateResult: state.profile.data,
   apiToken: state.parent_state.apiToken,
   loggin: state.auth.loggin,
   token_status: state.parent_state.token_status,
-}),{ updateProfile, changeTokenStatus, logout })(Profile);
+}),{ updateProfile, changeTokenStatus, logout, initialStore })(Profile);

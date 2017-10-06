@@ -22,8 +22,8 @@ export default function auth(state = initialState, action = {}) {
         error: null,
       };
     case types.LOGIN_SUCCESS:
-    console.log('QQQQQQQQQQQQQQQQQQQQQQQQQ', action.result.data);
-      if (action.result.data.success) {
+      if (action.result.data.success || action.result.data.error.login) {
+        console.log('CCCCCCCCCCC');
         return {
           ...state,
           loggin: false,
@@ -58,10 +58,15 @@ export default function auth(state = initialState, action = {}) {
       };
 
     case types.SAVE_LOGGIN:
-    return {
-      ...state,
-      loggin: true,
-    };
+      return {
+        ...state,
+        loggin: true,
+      };
+    case types.INITIAL_STORE:
+      return {
+        ...state,
+        userInfoResult: null,
+      }
     default:
       return state;
   }

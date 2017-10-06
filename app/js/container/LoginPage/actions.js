@@ -7,7 +7,7 @@ import {
 
 export function userLoginIn(data, apiToken) {
   // console.log('LOGIN_DATA', data);
-  // console.log('LOGIN_apiToken_1', apiToken);
+  console.log('LOGIN_apiToken_1', apiToken);
     return {
       types: [types.LOGIN_REQUEST, types.LOGIN_SUCCESS, types.LOGIN_FAILED],
       promise:
@@ -33,4 +33,10 @@ export function saveLoggin() {
     return {
       type: types.SAVE_LOGGIN,
     };
+}
+
+export function initialStore() {
+  return {
+    type: types.INITIAL_STORE,
+  }
 }

@@ -18,7 +18,6 @@ export default function ticket(state = initialState, action = {}) {
         error: null,
       };
     case types.TICKET_SUBMIT_SUCCESS:
-    console.log('PPPP', action);
       if (action.result.data.data) {
         return {
           ...state,
@@ -39,6 +38,11 @@ export default function ticket(state = initialState, action = {}) {
         loading: false,
         error: action.error,
       };
+    case types.INITIAL_STORE:
+      return {
+        ...state,
+        data: null,
+      }
     default:
       return state;
   }
