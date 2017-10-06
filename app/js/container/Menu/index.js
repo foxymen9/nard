@@ -112,7 +112,8 @@ class Menu extends Component {
           Linking.openURL("https://www.nard.sa");
           this.props.menuState();
           return;
-        case "3": //Login page
+        case "3": //Loout page
+          this.props.logout();
           this.props.saveMenuSelectedID('null');
           Actions.Login();
           return;

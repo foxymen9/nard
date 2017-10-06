@@ -3,6 +3,7 @@ import axios from 'axios';
 import { api_url } from '../../utils/service';
 
 export function submitTicket(apiToken, data) {
+  console.log('TICKET_DATA', data);
   return {
     types: [types.TICKET_SUBMIT_REQUEST, types.TICKET_SUBMIT_SUCCESS, types.TICKET_SUBMIT_FAILED],
     promise:

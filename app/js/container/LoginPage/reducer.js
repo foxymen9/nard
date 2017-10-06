@@ -23,7 +23,6 @@ export default function auth(state = initialState, action = {}) {
       };
     case types.LOGIN_SUCCESS:
       if (action.result.data.success || action.result.data.error.login) {
-        console.log('CCCCCCCCCCC');
         return {
           ...state,
           loggin: false,

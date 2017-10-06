@@ -14,7 +14,8 @@ import {
   ListView,
   Keyboard,
   findNodeHandle,  
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  Alert,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -60,11 +61,12 @@ class StarProject extends Component {
       departments: [],
       selectedID: null,
       loading: false,
+      alert_flag: false,
     };
   }
 
   componentWillMount() {
-    const { currentLanguage , userInfoResult, apiToken, serviceList } = this.props;
+    const { currentLanguage , userInfoResult, apiToken, serviceList, loggin } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
     this.props.saveMenuSelectedID('null');
     
@@ -77,7 +79,7 @@ class StarProject extends Component {
       departments: departments,
     });
 
-    if (userInfoResult && userInfoResult.data.success) {
+    if (userInfoResult && loggin) {
       this.setdDataState(userInfoResult.data, currentLanguage);
     }
   }
@@ -100,8 +102,8 @@ class StarProject extends Component {
     this.changeDepartmentLanguage(currentLanguage);
 
     this.setState({ loading: loading });
-
     const departments = [];
+
     for (let i = 0; i < serviceList.data.services.length; i ++) {
       departments.push(serviceList.data.services[i].title);
     }
@@ -121,7 +123,19 @@ class StarProject extends Component {
         }
       }
       else {
-        alert(projectResult.success);
+        if (!this.state.alert_flag && !loading) {
+          this.setState({alert_flag: true}); 
+          if (projectResult.error) {   //warning
+            setTimeout(()=> {
+              Alert.alert("WARNING",  projectResult.error.warning);
+            }, 100);
+          }
+          else {
+            setTimeout(()=> {
+              Alert.alert("SUCCESS",  projectResult.success);
+            }, 100);
+          }
+        }
       }
     }
   }
@@ -138,6 +152,8 @@ class StarProject extends Component {
       alert("Please select service");
       return;
     }
+
+    this.setState({alert_flag: false}); 
     
     const data = {
       services_id: selectedID,

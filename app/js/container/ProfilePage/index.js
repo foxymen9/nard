@@ -16,6 +16,7 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   AsyncStorage,
+  Alert,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -57,6 +58,7 @@ class Profile extends Component {
       content: '',
       firstName: 'K',
       loading: false,
+      alert_flag: false,
     };
   }
 
@@ -101,7 +103,19 @@ class Profile extends Component {
         return;
       }
       else {
-        alert(profileUpdateResult.success);
+        if (!this.state.alert_flag && !loading) {
+          this.setState({alert_flag: true}); 
+          if (profileUpdateResult.error) {   //warning
+            setTimeout(()=> {
+              Alert.alert("WARNING",  profileUpdateResult.error.warning);
+            }, 100);
+          }
+          else {
+            setTimeout(()=> {
+              Alert.alert("SUCCESS",  profileUpdateResult.success);
+            }, 100);
+          }
+        }
       }
     }
 
@@ -113,6 +127,8 @@ class Profile extends Component {
   onUpdate() {
     const { currentLanguage, userInfoResult, apiToken } = this.props;
     const { company, name, phone, email, content, firstname } = this.state;
+
+    this.setState({alert_flag: false}); 
 
     const data = {
       title: name,

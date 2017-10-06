@@ -18,7 +18,7 @@ export default function ticket(state = initialState, action = {}) {
         error: null,
       };
     case types.TICKET_SUBMIT_SUCCESS:
-      if (action.result.data.data) {
+      if (action.result.data && action.result.data.error.code !== "invalid_token") {
         return {
           ...state,
           loading: false,

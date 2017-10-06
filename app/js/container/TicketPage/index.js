@@ -14,7 +14,8 @@ import {
   ListView,
   Keyboard,
   findNodeHandle,  
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  Alert,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -60,6 +61,7 @@ class Ticket extends Component {
       selectedID: null,
       loading: false,
       content: '',
+      alert_flag: false,
     };
   }
 
@@ -112,7 +114,7 @@ class Ticket extends Component {
       });
     }
 
-    if (ticketResult) {
+    if (ticketResult) {      
       if (ticketResult === "token_failed") {
         if (token_status) {
           this.props.changeTokenStatus(false);
@@ -124,7 +126,19 @@ class Ticket extends Component {
         return;
       }
       else {
-        // alert(ticketResult.success);
+        if (!this.state.alert_flag && !loading) {
+          this.setState({alert_flag: true});
+          if (ticketResult.error) {   //warning
+            setTimeout(()=> {
+              Alert.alert("WARNING",  ticketResult.error.warning);
+            }, 100);
+          }
+          else { //success
+            setTimeout(()=> {
+              Alert.alert("SUCCESS",  ticketResult.success);
+            }, 100);
+          }
+        }
       }
     }
   }
@@ -141,6 +155,8 @@ class Ticket extends Component {
       alert("Please select service");
       return;
     }
+
+    this.setState({alert_flag: false}); 
 
     const data = {
       services_id: selectedID,

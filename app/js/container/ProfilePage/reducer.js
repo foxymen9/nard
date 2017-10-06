@@ -19,7 +19,7 @@ export default function profile(state = initialState, action = {}) {
       };
     case types.UPDATE_PROFILE_SUCCESS:
       console.log('PROFILE_SUCCESS_DATA', action.result.data);
-      if (action.result.data.success) {
+      if (action.result.data && action.result.data.error.code !== "invalid_token") {
         return {
           ...state,
           data: action.result.data,

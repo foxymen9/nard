@@ -18,7 +18,7 @@ export default function project(state = initialState, action = {}) {
         error: null,
       };
     case types.ADD_PROJECT_SUCCESS:
-      if (action.result.data.success) {
+      if (action.result.data && action.result.data.error.code !== "invalid_token") {
         return {
           ...state,
           loading: false,

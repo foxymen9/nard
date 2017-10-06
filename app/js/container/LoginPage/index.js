@@ -64,6 +64,7 @@ class Login extends Component {
       loadingToken: false,
       tokenFlag: false,
       apiToken: null,
+      alert_flag: false,
     };
   }
 
@@ -74,9 +75,9 @@ class Login extends Component {
 
     if (!token_status && !tokenFlag) {
       this.setState({tokenFlag: true});
-      console.log('RRRRRRRRRRRRRRRRRRRR')
       this.props.getApiToken();
     }
+    this.setState({alert_flag: false}); 
   }
   componentDidMount() {
     this.setState({pickerData: this.refs.phone.getPickerData()});
@@ -90,21 +91,15 @@ class Login extends Component {
     this.setState({loadingToken: loadingToken});
     this.setState({loading: loading});
 
-    // if (apiToken) {
-    //   console.log('LOADING_TOKEN', apiToken);
-    //   this.setState({apiToken: apiToken});
-    // }
-
     // check userinfo after login button clicked
     if (userInfoResult) {
-      console.log('AAAAAA', loggin);
-      console.log('BBBBBB', loggout);
       if (userInfoResult.error) {
-        // alert("invalid email or phone number");
-        // setTimeout(()=> {
-        //   Alert.alert("Error",  "invalid email or phone number");
-        // }, 100);
-        
+        if (!this.state.alert_flag && !loading) {
+          this.setState({alert_flag: true}); 
+          setTimeout(()=> {
+            Alert.alert("ERROR",  "invalid email or phone number");
+          }, 100);
+        }
       }
       else if (!loggin && !loggout) {
         this.props.saveLoggin();
@@ -114,6 +109,7 @@ class Login extends Component {
   }
 
   onLogin() {
+    this.setState({alert_flag: false}); 
     Keyboard.dismiss();
     const { apiToken } = this.props;
     const { email } = this.state;
