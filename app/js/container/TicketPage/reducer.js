@@ -6,18 +6,19 @@ const initialState = {
   loading: false,
 };
 
-export default function services(state = initialState, action = {}) {
+export default function ticket(state = initialState, action = {}) {
   switch (action.type) {
     /**************************/
     /* Update profile data
     /**************************/
-    case types.GET_SERVICES_REQUEST:
+    case types.TICKET_SUBMIT_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case types.GET_SERVICES_SUCCESS:
+    case types.TICKET_SUBMIT_SUCCESS:
+    console.log('PPPP', action);
       if (action.result.data.data) {
         return {
           ...state,
@@ -32,7 +33,7 @@ export default function services(state = initialState, action = {}) {
           data: "token_failed",
         };
       }
-    case types.GET_SERVICES_FAILED:
+    case types.TICKET_SUBMIT_FAILED:
       return {
         ...state,
         loading: false,

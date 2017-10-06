@@ -33,6 +33,7 @@ import Container from '../Container';
 
 import { userLoginIn } from '../LoginPage/actions';
 import { saveMenuSelectedID } from '../Menu/actions';
+import { getServices } from './actions';
 
 const background = require('../../../assets/imgs/main/back.png');
 const imgBlue = require('../../../assets/imgs/main/blue_button.png');
@@ -44,14 +45,21 @@ class Main extends Component {
     super(props);
 
     this.state = {
+      loading: false,
     };
   }
 
   componentWillMount() {
+    const {apiToken} = this.props;
     this.props.saveMenuSelectedID(0);
+    if (apiToken) {
+      this.props.getServices(apiToken.api_token);
+    }
   }
   
   componentWillReceiveProps(nextProps) {
+    const {loading} = nextProps;
+    this.setState({loading: loading});
   }
 
   onStartProject() {
@@ -64,9 +72,11 @@ class Main extends Component {
 
   render() {
     const { currentLanguage } = this.props;
+    const { loading } = this.state;
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null" >
+          <Spinner visible={ loading }/>
           <Image source={ background } style={ styles.background } >
             <View style={ styles.container } >
               <View style={ styles.wrapper_title }>
@@ -159,4 +169,7 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   currentLanguage: state.language.currentLanguage,
-}),{ saveMenuSelectedID })(Main);
+
+  loading: state.services.loading,
+  apiToken: state.parent_state.apiToken,
+}),{ saveMenuSelectedID, getServices })(Main);

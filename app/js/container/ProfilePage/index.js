@@ -87,11 +87,11 @@ class Profile extends Component {
     
     if (profileUpdateResult) {
       if (profileUpdateResult === "token_failed") {
+        this.props.changeTokenStatus(false);
+        this.props.logout();
         if (loggin || token_status) {
           Actions.Login();
         }
-        this.props.changeTokenStatus(false);
-        this.props.logout();
         return;
       }
       else {

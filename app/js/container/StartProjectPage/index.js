@@ -29,6 +29,9 @@ import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, te
 import language from '../../utils/language/language';
 import Container from '../Container';
 import { saveMenuSelectedID } from '../Menu/actions';
+import { addNewProject } from './actions';
+import { logout } from '../LoginPage/actions';
+import { changeTokenStatus } from '../ParentComponent/actions';
 
 const name = require('../../../assets/imgs/start_project/full_name.png');
 const name_ar = require('../../../assets/imgs/start_project/full_name_ar.png');
@@ -53,39 +56,70 @@ class StarProject extends Component {
       email: '',
       pressStatus: false,
       defaultDepartment: 'Select a service',
-      departments: []
+      departments: [],
+      selectedID: null,
+      loading: false,
     };
   }
 
   componentWillMount() {
-    const { currentLanguage } = this.props;
+    const { currentLanguage , userInfoResult, apiToken, serviceList } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
     this.props.saveMenuSelectedID('null');
+    
+    const departments = [];
+    for (let i = 0; i < serviceList.data.services.length; i ++) {
+      departments.push(serviceList.data.services[i].title);
+    }
+
     this.setState({
-      departments: [language.sWebsite[currentLanguage], 
-                    language.sEcommerce[currentLanguage], 
-                    language.sLogoDesign[currentLanguage],
-                    language.sMultimediaCD[currentLanguage],
-                    language.sContentSolution[currentLanguage],
-                    language.sSeo[currentLanguage],
-                    language.sMaintanence[currentLanguage],
-                    language.sKentico[currentLanguage],
-                    language.sMobile[currentLanguage]]});
+      departments: departments,
+    });
+
+    if (userInfoResult)
+      this.setdDataState(userInfoResult.data, currentLanguage);
+  }
+  
+  setdDataState(userData, currentLanguage) {
+    if (currentLanguage == 'EN') {
+      this.setState({name: userData.client_descriptions[1].title});
+      this.setState({phone: userData.client_data.mobile});
+      this.setState({email: userData.client_data.email});
+    }
+    else {
+      this.setState({name: userData.client_descriptions[2].title});
+      this.setState({phone: userData.client_data.mobile});
+      this.setState({email: userData.client_data.email});
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { currentLanguage } = nextProps;
+    const { currentLanguage, loading, serviceList, projectResult } = nextProps;
     this.changeDepartmentLanguage(currentLanguage);
+
+    this.setState({ loading: loading });
+
+    const departments = [];
+    for (let i = 0; i < serviceList.data.services.length; i ++) {
+      departments.push(serviceList.data.services[i].title);
+    }
+
     this.setState({
-      departments: [language.sWebsite[currentLanguage], 
-                    language.sEcommerce[currentLanguage], 
-                    language.sLogoDesign[currentLanguage],
-                    language.sMultimediaCD[currentLanguage],
-                    language.sContentSolution[currentLanguage],
-                    language.sSeo[currentLanguage],
-                    language.sMaintanence[currentLanguage],
-                    language.sKentico[currentLanguage],
-                    language.sMobile[currentLanguage]]});
+      departments: departments,
+    });
+
+    if (projectResult) {
+      if (projectResult === "token_failed") {
+        this.props.changeTokenStatus(false);
+        this.props.logout();
+        if (loggin || token_status) {
+          Actions.Login();
+        }
+      }
+      else {
+        alert(projectResult.success);
+      }
+    }
   }
   
   changeDepartmentLanguage(currentLanguage) {
@@ -94,17 +128,34 @@ class StarProject extends Component {
   }
 
   onStartProject() {
-    // Actions.MyServices();
+    const {phone, name, email, selectedID, content} = this.state;
+    const {apiToken, userInfoResult} = this.props;
+    if (selectedID == null) {
+      alert("Please select service");
+      return;
+    }
+    
+    const data = {
+      services_id: selectedID,
+      name: name,
+      email: email,
+      mobile: phone,
+      service_details: content,
+    }
+    this.props.addNewProject(apiToken.api_token, data);
   }
 
   onSelectDepartment(index){
+    const { serviceList } = this.props;
     const { departments } = this.state;
     this.setState({ defaultDepartment: departments[index] });
+    this.setState({ selectedID: serviceList.data.services[index].services_id });
   }
 
   render() {
     const { currentLanguage } = this.props;
-
+    const { loading } = this.state;
+    
     return (
       <Container currentLanguage={currentLanguage} pageTitle="startProject">
         <View style={ styles.container } >
@@ -421,4 +472,13 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
   currentLanguage: state.language.currentLanguage,
-}),{ saveMenuSelectedID })(StarProject);
+
+  projectResult: state.project.data,
+  loading: state.project.loading,
+
+  serviceList: state.services.data,
+  userInfoResult: state.auth.userInfoResult,
+  token_status: state.parent_state.token_status,
+  apiToken: state.parent_state.apiToken,
+  loggin: state.auth.loggin,
+}),{ saveMenuSelectedID, addNewProject, logout, changeTokenStatus })(StarProject);

@@ -71,11 +71,11 @@ class Offers extends Component {
 
     if (offersData) {
       if (offersData === "token_failed") {
+        this.props.changeTokenStatus(false);
+        this.props.logout();
         if (loggin || token_status) {
           Actions.Login();
         }
-        this.props.changeTokenStatus(false);
-        this.props.logout();
         return;
       }
       else {
@@ -163,13 +163,6 @@ class Offers extends Component {
     const { currentLanguage } = this.props;
     const { offerList, loading } = this.state;
 
-    /* ** data for ListView ** */
-    // const serviceItems = [
-    //   {id: 1, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-    //   {id: 2, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-    //   {id: 3, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-    //   {id: 4, title: language.offerTitle[currentLanguage], subTitle: language.offerSubTitle[currentLanguage]},
-    // ];
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(offerList);
     /* ************************ */

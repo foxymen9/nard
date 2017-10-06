@@ -6,6 +6,7 @@ const initialState = {
   signupStatus: null,
   userInfoResult: null,
   loggin: false,
+  loggout: false,
 };
 
 export default function auth(state = initialState, action = {}) {
@@ -21,21 +22,22 @@ export default function auth(state = initialState, action = {}) {
         error: null,
       };
     case types.LOGIN_SUCCESS:
+    console.log('QQQQQQQQQQQQQQQQQQQQQQQQQ', action.result.data);
       if (action.result.data.success) {
-        return {
-          ...state,
-          loggin: true,
-          loading: false,
-          userInfoResult: action.result.data,
-        };  
-      }
-      else if (action.result.data.error.code === "invalid_token") {
-        console.log('LOGIN_FAILED_TOKEN', action.result.data);
         return {
           ...state,
           loggin: false,
           loading: false,
-          userInfoResult: null,
+          loggout: false,
+          userInfoResult: action.result.data,
+        };  
+      }
+      else if (action.result.data.error.code === "invalid_token") {
+        return {
+          ...state,
+          loggin: false,
+          loading: false,
+          userInfoResult: "token_failed",
         };
       }
     case types.LOGIN_FAILED:
@@ -52,6 +54,7 @@ export default function auth(state = initialState, action = {}) {
       return {
         ...state,
         loggin: false,
+        loggout: true,
       };
 
     case types.SAVE_LOGGIN:

@@ -80,11 +80,11 @@ class MyServices extends Component {
 
     if (myServices) {
       if (myServices === "token_failed") {
+        this.props.changeTokenStatus(false);
+        this.props.logout();
         if (loggin || token_status) {
           Actions.Login();
         }
-        this.props.changeTokenStatus(false);
-        this.props.logout();
         return;
       }
       else {

@@ -34,6 +34,7 @@ import { userLoginIn, saveLoggin } from './actions';
 import { changeLanguage } from '../LanguageStore/actions';
 import { getApiToken, changeTokenStatus } from '../ParentComponent/actions';
 import language from '../../utils/language/language';
+import { logout } from '../LoginPage/actions';
 
 const background = require('../../../assets/imgs/background/background.png');
 const logo = require('../../../assets/imgs/login/logo.png');
@@ -57,8 +58,9 @@ class Login extends Component {
       rememberMe: false,
       language: true,   //EN -> AR,
       pickerData: null,
-      apiToken: '',
+      apiTokenState: '',
       loading: false,
+      loadingToken: false,
     };
   }
 
@@ -74,10 +76,11 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { loggin, userInfoResult, loading, token_status, apiToken } = nextProps;
+    const { loggin, loggout, userInfoResult, loading, loadingToken, token_status, apiToken } = nextProps;
     const { email } = this.state;
     const phoneNumber = this.refs.phone.getValue();
     
+    this.setState({loadingToken: loadingToken});
     this.setState({loading: loading});
 
     if (!token_status) {
@@ -85,31 +88,35 @@ class Login extends Component {
       return;
     }
 
-    if (apiToken && apiToken.success) {
-      this.setState({apiToken: apiToken.api_token});
-    }  
-
     // check userinfo after login button clicked
     if (userInfoResult && token_status) {
-      if (!loggin) {
-        this.props.saveLoggin();
-        // AsyncStorage.setItem("login_info", JSON.stringify({email: email, phoneNumber: phoneNumber, client_id: userInfoResult.data.client_data.clients_id}));
-        Actions.Main();
-      }
+      if (userInfoResult === "token_failed") {
+        this.props.changeTokenStatus(false);
+        this.props.logout();
+        if (loggin || token_status) {
+          Actions.Login();
+        }
+        return;
+      }      
       else if (userInfoResult.error) {
         alert("invalid email or phone number");
+        return;
+      }
+      else if (!loggin && !loggout) {
+        this.props.saveLoggin();
+        Actions.Main();
       }
     }
   }
 
   onLogin() {
     Keyboard.dismiss();
-
-    const { apiToken } = this.state;
+    const { apiToken } = this.props;
     const { email } = this.state;
+    
     const phoneNumber = this.refs.phone.getValue();
     const data = { email: email, telephone: phoneNumber };
-    this.props.userLoginIn(data, apiToken);
+    this.props.userLoginIn(data, apiToken.api_token);
   }
 
   onRememberMe() {
@@ -146,10 +153,11 @@ class Login extends Component {
   
   render() {
     const { currentLanguage, apiToken } = this.props;
-    const { loading } = this.state;
+    const { loading, loadingToken } = this.state;
 
     return (
         <View style={ styles.main } >
+          <Spinner visible={ loadingToken }/>
           <Spinner visible={ loading }/>
           <Image source={ background } style={ styles.background } />
           <View style={ styles.navBar } >
@@ -420,8 +428,10 @@ const styles = StyleSheet.create({
 export default connect(state => ({
   loading: state.auth.loading,
   loggin: state.auth.loggin,
+  loggout: state.auth.loggout,
   userInfoResult: state.auth.userInfoResult,
   currentLanguage: state.language.currentLanguage,
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
-}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin })(Login);
+  loadingToken: state.parent_state.loadingToken,
+}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout })(Login);

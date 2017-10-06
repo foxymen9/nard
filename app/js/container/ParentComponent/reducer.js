@@ -4,6 +4,7 @@ const initialState = {
   apiToken: null,
   error: null,
   token_status: false,
+  loadingToken: false,
 };
 
 export default function parent_state(state = initialState, action = {}) {
@@ -15,17 +16,22 @@ export default function parent_state(state = initialState, action = {}) {
       return {
         ...state,
         error: null,
+        token_status: false,
+        loadingToken: true,
       };
     case types.TOKEN_SUCCESS:
       return {
         ...state,
         token_status: true,
+        loadingToken: false,
         apiToken: action.result.data,
       };
     case types.TOKEN_FAILED:
       return {
         ...state,
         error: action.error,
+        loadingToken: false,
+        token_status: false,
       };
     case types.CHANGE_TOKEN_STATUS:
       return {

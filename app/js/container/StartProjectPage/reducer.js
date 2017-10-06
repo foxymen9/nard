@@ -6,19 +6,19 @@ const initialState = {
   loading: false,
 };
 
-export default function services(state = initialState, action = {}) {
+export default function project(state = initialState, action = {}) {
   switch (action.type) {
     /**************************/
     /* Update profile data
     /**************************/
-    case types.GET_SERVICES_REQUEST:
+    case types.ADD_PROJECT_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case types.GET_SERVICES_SUCCESS:
-      if (action.result.data.data) {
+    case types.ADD_PROJECT_SUCCESS:
+      if (action.result.data.success) {
         return {
           ...state,
           loading: false,
@@ -32,7 +32,7 @@ export default function services(state = initialState, action = {}) {
           data: "token_failed",
         };
       }
-    case types.GET_SERVICES_FAILED:
+    case types.ADD_PROJECT_FAILED:
       return {
         ...state,
         loading: false,
