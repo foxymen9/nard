@@ -31,13 +31,24 @@ export default function auth(state = initialState, action = {}) {
           userInfoResult: action.result.data,
         };  
       }
-      else if (action.result.data.error.code === "invalid_token") {
-        return {
-          ...state,
-          loggin: false,
-          loading: false,
-          userInfoResult: "token_failed",
-        };
+      else if (action.result.data.error) {
+        if (action.result.data.error.code === "invalid_token") {
+          return {
+            ...state,
+            loggin: false,
+            loading: false,
+            userInfoResult: "token_failed",
+          };
+        }
+        else {
+          return {
+            ...state,
+            loggin: false,
+            loading: false,
+            loggout: false,
+            userInfoResult: action.result.data,
+          }; 
+        }
       }
     case types.LOGIN_FAILED:
       return {

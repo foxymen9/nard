@@ -112,6 +112,7 @@ class StarProject extends Component {
       departments: departments,
     });
 
+    console.log("QQQQQQQQQ", projectResult);
     if (projectResult) {
       if (projectResult === "token_failed") {
         if (token_status) {
@@ -119,6 +120,7 @@ class StarProject extends Component {
         }
         this.props.logout();
         if (!loggin && !token_status) {
+          this.props.initialStore();
           Actions.Login();
         }
       }

@@ -19,19 +19,28 @@ export default function profile(state = initialState, action = {}) {
       };
     case types.UPDATE_PROFILE_SUCCESS:
       console.log('PROFILE_SUCCESS_DATA', action.result.data);
-      if (action.result.data && action.result.data.error.code !== "invalid_token") {
+      if (action.result.data.success) {
         return {
           ...state,
-          data: action.result.data,
           loading: false,
+          data: action.result.data,
         };  
       }
-      else if (action.result.data.error.code === "invalid_token") {
-        return {
-          ...state,
-          data: "token_failed",
-          loading: false,
-        };
+      else if (action.result.data.error) {
+        if (action.result.data.error.code === "invalid_token") {
+          return {
+            ...state,
+            loading: false,
+            data: "token_failed",
+          };
+        }
+        else {
+          return {
+            ...state,
+            loading: false,
+            data: action.result.data,
+          }; 
+        }
       }
     case types.UPDATE_PROFILE_FAILED:
       return {

@@ -18,19 +18,28 @@ export default function ticket(state = initialState, action = {}) {
         error: null,
       };
     case types.TICKET_SUBMIT_SUCCESS:
-      if (action.result.data && action.result.data.error.code !== "invalid_token") {
+      if (action.result.data.success) {
         return {
           ...state,
           loading: false,
           data: action.result.data,
         };  
       }
-      else if (action.result.data.error.code === "invalid_token") {
-        return {
-          ...state,
-          loading: false,
-          data: "token_failed",
-        };
+      else if (action.result.data.error) {
+        if (action.result.data.error.code === "invalid_token") {
+          return {
+            ...state,
+            loading: false,
+            data: "token_failed",
+          };
+        }
+        else {
+          return {
+            ...state,
+            loading: false,
+            data: action.result.data,
+          }; 
+        }
       }
     case types.TICKET_SUBMIT_FAILED:
       return {

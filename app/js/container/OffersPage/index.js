@@ -77,6 +77,7 @@ class Offers extends Component {
         }
         this.props.logout();
         if (!loggin && !token_status) {
+          this.props.initialStore();
           Actions.Login();
         }
         return;

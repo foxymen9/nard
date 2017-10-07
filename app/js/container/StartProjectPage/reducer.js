@@ -18,19 +18,28 @@ export default function project(state = initialState, action = {}) {
         error: null,
       };
     case types.ADD_PROJECT_SUCCESS:
-      if (action.result.data && action.result.data.error.code !== "invalid_token") {
+      if (action.result.data.success) {
         return {
           ...state,
           loading: false,
           data: action.result.data,
         };  
       }
-      else if (action.result.data.error.code === "invalid_token") {
-        return {
-          ...state,
-          loading: false,
-          data: "token_failed",
-        };
+      else if (action.result.data.error) {
+        if (action.result.data.error.code === "invalid_token") {
+          return {
+            ...state,
+            loading: false,
+            data: "token_failed",
+          };
+        }
+        else {
+          return {
+            ...state,
+            loading: false,
+            data: action.result.data,
+          }; 
+        }
       }
     case types.ADD_PROJECT_FAILED:
       return {
@@ -39,6 +48,7 @@ export default function project(state = initialState, action = {}) {
         error: action.error,
       };
     case types.INITIAL_STORE:
+    console.log('LLLLLLLLLLL');
       return {
         ...state,
         data: null,
