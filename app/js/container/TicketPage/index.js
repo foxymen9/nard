@@ -165,7 +165,7 @@ class Ticket extends Component {
       email: email,
       mobile: phone,
       service_details: content,
-      domain: "nard.sa"
+      domain_name: "nard.sa"
     };
 
     this.props.submitTicket(apiToken.api_token, data);

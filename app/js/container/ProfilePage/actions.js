@@ -11,7 +11,7 @@ export function updateProfile(data, apiToken) {
     promise:
       axios({
           method: 'post',
-          url: `${api_url}/index.php?route=api/client/updateclientprofile&api_token${apiToken}`,
+          url: `${api_url}/index.php?route=api/client/updateclientprofile&api_token=${apiToken}`,
           headers: {'Accept': 'application/json'},
           data: data,
       })

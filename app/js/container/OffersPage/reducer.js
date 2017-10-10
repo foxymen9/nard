@@ -18,6 +18,7 @@ export default function offers(state = initialState, action = {}) {
         error: null,
       };
     case types.GET_OFFERS_SUCCESS:
+    console.log('OFFER_DATA', action.result.data);
       if (action.result.data.data) {
         return {
           ...state,
