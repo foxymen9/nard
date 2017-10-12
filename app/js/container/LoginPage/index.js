@@ -133,6 +133,7 @@ class Login extends Component {
 
   onForgotPassword() {
     const { email } = this.state;
+    Actions.ForgotPassword();
   }
 
   onSkip() {

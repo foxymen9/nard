@@ -26,6 +26,7 @@ import Offers from './container/OffersPage';
 import OffersDetail from './container/OffersDetailPage';
 import Services from './container/ServicesPage';
 import ServicesDetail from './container/ServicesDetailPage';
+import ForgotPassword from './container/ForgotPasswordPage';
 
 export default class App extends Component {
   constructor(props) {
@@ -52,6 +53,7 @@ export default class App extends Component {
         <Scene key="OffersDetail" component={ OffersDetail } initial={ false } hideNavBar={ true } panHandlers={null}/>
         <Scene key="Services" component={ Services } initial={ false } hideNavBar={ true } panHandlers={null} />
         <Scene key="ServicesDetail" component={ ServicesDetail } initial={ false } hideNavBar={ true } panHandlers={null} />
+        <Scene key="ForgotPassword" component={ ForgotPassword } initial={ false } hideNavBar={ true } panHandlers={null}/>
       </Scene>
     );
 
