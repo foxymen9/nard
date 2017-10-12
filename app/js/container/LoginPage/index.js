@@ -113,7 +113,6 @@ class Login extends Component {
     Keyboard.dismiss();
     const { apiToken } = this.props;
     const { email } = this.state;
-    console.log('API_LOGIN_TOKEN', apiToken)
     
     const phoneNumber = this.refs.phone.getValue();
     const data = { email: email, telephone: phoneNumber };

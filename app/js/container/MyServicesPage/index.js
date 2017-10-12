@@ -92,7 +92,6 @@ class MyServices extends Component {
         return;
       }
       else {
-        // console.log('MY_SERVICES_DATA', myServices );
         const data = myServices.data.services;
         
         const hostingData = {}, domainData = {}, smsData = {}, sslData = {}, maintenanceData = {}, kenticoData = {}, chatData = {};

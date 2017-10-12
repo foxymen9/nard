@@ -53,7 +53,6 @@ class Offers extends Component {
   }
 
   componentWillMount() {
-    console.log('PPPPPPP');
     const { userInfoResult, apiToken, loggin } = this.props;
 
     if (loggin) {

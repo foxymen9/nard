@@ -35,17 +35,29 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        firstName: 'K',
-        userName: 'Khalid El Kamel',
+        firstName: '',
+        userName: '',
         dataSource: null,
         rowID: null,
     }
   }
 
   componentWillMount() {
+    const { profileInfo } = this.props;
+    this.setProfileInfo(profileInfo.data);
   }
 
   componentWillReceiveProps(nextProps) {
+    const { profileInfo } = nextProps;
+    this.setProfileInfo(profileInfo.data);
+  }
+
+  setProfileInfo(data) {
+    let firstName = data.client_descriptions[1].title[0];
+    this.setState({
+      userName: data.client_descriptions[1].title,
+      firstName: firstName,
+    });
   }
 
   onItemSelect(data, rowID) {

@@ -119,9 +119,9 @@ class Profile extends Component {
       }
     }
 
-    if (userInfoResult) {
-      this.setdDataState(userInfoResult.data, currentLanguage);
-    }
+    // if (userInfoResult) {
+    //   this.setdDataState(userInfoResult.data, currentLanguage);
+    // }
   }
 
   onUpdate() {

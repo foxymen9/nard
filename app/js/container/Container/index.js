@@ -70,9 +70,9 @@ class Container extends Component {
       const drawerStyles = {
         drawer: { shadowColor: '#000', shadowOpacity: 0.8, shadowRadius: 5},
       }
-      const { currentLanguage, pageTitle, serviceDetail } = this.props;
+      const { currentLanguage, pageTitle, serviceDetail, userInfoResult } = this.props;
       const { menuStatus } = this.state;
-      const menuComponent = <Menu currentLanguage={currentLanguage} menuState={()=>this.onChangeMenuState()} />;
+      const menuComponent = <Menu currentLanguage={currentLanguage} menuState={()=>this.onChangeMenuState()} profileInfo={userInfoResult} />;
 
       return (
           <Drawer
@@ -196,4 +196,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
+  userInfoResult: state.auth.userInfoResult,
 }),{ saveMenuSelectedID })(Container);

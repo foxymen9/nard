@@ -112,7 +112,6 @@ class StarProject extends Component {
       departments: departments,
     });
 
-    console.log("QQQQQQQQQ", projectResult);
     if (projectResult) {
       if (projectResult === "token_failed") {
         if (token_status) {

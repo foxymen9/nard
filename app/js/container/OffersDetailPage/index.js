@@ -50,7 +50,7 @@ class OffersDetail extends Component {
   }
 
   onApply() {
-
+    Actions.StartProject();
   }
   
   render() {

@@ -48,7 +48,6 @@ export default function project(state = initialState, action = {}) {
         error: action.error,
       };
     case types.INITIAL_STORE:
-    console.log('LLLLLLLLLLL');
       return {
         ...state,
         data: null,
