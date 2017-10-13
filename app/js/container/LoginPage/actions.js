@@ -20,6 +20,7 @@ export function userLoginIn(data, apiToken) {
 }
 
 export function logout() {
+  AsyncStorage.removeItem('userInfo');
     //Save login status (false) to AsyncStorage after loggout
     return {
       type: types.LOGOUT_SUCCESS,

@@ -32,6 +32,7 @@ import  ModalPickerImage from '../../utils/ModalPickerImage';
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, subWidth, inputMargin } from '../../styles/commonStyles';
 import { userLoginIn, saveLoggin, initialStore } from './actions';
+import { rememberMe } from '../RememberMe/actions';
 import { changeLanguage } from '../LanguageStore/actions';
 import { getApiToken, changeTokenStatus } from '../ParentComponent/actions';
 import language from '../../utils/language/language';
@@ -65,13 +66,20 @@ class Login extends Component {
       tokenFlag: false,
       apiToken: null,
       alert_flag: false,
+      async_flag: false,
+      async_user_info: null,
     };
   }
 
   componentWillMount() {
-    //get api_token from server after check in AsyncStorage
-    const {token_status} = this.props;
-    const {tokenFlag} = this.state;
+    const { token_status } = this.props;
+    const { tokenFlag, async_flag } = this.state;
+
+    //Set flag after Asyncstorage data loading
+    AsyncStorage.getItem('userInfo').then((value) => {
+      this.setState({async_flag: true});
+      this.setState({async_user_info: JSON.parse(value)});
+		}).done();
 
     if (!token_status && !tokenFlag) {
       this.setState({tokenFlag: true});
@@ -79,31 +87,46 @@ class Login extends Component {
     }
     this.setState({alert_flag: false}); 
   }
+
   componentDidMount() {
     this.setState({pickerData: this.refs.phone.getPickerData()});
   }
 
   componentWillReceiveProps(nextProps) {
     const { loggin, loggout, userInfoResult, loading, loadingToken, token_status, apiToken } = nextProps;
-    const { email } = this.state;
+    const { email, async_user_info, async_flag } = this.state;
     const phoneNumber = this.refs.phone.getValue();
     
     this.setState({loadingToken: loadingToken});
     this.setState({loading: loading});
 
-    // check userinfo after login button clicked
-    if (userInfoResult) {
-      if (userInfoResult.error) {
-        if (!this.state.alert_flag && !loading) {
-          this.setState({alert_flag: true}); 
-          setTimeout(()=> {
-            Alert.alert("ERROR",  "invalid email or phone number");
-          }, 100);
+    if (!loadingToken) {
+      // check after Asynstorage loading.
+      if ( async_flag ) {
+        this.setState({async_flag: false});
+        if (async_user_info != null) {
+          //get user data from AsyncStorage
+          const email = async_user_info.data.client_data.email;
+          const mobile = async_user_info.data.client_data.mobile;
+          const data = { email: email, telephone: mobile };
+          this.props.userLoginIn(data, apiToken.api_token);
         }
       }
-      else if (!loggin && !loggout) {
-        this.props.saveLoggin();
-        Actions.Main();
+      else {
+        if (userInfoResult) {
+          if (userInfoResult.error) {
+            if (!this.state.alert_flag && !loading) {
+              this.setState({alert_flag: true}); 
+              setTimeout(()=> {
+                Alert.alert("ERROR",  "invalid email or phone number");
+              }, 100);
+            }
+          }
+          else if (!loggin && !loggout) {
+            this.props.saveLoggin();
+            Actions.Main();
+          }
+        }
       }
     }
   }
@@ -129,6 +152,7 @@ class Login extends Component {
 
   onRememberMe() {
     this.setState({rememberMe: !this.state.rememberMe});
+    this.props.rememberMe(!this.state.rememberMe);
   }
 
   onForgotPassword() {
@@ -435,4 +459,4 @@ export default connect(state => ({
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
   loadingToken: state.parent_state.loadingToken,
-}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout, initialStore })(Login);
+}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout, initialStore, rememberMe })(Login);

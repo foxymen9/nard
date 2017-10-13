@@ -8,6 +8,7 @@ import offers from './container/OffersPage/reducer';
 import ticket from './container/TicketPage/reducer';
 import services from './container/MainPage/reducer';
 import project from './container/StartProjectPage/reducer';
+import remember_me from './container/RememberMe/reducer';
 
 export {
   auth,
@@ -19,5 +20,6 @@ export {
   offers,
   ticket,
   services,
-  project
+  project,
+  remember_me
 };

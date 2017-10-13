@@ -59,8 +59,15 @@ class Main extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    const {loading} = nextProps;
+    const {loading, userInfoResult, rememberMe, apiToken } = nextProps;
     this.setState({loading: loading});
+    
+    if (rememberMe) {
+      if (userInfoResult) {
+        AsyncStorage.setItem('userInfo', JSON.stringify(userInfoResult));
+        AsyncStorage.setItem('userToken', JSON.stringify(apiToken.api_token));
+      }
+    }
   }
 
   onStartProject() {
@@ -173,4 +180,6 @@ export default connect(state => ({
 
   loading: state.services.loading,
   apiToken: state.parent_state.apiToken,
+  rememberMe: state.remember_me.data,
+  userInfoResult: state.auth.userInfoResult,
 }),{ saveMenuSelectedID, getServices, initialStore })(Main);
