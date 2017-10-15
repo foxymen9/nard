@@ -104,7 +104,7 @@ class Login extends Component {
       // check after Asynstorage loading.
       if ( async_flag ) {
         this.setState({async_flag: false});
-        if (async_user_info != null) {
+        if (async_user_info != null && async_user_info.data.client_data) {
           //get user data from AsyncStorage
           const email = async_user_info.data.client_data.email;
           const mobile = async_user_info.data.client_data.mobile;
@@ -136,10 +136,11 @@ class Login extends Component {
     Keyboard.dismiss();
     const { apiToken } = this.props;
     const { email } = this.state;
-    
-    const phoneNumber = this.refs.phone.getValue();
-    const data = { email: email, telephone: phoneNumber };
-    this.props.userLoginIn(data, apiToken.api_token);
+    if (apiToken) {
+      const phoneNumber = this.refs.phone.getValue();
+      const data = { email: email, telephone: phoneNumber };
+      this.props.userLoginIn(data, apiToken.api_token);
+    }
   }
 
   onChangeLanguage() {
@@ -415,6 +416,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lognButton: {
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     width: subWidth,

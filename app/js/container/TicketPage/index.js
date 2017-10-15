@@ -153,7 +153,7 @@ class Ticket extends Component {
     const {phone, name, email, selectedID, content} = this.state;
     const {apiToken, userInfoResult} = this.props;
     if (selectedID == null) {
-      alert("Please select service");
+      Alert.alert("Warning",  "Please select service");
       return;
     }
 

@@ -57,11 +57,13 @@ class Menu extends Component {
   }
 
   setProfileInfo(data) {
-    let firstName = data.client_descriptions[1].title[0];
-    this.setState({
-      userName: data.client_descriptions[1].title,
-      firstName: firstName,
-    });
+    if (data.client_descriptions) {
+      let firstName = data.client_descriptions[1].title[0];
+      this.setState({
+        userName: data.client_descriptions[1].title,
+        firstName: firstName,
+      });
+    }
   }
 
   onItemSelect(data, rowID) {

@@ -28,9 +28,10 @@ import language from '../../utils/language/language';
 
 import { saveMenuSelectedID } from '../Menu/actions';
 
+const background = require('../../../assets/imgs/background/background.png');
 const logo = require('../../../assets/imgs/main/logo_color.png');
 const menu = require('../../../assets/imgs/main/menu.png');
-const back = require('../../../assets/imgs/background/back.png');
+const back = require('../../../assets/imgs/my_services/arrow_ar.png');
 
 class ForgotPasswordPage extends Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class ForgotPasswordPage extends Component {
   render() {
     return (
         <View style={ styles.container } >
+          <Image source={ background } style={ styles.background } />
           <View style={ styles.navBar } >
             <TouchableOpacity
               activeOpacity={ .5 }
@@ -86,10 +88,21 @@ class ForgotPasswordPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: screenHeight,
     alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: screenWidth,
+    height: screenHeight,
   },
   navBar: {
-    backgroundColor: commonColors.title,
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     paddingTop: statusBar,
     height: navBar-2,
@@ -98,7 +111,7 @@ const styles = StyleSheet.create({
   border: {
     height: 2,
     width: screenWidth,
-    backgroundColor: commonColors.separateGray,
+    backgroundColor: 'transparent',
   },
   logo: {
     width: screenWidth,
@@ -106,6 +119,7 @@ const styles = StyleSheet.create({
   },
   logoText: {
     width: screenWidth,
+    color: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
@@ -124,21 +138,23 @@ const styles = StyleSheet.create({
     flex: 1,
     width: screenWidth,
     height: screenHeight - navBar,
-    backgroundColor: commonColors.title,
     alignItems: 'center',
   },
   profile: {
     width: subWidth,
-    marginVertical: 20,
+    marginVertical: 50,
     marginHorizontal: 20,
+    backgroundColor: 'transparent',
   },
   textBold: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 15,
+    color: '#fff',
   },
   text: {
     lineHeight: 30,
-    fontSize: 20,
+    fontSize: 15,
+    color: '#fff',
   },
 });
 
