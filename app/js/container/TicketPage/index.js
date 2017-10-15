@@ -25,6 +25,7 @@ import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ModalDropdown from 'react-native-modal-dropdown';
+import SimplePicker from 'react-native-simple-picker';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding } from '../../styles/commonStyles';
@@ -62,6 +63,7 @@ class Ticket extends Component {
       loading: false,
       content: '',
       alert_flag: false,
+      pickerOptions: [],
     };
   }
 
@@ -69,14 +71,16 @@ class Ticket extends Component {
     const { currentLanguage, userInfoResult, apiToken, serviceList } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
     // for (serviceList.data.services);
-    const departments = [];
+    const departments = [], pickerOptions=[];
     if (serviceList) {
       for (let i = 0; i < serviceList.data.services.length; i ++) {
         departments.push(serviceList.data.services[i].title);
+        pickerOptions.push(i);
       }
 
       this.setState({
         departments: departments,
+        pickerOptions: pickerOptions,
       });
     }
 
@@ -103,14 +107,16 @@ class Ticket extends Component {
 
     this.changeDepartmentLanguage(currentLanguage);
 
-    const departments = [];
+    const departments = [], pickerOptions=[];
     if (serviceList) {
       for (let i = 0; i < serviceList.data.services.length; i ++) {
         departments.push(serviceList.data.services[i].title);
+        pickerOptions.push(i);
       }
 
       this.setState({
         departments: departments,
+        pickerOptions: pickerOptions,
       });
     }
 
@@ -247,16 +253,27 @@ class Ticket extends Component {
               </View>
               <View style={ styles.subView } >
                 <Image source={department_img} style={ styles.inputImg }  resizeMode="contain" >
-                  <ModalDropdown options={this.state.departments}  
-                                style={ styles.modalDropdown } 
-                                dropdownStyle={ styles.dropdownStyle } 
-                                onSelect={ (index) => this.onSelectDepartment(index) }
-                  >
-                    <View style={ styles.dropdown }>
-                      <Text style={styles.dropdownText}>{ this.state.defaultDepartment }</Text>
-                      <Image source={arrow} resizeMode="center" />
+                  <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
+                    <View style={styles.modalDropdown}>
+                      <View style={styles.dropdown}>
+                        <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                        <Image source={arrow} resizeMode="center" />
+                      </View>
+                      <SimplePicker
+                        ref={'picker'}
+                        options={this.state.pickerOptions}
+                        labels={this.state.departments}
+                        itemStyle={{
+                          fontSize: 14,
+                          color: '#000',
+                          textAlign: 'center',
+                        }}
+                        onSubmit={(option) => {
+                          this.onSelectDepartment(option)
+                        }}
+                      />
                     </View>
-                  </ModalDropdown>
+                  </TouchableOpacity>
                 </Image>
               </View>
               <View style={ styles.subView } >
@@ -498,7 +515,7 @@ const styles = StyleSheet.create({
     paddingLeft: 60,
   },
   dropdownText: {
-    color: commonColors.placeholderTextGray,
+    color: '#000',
   },
   inputImgContent: {
     width: subWidth,

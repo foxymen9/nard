@@ -25,6 +25,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ModalDropdown from 'react-native-modal-dropdown';
+import SimplePicker from 'react-native-simple-picker';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding } from '../../styles/commonStyles';
@@ -62,6 +63,7 @@ class StarProject extends Component {
       selectedID: null,
       loading: false,
       alert_flag: false,
+      pickerOptions: [],
     };
   }
 
@@ -70,13 +72,15 @@ class StarProject extends Component {
     this.changeDepartmentLanguage(currentLanguage);
     this.props.saveMenuSelectedID('null');
     
-    const departments = [];
+    const departments = [], pickerOptions=[];
     for (let i = 0; i < serviceList.data.services.length; i ++) {
       departments.push(serviceList.data.services[i].title);
+      pickerOptions.push(i);
     }
 
     this.setState({
       departments: departments,
+      pickerOptions: pickerOptions,
     });
 
     if (userInfoResult && loggin) {
@@ -102,14 +106,16 @@ class StarProject extends Component {
     this.changeDepartmentLanguage(currentLanguage);
 
     this.setState({ loading: loading });
-    const departments = [];
+    const departments = [], pickerOptions=[];
 
     for (let i = 0; i < serviceList.data.services.length; i ++) {
       departments.push(serviceList.data.services[i].title);
+      pickerOptions.push(i);
     }
 
     this.setState({
       departments: departments,
+      pickerOptions: pickerOptions,
     });
 
     if (projectResult) {
@@ -234,17 +240,28 @@ class StarProject extends Component {
                   onSubmitEditing={ () => this.refs.content.focus() }
                 />
               </Image>
-              <Image source={department_img} style={ styles.inputImg }  resizeMode="contain" >
-                <ModalDropdown options={this.state.departments}  
-                              style={styles.modalDropdown} 
-                              dropdownStyle={styles.dropdownStyle} 
-                              onSelect={(index)=>this.onSelectDepartment(index)}
-                >
-                  <View style={styles.dropdown}>
-                    <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
-                    <Image source={arrow} resizeMode="center" />
+              <Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
+                <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
+                  <View style={styles.modalDropdown}>
+                    <View style={styles.dropdown}>
+                      <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                      <Image source={arrow} resizeMode="center" />
+                    </View>
+                    <SimplePicker
+                      ref={'picker'}
+                      options={this.state.pickerOptions}
+                      labels={this.state.departments}
+                      itemStyle={{
+                        fontSize: 14,
+                        color: '#000',
+                        textAlign: 'center',
+                      }}
+                      onSubmit={(option) => {
+                        this.onSelectDepartment(option)
+                      }}
+                    />
                   </View>
-                </ModalDropdown>
+                </TouchableOpacity>
               </Image>
               <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper}>
@@ -333,16 +350,27 @@ class StarProject extends Component {
                 />
               </Image>
               <Image source={department_img_ar} style={ styles.inputImg }  resizeMode="contain" >
-                <ModalDropdown options={this.state.departments}  
-                              style={ styles.modalDropdown_ar } 
-                              dropdownStyle={ styles.dropdownStyle_ar } 
-                              onSelect={ (index) => this.onSelectDepartment(index) }
-                >
-                  <View style={ styles.dropdown_ar }>
-                    <Image source={arrow} resizeMode="center" />
-                    <Text style={styles.dropdownText}>{ this.state.defaultDepartment }</Text>
+                <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
+                  <View style={styles.modalDropdown_ar}>
+                    <View style={styles.dropdown_ar}>
+                      <Image source={arrow} resizeMode="center" />
+                      <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                    </View>
+                    <SimplePicker
+                      ref={'picker'}
+                      options={this.state.pickerOptions}
+                      labels={this.state.departments}
+                      itemStyle={{
+                        fontSize: 14,
+                        color: '#000',
+                        textAlign: 'center',
+                      }}
+                      onSubmit={(option) => {
+                        this.onSelectDepartment(option)
+                      }}
+                    />
                   </View>
-                </ModalDropdown>
+                </TouchableOpacity>
               </Image>
               <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper_ar}>
@@ -440,7 +468,7 @@ const styles = StyleSheet.create({
     paddingLeft: 60,
   },
   dropdownText: {
-    color: commonColors.placeholderTextGray,
+    color: '#000',
   },
   input: {
     fontSize: 14,
