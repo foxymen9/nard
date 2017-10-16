@@ -43,15 +43,16 @@ class Menu extends Component {
   }
 
   componentWillMount() {
-    const { profileInfo } = this.props;
-    if (profileInfo) {
+    const { profileInfo, login } = this.props;
+    if (login && profileInfo) {
       this.setProfileInfo(profileInfo.data);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { profileInfo } = nextProps;
-    if (profileInfo) {
+    const { profileInfo, loggin } = nextProps;
+    // console.log('*******PROFILE_INFO********', profileInfo);
+    if (profileInfo && !profileInfo.error ) {
       this.setProfileInfo(profileInfo.data);
     }
   }
