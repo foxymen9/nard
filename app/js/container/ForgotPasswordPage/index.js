@@ -56,7 +56,7 @@ class ForgotPasswordPage extends Component {
               onPress={ () => this.gotoLoginPage() }
             >
               <View>
-                <Text style={styles.logoText} >CONTACT US</Text>
+                <Text style={styles.logoText} >Forgot Password</Text>
                   <TouchableOpacity
                     activeOpacity={ .5 }
                     style={ styles.back }
@@ -72,12 +72,9 @@ class ForgotPasswordPage extends Component {
           <View style={styles.border} />
           <View style={ styles.container } >
             <View style={styles.profile}>
-              <Text style={styles.text}>Saudi Arabia</Text>
-              <Text style={styles.text}>Grenada Business Park A4, 12th floor - Riyadh Kingdom of Saudi Arabia</Text>
-              <Text style={styles.text}><Text style={styles.textBold}>Mobile: </Text>+966.55.86.77.3</Text>
-              <Text style={styles.text}><Text style={styles.textBold}>Tel: </Text>+966.55.86.77.3</Text>
-              <Text style={styles.text}><Text style={styles.textBold}>E-mail: </Text>info@nard.sa</Text>
-              <Text style={styles.text}><Text style={styles.textBold}>Web: </Text>www.nard.sa</Text>
+              <Text style={styles.text}><Text style={styles.textBold}>Tel: </Text>+966.11.511.8079</Text>
+              <Text style={styles.text}><Text style={styles.textBold}>Fax: </Text>+966.11.511.8111</Text>
+              <Text style={styles.text}><Text style={styles.textBold}>Web site: </Text>www.nard.sa</Text>
             </View>
           </View>
         </View>
@@ -141,9 +138,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profile: {
-    width: subWidth,
-    marginVertical: 50,
-    marginHorizontal: 20,
+    width: 165,
+    marginVertical: 100,
     backgroundColor: 'transparent',
   },
   textBold: {
@@ -152,8 +148,8 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   text: {
-    lineHeight: 30,
-    fontSize: 15,
+    lineHeight: 50,
+    fontSize: 16,
     color: '#fff',
   },
 });

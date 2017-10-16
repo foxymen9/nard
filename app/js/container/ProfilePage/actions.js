@@ -23,3 +23,4 @@ export function initialStore() {
     type: types.INITIAL_STORE,
   }
 }
+

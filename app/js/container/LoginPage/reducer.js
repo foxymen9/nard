@@ -77,6 +77,19 @@ export default function auth(state = initialState, action = {}) {
         ...state,
         userInfoResult: null,
       }
+    case types.GET_PROFILE_REQUEST:
+      return {
+        ...state,
+      }
+    case types.GET_PROFILE_SUCCESS:
+      return {
+          ...state,
+          userInfoResult: action.result.data,
+        };
+    case types.GET_PROFILE_FAILED:
+      return {
+        ...state,
+      }
     default:
       return state;
   }

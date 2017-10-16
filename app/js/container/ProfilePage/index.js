@@ -32,6 +32,7 @@ import language from '../../utils/language/language';
 import Container from '../Container';
 import {updateProfile, initialStore} from './actions';
 import {logout} from '../LoginPage/actions';
+import { getProfileData } from '../LoginPage/actions';
 import { changeTokenStatus } from '../ParentComponent/actions';
 
 const avatar_img = require('../../../assets/imgs/profile/avatar.png');
@@ -86,7 +87,7 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {profileUpdateResult, userInfoResult, currentLanguage, loggin, loading, token_status} = nextProps;
+    const {profileUpdateResult, userInfoResult, currentLanguage, loggin, loading, token_status, apiToken} = nextProps;
     // const userData = userInfoResult.data;
     this.setState({loading: loading});
     
@@ -114,14 +115,18 @@ class Profile extends Component {
             setTimeout(()=> {
               Alert.alert("SUCCESS",  profileUpdateResult.success);
             }, 100);
+            
+            //get updated profile data again
+            const email = userInfoResult.data.client_data.email;
+            const phoneNumber = userInfoResult.data.client_data.mobile;
+            if (apiToken) {
+              const data = { email: email, telephone: phoneNumber };
+              this.props.getProfileData(data, apiToken.api_token);
+            }
           }
         }
       }
     }
-
-    // if (userInfoResult) {
-    //   this.setdDataState(userInfoResult.data, currentLanguage);
-    // }
   }
 
   onUpdate() {
@@ -391,4 +396,4 @@ export default connect(state => ({
   apiToken: state.parent_state.apiToken,
   loggin: state.auth.loggin,
   token_status: state.parent_state.token_status,
-}),{ updateProfile, changeTokenStatus, logout, initialStore })(Profile);
+}),{ updateProfile, changeTokenStatus, getProfileData, logout, initialStore })(Profile);

@@ -39,3 +39,18 @@ export function initialStore() {
     type: types.INITIAL_STORE,
   }
 }
+
+
+export function getProfileData(data, apiToken) {
+    return {
+      types: [types.GET_PROFILE_REQUEST, types.GET_PROFILE_SUCCESS, types.GET_PROFILE_FAILED],
+      promise:
+        axios({
+            method: 'post',
+            url: `${api_url}/index.php?route=api/login/client&api_token=${apiToken}`,
+            headers: {'Accept': 'application/json'},
+            data: data
+        })
+      
+    };
+}
