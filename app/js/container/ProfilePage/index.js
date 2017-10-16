@@ -64,6 +64,7 @@ class Profile extends Component {
   }
 
   componentWillMount() {
+    console.log('************ PROFILE **************');
     const {userInfoResult, currentLanguage} = this.props;
 
     if (userInfoResult) {

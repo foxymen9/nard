@@ -22,6 +22,7 @@ import { Actions } from 'react-native-router-flux';
 import { logout } from '../LoginPage/actions';
 import { changeLanguage } from '../LanguageStore/actions';
 import { saveMenuSelectedID } from './actions';
+import { initialStore } from "../ProfilePage/actions";
 import language from '../../utils/language/language';
 
 import { screenWidth, screenHeight, statusBar } from '../../styles/commonStyles';
@@ -43,16 +44,16 @@ class Menu extends Component {
   }
 
   componentWillMount() {
-    const { profileInfo, login } = this.props;
-    if (login && profileInfo) {
+    const { profileInfo } = this.props;
+    if (profileInfo != null && !profileInfo.hasOwnProperty("error")) {
       this.setProfileInfo(profileInfo.data);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { profileInfo, loggin } = nextProps;
+    const { profileInfo } = nextProps;
     // console.log('*******PROFILE_INFO********', profileInfo);
-    if (profileInfo && !profileInfo.error ) {
+    if (profileInfo != null && !profileInfo.hasOwnProperty("error")) {
       this.setProfileInfo(profileInfo.data);
     }
   }
@@ -109,6 +110,7 @@ class Menu extends Component {
           return;
         case "7": //Log out
           this.props.logout();
+          this.props.initialStore();
           this.props.saveMenuSelectedID('null');
           Actions.Login();
           return;
@@ -189,7 +191,6 @@ class Menu extends Component {
     }
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(menuItems);
-
     return (
       <View style={ styles.container } >
         <View style={styles.title}>
@@ -293,4 +294,4 @@ export default connect(state => ({
   myServicesData: state.menu.myServicesData,
   menuSelectedID: state.menu.menuSelectedID,
   loggin: state.auth.loggin,
-}),{ changeLanguage, saveMenuSelectedID, logout })(Menu);
+}),{ changeLanguage, saveMenuSelectedID, initialStore, logout })(Menu);

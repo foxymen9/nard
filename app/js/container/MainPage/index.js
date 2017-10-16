@@ -61,7 +61,6 @@ class Main extends Component {
   componentWillReceiveProps(nextProps) {
     const {loading, userInfoResult, rememberMe, apiToken } = nextProps;
     this.setState({loading: loading});
-    
     if (rememberMe) {
       if (userInfoResult) {
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfoResult));

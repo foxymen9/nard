@@ -71,11 +71,13 @@ class MyServices extends Component {
 
   componentWillMount() {
     const { userInfoResult, apiToken } = this.props;
-    const data = {client_id: userInfoResult.data.client_data.clients_id};
-    this.props.getMyServices(data, apiToken.api_token);
-    this.props.saveMenuSelectedID(1);
-    if (apiToken) {
-      this.props.getServices(apiToken.api_token);
+    if (userInfoResult != null) {
+      const data = {client_id: userInfoResult.data.client_data.clients_id};
+      this.props.getMyServices(data, apiToken.api_token);
+      this.props.saveMenuSelectedID(1);
+      if (apiToken) {
+        this.props.getServices(apiToken.api_token);
+      }
     }
   }
 

@@ -73,7 +73,6 @@ class Container extends Component {
       const { currentLanguage, pageTitle, serviceDetail, userInfoResult } = this.props;
       const { menuStatus } = this.state;
       const menuComponent = <Menu currentLanguage={currentLanguage} menuState={()=>this.onChangeMenuState()} profileInfo={userInfoResult} />;
-
       return (
           <Drawer
               type="overlay"
