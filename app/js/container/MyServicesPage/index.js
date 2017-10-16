@@ -13,7 +13,8 @@ import {
   ListView,
   Keyboard,
   findNodeHandle,  
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -29,6 +30,8 @@ import Container from '../Container';
 
 import { saveMenuSelectedID } from '../Menu/actions';
 import { getMyServices, initialStore } from './actions';
+import { getServices } from '../MainPage/actions';
+
 import {logout} from '../LoginPage/actions';
 import { changeTokenStatus } from '../ParentComponent/actions';
 
@@ -71,13 +74,23 @@ class MyServices extends Component {
     const data = {client_id: userInfoResult.data.client_data.clients_id};
     this.props.getMyServices(data, apiToken.api_token);
     this.props.saveMenuSelectedID(1);
+    if (apiToken) {
+      this.props.getServices(apiToken.api_token);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const {myServices, userInfoResult, currentLanguage, loggin, token_status, loading} = nextProps;
+    const {myServices, userInfoResult, currentLanguage, loggin, token_status, loading, rememberMe, apiToken} = nextProps;
     const {totalCount} = this.state;
 
     this.setState({loading: loading});
+
+    if (rememberMe) {
+      if (userInfoResult) {
+        AsyncStorage.setItem('userInfo', JSON.stringify(userInfoResult));
+        AsyncStorage.setItem('userToken', JSON.stringify(apiToken.api_token));
+      }
+    }
 
     if (myServices) {
       if (myServices === "token_failed") {
@@ -426,8 +439,9 @@ export default connect(state => ({
   myServices: state.my_services.data,
   loading: state.my_services.loading,
 
+  rememberMe: state.remember_me.data,
   userInfoResult: state.auth.userInfoResult,
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
 
-}),{ getMyServices, saveMenuSelectedID, logout, changeTokenStatus, initialStore })(MyServices);
+}),{ getMyServices, getServices, saveMenuSelectedID, logout, changeTokenStatus, initialStore })(MyServices);

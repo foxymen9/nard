@@ -317,10 +317,10 @@ class Ticket extends Component {
                 <View style={styles.profile}>
                   <Text style={styles.text}>Saudi Arabia</Text>
                   <Text style={styles.text}>Grenada Business Park A4, 12th floor - Riyadh Kingdom of Saudi Arabia</Text>
-                  <Text style={styles.text}><Text style={styles.textBold}>Mobile: </Text>+966.55.86.77.3</Text>
-                  <Text style={styles.text}><Text style={styles.textBold}>Tel: </Text>+966.55.86.77.3</Text>
+                  <Text style={styles.text}><Text style={styles.textBold}>Tel: </Text>+966.11.511.8079</Text>
+                  <Text style={styles.text}><Text style={styles.textBold}>Fax: </Text>+966.11.511.8111</Text>
                   <Text style={styles.text}><Text style={styles.textBold}>E-mail: </Text>info@nard.sa</Text>
-                  <Text style={styles.text}><Text style={styles.textBold}>Web: </Text>www.nard.sa</Text>
+                  <Text style={styles.text}><Text style={styles.textBold}>Web site: </Text>www.nard.sa</Text>
                 </View>
               </View>
             </KeyboardAwareScrollView>
@@ -436,10 +436,10 @@ class Ticket extends Component {
                 <View style={styles.profile}>
                   <Text style={styles.text_ar}>Saudi Arabia</Text>
                   <Text style={styles.text_ar}>Grenada Business Park A4, 12th floor - Riyadh Kingdom of Saudi Arabia</Text>
-                  <Text style={styles.text_ar}>+966.55.86.77.3<Text style={styles.textBold}> :Mobile</Text></Text>
-                  <Text style={styles.text_ar}>+966.55.86.77.3<Text style={styles.textBold}> :Tel</Text></Text>
+                  <Text style={styles.text_ar}>+966.11.511.8079<Text style={styles.textBold}> :Tel</Text></Text>
+                  <Text style={styles.text_ar}>+966.11.511.8111<Text style={styles.textBold}> :Fax</Text></Text>
                   <Text style={styles.text_ar}>info@nard.sa<Text style={styles.textBold}> :E-mail</Text></Text>
-                  <Text style={styles.text_ar}>www.nard.sa<Text style={styles.textBold}> :Web</Text></Text>
+                  <Text style={styles.text_ar}>www.nard.sa<Text style={styles.textBold}> :Web site</Text></Text>
                 </View>
               </View>
             </KeyboardAwareScrollView>

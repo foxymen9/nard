@@ -124,7 +124,8 @@ class Login extends Component {
           }
           else if (!loggin && !loggout) {
             this.props.saveLoggin();
-            Actions.Main();
+            // Actions.Main();
+            Actions.MyServices();
           }
         }
       }
