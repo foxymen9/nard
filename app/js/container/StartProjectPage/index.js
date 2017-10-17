@@ -394,7 +394,7 @@ class StarProject extends Component {
                   </View>
                 </TouchableOpacity>
               </Image>
-              :<Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
+              :<Image source={department_img_ar} style={ styles.inputImg } resizeMode="contain" >
                 <ModalPicker
                     ref={'picker_android'}
                     data={this.state.service_android}
@@ -490,7 +490,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 60,
+    paddingLeft: 20,
   },
   dropdownText: {
     color: '#000',
