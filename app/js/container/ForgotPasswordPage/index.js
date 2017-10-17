@@ -131,12 +131,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-  container: {
-    flex: 1,
-    width: screenWidth,
-    height: screenHeight - navBar,
-    alignItems: 'center',
-  },
   profile: {
     width: 165,
     marginVertical: 100,

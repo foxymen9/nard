@@ -16,6 +16,8 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   Alert,
+  ScrollView,
+  Platform,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -24,8 +26,8 @@ import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import ModalDropdown from 'react-native-modal-dropdown';
 import SimplePicker from 'react-native-simple-picker';
+import ModalPicker from '../../utils/ModalPicker';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding } from '../../styles/commonStyles';
@@ -64,6 +66,7 @@ class StarProject extends Component {
       loading: false,
       alert_flag: false,
       pickerOptions: [],
+      service_android: [],
     };
   }
 
@@ -72,13 +75,15 @@ class StarProject extends Component {
     this.changeDepartmentLanguage(currentLanguage);
     this.props.saveMenuSelectedID('null');
     
-    const departments = [], pickerOptions=[];
+    const departments = [], pickerOptions=[], service_android=[];
     for (let i = 0; i < serviceList.data.services.length; i ++) {
+      service_android.push({key: i, label: serviceList.data.services[i].title});
       departments.push(serviceList.data.services[i].title);
       pickerOptions.push(i);
     }
 
     this.setState({
+      service_android: service_android,
       departments: departments,
       pickerOptions: pickerOptions,
     });
@@ -106,17 +111,20 @@ class StarProject extends Component {
     this.changeDepartmentLanguage(currentLanguage);
 
     this.setState({ loading: loading });
-    const departments = [], pickerOptions=[];
 
-    for (let i = 0; i < serviceList.data.services.length; i ++) {
-      departments.push(serviceList.data.services[i].title);
-      pickerOptions.push(i);
+    const departments = [], pickerOptions=[], service_android=[];
+    if (serviceList) {
+      for (let i = 0; i < serviceList.data.services.length; i ++) {
+        service_android.push({key: i, label: serviceList.data.services[i].title});
+        departments.push(serviceList.data.services[i].title);
+        pickerOptions.push(i);
+      }
+      this.setState({
+        service_android: service_android,
+        departments: departments,
+        pickerOptions: pickerOptions,
+      });
     }
-
-    this.setState({
-      departments: departments,
-      pickerOptions: pickerOptions,
-    });
 
     if (projectResult) {
       if (projectResult === "token_failed") {
@@ -148,7 +156,6 @@ class StarProject extends Component {
   }
   
   changeDepartmentLanguage(currentLanguage) {
-    const { defaultDepartment } = this.state; 
     this.setState({defaultDepartment: language.department_txt[currentLanguage] });
   }
 
@@ -182,7 +189,7 @@ class StarProject extends Component {
   render() {
     const { currentLanguage } = this.props;
     const { loading } = this.state;
-    
+
     return (
       <Container currentLanguage={currentLanguage} pageTitle="startProject">
         <OrientationLoadingOveraly visible={ loading } />
@@ -240,6 +247,7 @@ class StarProject extends Component {
                   onSubmitEditing={ () => this.refs.content.focus() }
                 />
               </Image>
+              {Platform.OS === 'ios' ?
               <Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
                 <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
                   <View style={styles.modalDropdown}>
@@ -263,6 +271,19 @@ class StarProject extends Component {
                   </View>
                 </TouchableOpacity>
               </Image>
+              :<Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
+                <ModalPicker
+                    ref={'picker_android'}
+                    data={this.state.service_android}
+                    onChange = {(option)=>this.onSelectDepartment(option.key)} >
+                    <View style={styles.modalDropdown}>
+                      <View style={styles.dropdown}>
+                        <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                        <Image source={arrow} resizeMode="center" />
+                      </View>
+                    </View>
+                </ModalPicker>
+              </Image>}
               <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper}>
                   <TextInput
@@ -349,6 +370,7 @@ class StarProject extends Component {
                   onSubmitEditing={ () => this.refs.content.focus() }
                 />
               </Image>
+              {Platform.OS === 'ios' ?
               <Image source={department_img_ar} style={ styles.inputImg }  resizeMode="contain" >
                 <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
                   <View style={styles.modalDropdown_ar}>
@@ -372,6 +394,19 @@ class StarProject extends Component {
                   </View>
                 </TouchableOpacity>
               </Image>
+              :<Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
+                <ModalPicker
+                    ref={'picker_android'}
+                    data={this.state.service_android}
+                    onChange = {(option)=>this.onSelectDepartment(option.key)} >
+                    <View style={styles.modalDropdown_ar}>
+                      <View style={styles.dropdown_ar}>
+                        <Image source={arrow} resizeMode="center" />
+                        <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                      </View>
+                    </View>
+                </ModalPicker>
+              </Image>}
               <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper_ar}>
                   <TextInput
@@ -445,16 +480,6 @@ const styles = StyleSheet.create({
     backgroundColor:  'transparent', 
     marginRight: inputMargin,
     width: subWidth - inputMargin,
-  },
-  dropdownStyle: {
-    width: 180,
-  },
-  dropdownStyle_ar: {
-    width: 180,
-    marginLeft: 80,
-  },
-  dropdownStyle: {
-    width: 180,
   },
   dropdown: {
     flexDirection: 'row',
