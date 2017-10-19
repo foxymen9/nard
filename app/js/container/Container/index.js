@@ -65,6 +65,10 @@ class Container extends Component {
     Actions.pop();
   }
 
+  onBackMain() {
+    Actions.Main();
+  }
+
   render()
   {
       const drawerStyles = {
@@ -124,12 +128,22 @@ class Container extends Component {
                     >
                       <Image source={ menu } resizeMode="contain" style={styles.menuIcon} />  
                     </TouchableOpacity>
-                    {(pageTitle === 'ourServicesDetail' || pageTitle === 'offersDetail' || serviceDetail == "true" 
-                          || pageTitle == "startProject" || pageTitle == "services") && (
+                    {(pageTitle === 'ourServicesDetail' || pageTitle === 'offersDetail' || serviceDetail == "true") && (
                       <TouchableOpacity
                         activeOpacity={ .5 }
                         style={ styles.back }
                         onPress={ () => this.onBack() }
+                      >
+                        <View >
+                          <Image source={ back } resizeMode="contain" style={styles.backIcon} />  
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    {(pageTitle == "startProject" || pageTitle == "services") && (
+                      <TouchableOpacity
+                        activeOpacity={ .5 }
+                        style={ styles.back }
+                        onPress={ () => this.onBackMain() }
                       >
                         <View >
                           <Image source={ back } resizeMode="contain" style={styles.backIcon} />  
