@@ -16,6 +16,8 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   ScrollView,
+  Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -35,6 +37,7 @@ const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 class OffersDetail extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
     this.state = {
       name: '',
@@ -44,6 +47,20 @@ class OffersDetail extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Offers();
+    return true;
   }
 
   componentWillReceiveProps(nextProps) {

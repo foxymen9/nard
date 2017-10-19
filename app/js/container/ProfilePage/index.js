@@ -17,6 +17,8 @@ import {
   RecyclerViewBackedScrollView,
   AsyncStorage,
   Alert,
+  Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -50,6 +52,7 @@ const pressBtn_img = require('../../../assets/imgs/main/blue_button.png');
 class Profile extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
     this.state = {
       company: '',
@@ -64,12 +67,26 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    console.log('************ PROFILE **************');
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+
     const {userInfoResult, currentLanguage} = this.props;
 
     if (userInfoResult) {
       this.setdDataState(userInfoResult.data, currentLanguage);
     }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Main();
+    return true;
   }
 
   setdDataState(userData, currentLanguage) {

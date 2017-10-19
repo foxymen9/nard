@@ -16,6 +16,7 @@ export default function services(state = initialState, action = {}) {
         ...state,
         loading: true,
         error: null,
+        data: null,
       };
     case types.GET_SERVICES_SUCCESS:
       if (action.result.data.data) {

@@ -14,6 +14,8 @@ import {
   Keyboard,
   findNodeHandle,
   AsyncStorage,
+  BackHandler,
+  Platform,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -34,7 +36,9 @@ import Container from '../Container';
 
 import { userLoginIn } from '../LoginPage/actions';
 import { saveMenuSelectedID } from '../Menu/actions';
-import { getServices, initialStore } from './actions';
+import { getServices, initialMainStore } from './actions';
+import { logout } from '../LoginPage/actions';
+import { initialStore } from "../ProfilePage/actions";
 
 const background = require('../../../assets/imgs/main/back.png');
 const imgBlue = require('../../../assets/imgs/main/blue_button.png');
@@ -44,6 +48,7 @@ const menu = require('../../../assets/imgs/main/menu.png');
 class Main extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
     this.state = {
       loading: false,
@@ -51,12 +56,30 @@ class Main extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+
     const {apiToken} = this.props;
     this.props.saveMenuSelectedID(0);
     if (apiToken) {
       this.props.getServices(apiToken.api_token);
     }
   }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    this.props.logout();
+    this.props.initialStore();
+    Actions.Login();
+    return true;
+  }
+
   
   componentWillReceiveProps(nextProps) {
     const {loading, userInfoResult, rememberMe, apiToken } = nextProps;
@@ -181,4 +204,4 @@ export default connect(state => ({
   apiToken: state.parent_state.apiToken,
   rememberMe: state.remember_me.data,
   userInfoResult: state.auth.userInfoResult,
-}),{ saveMenuSelectedID, getServices, initialStore })(Main);
+}),{ saveMenuSelectedID, getServices, initialMainStore, initialStore, logout })(Main);

@@ -16,6 +16,7 @@ export default function offers(state = initialState, action = {}) {
         ...state,
         loading: true,
         error: null,
+        data: null,
       };
     case types.GET_OFFERS_SUCCESS:
       if (action.result.data.data) {

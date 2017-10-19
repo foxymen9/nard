@@ -15,6 +15,7 @@ export default function my_ervices(state = initialState, action = {}) {
       return {
         ...state,
         loading: true,
+        data: null,
         error: null,
       };
     case types.GET_CLIENT_SERVICES_SUCCESS:

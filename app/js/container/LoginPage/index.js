@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1.9,
-    height: screenHeight - 50,
+    height: screenHeight - 55,
   },
   descriptionContainer: {
     flex: 0.6,
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lognButton: {
-    marginTop: 20,
+    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     width: subWidth,
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   skip: {
-    marginTop: 25,
+    marginTop: 30,
     backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'center',

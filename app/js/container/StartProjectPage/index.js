@@ -18,6 +18,7 @@ import {
   Alert,
   ScrollView,
   Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -55,6 +56,8 @@ class StarProject extends Component {
   constructor(props) {
     super(props);
 
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+
     this.state = {
       name: '',
       phone: '',
@@ -71,15 +74,21 @@ class StarProject extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+
     const { currentLanguage , userInfoResult, apiToken, serviceList, loggin } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
     this.props.saveMenuSelectedID('null');
     
     const departments = [], pickerOptions=[], service_android=[];
-    for (let i = 0; i < serviceList.data.services.length; i ++) {
-      service_android.push({key: i, label: serviceList.data.services[i].title});
-      departments.push(serviceList.data.services[i].title);
-      pickerOptions.push(i);
+    if (serviceList) {
+      for (let i = 0; i < serviceList.data.services.length; i ++) {
+        service_android.push({key: i, label: serviceList.data.services[i].title});
+        departments.push(serviceList.data.services[i].title);
+        pickerOptions.push(i);
+      }
     }
 
     this.setState({
@@ -91,6 +100,17 @@ class StarProject extends Component {
     if (userInfoResult && loggin) {
       this.setdDataState(userInfoResult.data, currentLanguage);
     }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Main();
+    return true;
   }
   
   setdDataState(userData, currentLanguage) {
@@ -253,7 +273,6 @@ class StarProject extends Component {
                   <View style={styles.modalDropdown}>
                     <View style={styles.dropdown}>
                       <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
-                      <Image source={arrow} resizeMode="center" />
                     </View>
                     <SimplePicker
                       ref={'picker'}
@@ -276,10 +295,9 @@ class StarProject extends Component {
                     ref={'picker_android'}
                     data={this.state.service_android}
                     onChange = {(option)=>this.onSelectDepartment(option.key)} >
-                    <View style={styles.modalDropdown}>
+                    <View style={styles.modalDropdown_android}>
                       <View style={styles.dropdown}>
                         <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
-                        <Image source={arrow} resizeMode="center" />
                       </View>
                     </View>
                 </ModalPicker>
@@ -375,8 +393,7 @@ class StarProject extends Component {
                 <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
                   <View style={styles.modalDropdown_ar}>
                     <View style={styles.dropdown_ar}>
-                      <Image source={arrow} resizeMode="center" />
-                      <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                      <Text style={styles.dropdownText_ar}>{this.state.defaultDepartment}</Text>
                     </View>
                     <SimplePicker
                       ref={'picker'}
@@ -399,10 +416,9 @@ class StarProject extends Component {
                     ref={'picker_android'}
                     data={this.state.service_android}
                     onChange = {(option)=>this.onSelectDepartment(option.key)} >
-                    <View style={styles.modalDropdown_ar}>
+                    <View style={styles.modalDropdown_ar_android}>
                       <View style={styles.dropdown_ar}>
-                        <Image source={arrow} resizeMode="center" />
-                        <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
+                        <Text style={styles.dropdownText_ar}>{this.state.defaultDepartment}</Text>
                       </View>
                     </View>
                 </ModalPicker>
@@ -474,26 +490,37 @@ const styles = StyleSheet.create({
   modalDropdown: {
     backgroundColor:  'transparent', 
     marginLeft: inputMargin,
-    width: 210,
+  },
+  modalDropdown_android: {
+    backgroundColor:  'transparent', 
+    marginLeft: 65,
   },
   modalDropdown_ar: {
     backgroundColor:  'transparent', 
     marginRight: inputMargin,
     width: subWidth - inputMargin,
   },
+  modalDropdown_ar_android: {
+    backgroundColor:  'transparent', 
+    marginRight: 65,
+    width: subWidth - 65,
+  },
   dropdown: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   dropdown_ar: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     paddingLeft: 20,
   },
   dropdownText: {
     color: '#000',
+  },
+  dropdownText_ar: {
+    textAlign: 'right',
   },
   input: {
     fontSize: 14,

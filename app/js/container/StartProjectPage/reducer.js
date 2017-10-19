@@ -16,6 +16,7 @@ export default function project(state = initialState, action = {}) {
         ...state,
         loading: true,
         error: null,
+        data: null,
       };
     case types.ADD_PROJECT_SUCCESS:
       if (action.result.data.success) {

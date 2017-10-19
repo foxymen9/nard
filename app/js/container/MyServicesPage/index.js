@@ -15,6 +15,8 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   AsyncStorage,
+  Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -59,6 +61,8 @@ class MyServices extends Component {
   constructor(props) {
     super(props);
 
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+
     this.state = {
       dataSource: null,
       rowID: null,
@@ -70,6 +74,10 @@ class MyServices extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+
     const { userInfoResult, apiToken } = this.props;
     if (userInfoResult != null) {
       const data = {client_id: userInfoResult.data.client_data.clients_id};
@@ -81,10 +89,20 @@ class MyServices extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Main();
+    return true;
+  }
+
   componentWillReceiveProps(nextProps) {
     const {myServices, userInfoResult, currentLanguage, loggin, token_status, loading, rememberMe, apiToken} = nextProps;
     const {totalCount} = this.state;
-
     this.setState({loading: loading});
 
     if (rememberMe) {
@@ -285,7 +303,6 @@ class MyServices extends Component {
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="ourServices">
-        <OrientationLoadingOveraly visible={ loading } />
         {currentLanguage == 'EN'
         ?<View style={ styles.container } >
           <View style={styles.titleWrapper}>

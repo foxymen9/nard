@@ -17,6 +17,8 @@ import {
   RecyclerViewBackedScrollView,
   ScrollView,
   WebView,
+  Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -39,6 +41,7 @@ const submit = require('../../../assets/imgs/main/yellow_button.png');
 class ServicesDetail extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
     this.state = {
       name: '',
@@ -48,6 +51,20 @@ class ServicesDetail extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.MyServices();
+    return true;
   }
 
   componentWillReceiveProps(nextProps) {

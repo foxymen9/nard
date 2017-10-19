@@ -20,6 +20,7 @@ export default function auth(state = initialState, action = {}) {
         loading: true,
         loggin: false,
         error: null,
+        userInfoResult: null,
       };
     case types.LOGIN_SUCCESS:
       if (action.result.data.success || action.result.data.error.login) {

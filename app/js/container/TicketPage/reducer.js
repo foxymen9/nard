@@ -16,6 +16,7 @@ export default function ticket(state = initialState, action = {}) {
         ...state,
         loading: true,
         error: null,
+        data: null,
       };
     case types.TICKET_SUBMIT_SUCCESS:
       if (action.result.data.success) {

@@ -19,7 +19,7 @@ export function getServices(apiToken) {
   };
 }
 
-export function initialStore() {
+export function initialMainStore() {
   return {
     type: types.INITIAL_STORE,
   }

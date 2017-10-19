@@ -16,6 +16,7 @@ export default function profile(state = initialState, action = {}) {
         ...state,
         error: null,
         loading: true,
+        data: null,
       };
     case types.UPDATE_PROFILE_SUCCESS:
       if (action.result.data.success) {

@@ -124,7 +124,8 @@ class Container extends Component {
                     >
                       <Image source={ menu } resizeMode="contain" style={styles.menuIcon} />  
                     </TouchableOpacity>
-                    {(pageTitle === 'ourServicesDetail' || pageTitle === 'offersDetail' || serviceDetail == "true") && (
+                    {(pageTitle === 'ourServicesDetail' || pageTitle === 'offersDetail' || serviceDetail == "true" 
+                          || pageTitle == "startProject" || pageTitle == "services") && (
                       <TouchableOpacity
                         activeOpacity={ .5 }
                         style={ styles.back }

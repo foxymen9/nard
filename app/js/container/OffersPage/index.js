@@ -15,6 +15,8 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   AsyncStorage,
+  Platform,
+  BackHandler,
 } from 'react-native';
 import Storage from 'react-native-key-value-store';
 
@@ -43,6 +45,8 @@ class Offers extends Component {
   constructor(props) {
     super(props);
 
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+
     this.state = {
       dataSource: null,
       rowID: null,
@@ -53,6 +57,10 @@ class Offers extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+
     const { userInfoResult, apiToken, loggin } = this.props;
 
     if (loggin) {
@@ -63,6 +71,17 @@ class Offers extends Component {
     }
     const data = {mail: userInfoResult.data.client_data.email};
     this.props.getOffers(data, apiToken.api_token);
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Main();
+    return true;
   }
 
   componentWillReceiveProps(nextProps) {

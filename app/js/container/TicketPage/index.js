@@ -16,7 +16,8 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   Alert,
-  Platform
+  Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -54,6 +55,7 @@ const pressBtn = require('../../../assets/imgs/main/blue_button.png');
 class Ticket extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
     this.state = {
       name: '',
@@ -71,6 +73,10 @@ class Ticket extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+
     const { currentLanguage, userInfoResult, apiToken, serviceList } = this.props;
     this.changeDepartmentLanguage(currentLanguage);
     // for (serviceList.data.services);
@@ -90,6 +96,17 @@ class Ticket extends Component {
     }
 
     this.setdDataState(userInfoResult.data, currentLanguage);
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Main();
+    return true;
   }
 
   setdDataState(userData, currentLanguage) {
@@ -265,7 +282,6 @@ class Ticket extends Component {
                     <View style={styles.modalDropdown}>
                       <View style={styles.dropdown}>
                         <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
-                        <Image source={arrow} resizeMode="center" />
                       </View>
                       <SimplePicker
                         ref={'picker'}
@@ -288,10 +304,9 @@ class Ticket extends Component {
                       ref={'picker_android'}
                       data={this.state.service_android}
                       onChange = {(option)=>this.onSelectDepartment(option.key)} >
-                      <View style={styles.modalDropdown}>
+                      <View style={styles.modalDropdown_android}>
                         <View style={styles.dropdown}>
                           <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
-                          <Image source={arrow} resizeMode="center" />
                         </View>
                       </View>
                   </ModalPicker>
@@ -408,7 +423,6 @@ class Ticket extends Component {
                   <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
                     <View style={styles.modalDropdown_ar}>
                       <View style={styles.dropdown_ar}>
-                        <Image source={arrow} resizeMode="center" />
                         <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
                       </View>
                       <SimplePicker
@@ -432,10 +446,9 @@ class Ticket extends Component {
                       ref={'picker_android'}
                       data={this.state.service_android}
                       onChange = {(option)=>this.onSelectDepartment(option.key)} >
-                      <View style={styles.modalDropdown_ar}>
+                      <View style={styles.modalDropdown_ar_android}>
                         <View style={styles.dropdown_ar}>
                           <Text style={styles.dropdownText}>{this.state.defaultDepartment}</Text>
-                          <Image source={arrow} resizeMode="center" />
                         </View>
                       </View>
                   </ModalPicker>
@@ -541,6 +554,16 @@ const styles = StyleSheet.create({
     marginRight: inputMargin,
     width: subWidth - inputMargin,
   },
+  modalDropdown_android: {
+    backgroundColor:  'transparent', 
+    marginLeft: 65,
+    width: subWidth - inputMargin,
+  },
+  modalDropdown_ar_android: {
+    backgroundColor:  'transparent', 
+    marginRight: 65,
+    width: subWidth - 65,
+  },
   dropdown: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -548,7 +571,7 @@ const styles = StyleSheet.create({
   },
   dropdown_ar: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     paddingLeft: 20,
   },
