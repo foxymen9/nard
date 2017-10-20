@@ -77,6 +77,7 @@ class Container extends Component {
       const { currentLanguage, pageTitle, serviceDetail, userInfoResult } = this.props;
       const { menuStatus } = this.state;
       const menuComponent = <Menu currentLanguage={currentLanguage} menuState={()=>this.onChangeMenuState()} profileInfo={userInfoResult} />;
+      
       return (
           <Drawer
               type="overlay"
@@ -139,7 +140,7 @@ class Container extends Component {
                         </View>
                       </TouchableOpacity>
                     )}
-                    {(pageTitle == "startProject" || pageTitle == "services") && (
+                    {(pageTitle == "startProject" || (pageTitle == "services" && serviceDetail != "true")) && (
                       <TouchableOpacity
                         activeOpacity={ .5 }
                         style={ styles.back }

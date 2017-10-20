@@ -16,6 +16,8 @@ import {
   findNodeHandle,  
   RecyclerViewBackedScrollView,
   ScrollView,
+  Platform,
+  BackHandler,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -53,9 +55,24 @@ import MobilePage from './subPages/kentico';
 class ServicesDetail extends Component {
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   componentWillMount() {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
+      BackHandler.removeEventListener("hardwareBackPress", this.handleBackButtonClick);
+    }
+  }
+
+  handleBackButtonClick() {
+    Actions.Services();
+    return true;
   }
 
   componentWillReceiveProps(nextProps) {
