@@ -52,7 +52,7 @@ class Offers extends Component {
       rowID: null,
       backColors: [commonColors.lightYellow, commonColors.detailTitleBar, commonColors.grayTitleText],
       allOffers: [],
-      offerList: [{id: 1, title: '', subTitle: ''}],
+      offerList: [],
     };
   }
 
@@ -185,7 +185,7 @@ class Offers extends Component {
   render() {
     const { currentLanguage } = this.props;
     const { offerList, loading } = this.state;
-
+    
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(offerList);
     /* ************************ */
@@ -198,6 +198,7 @@ class Offers extends Component {
           ?<ListView
             ref='listview'
             dataSource={dataSource}
+            enableEmptySections={true}
             renderRow={this._renderRow.bind(this)}
             renderSeparator={this._renderSeparator}
             onScroll = {(event)=>this.handleScroll(event)}
@@ -206,6 +207,7 @@ class Offers extends Component {
           :<ListView
             ref='listview'
             dataSource={dataSource}
+            enableEmptySections={true}
             renderRow={this._renderRow_ar.bind(this)}
             renderSeparator={this._renderSeparator}
             onScroll = {(event)=>this.handleScroll(event)}

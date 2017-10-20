@@ -6,8 +6,9 @@ import {
 
 import ExtraDimensions from 'react-native-extra-dimensions-android';
 
-export const { width: screenWidth, height: screenHeightIOS } = Dimensions.get('window');
+export const { width: screenWidthIOS, height: screenHeightIOS } = Dimensions.get('window');
 
+export const RealWidth = ExtraDimensions.get('REAL_WINDOW_WIDTH');
 export const RealHeight = ExtraDimensions.get('REAL_WINDOW_HEIGHT');
 export const softMenubarHeight = ExtraDimensions.get('SOFT_MENU_BAR_HEIGHT');
 export const statusbarHeight = ExtraDimensions.get('STATUS_BAR_HEIGHT');
@@ -22,7 +23,17 @@ function getScreenHeight() {
   }
 }
 
+function getScreenWidth() {
+  if (Platform.OS === "ios") {
+    return screenWidthIOS;
+  }
+  else {
+    return RealWidth;
+  }
+}
+
 export let screenHeight = getScreenHeight();
+export let screenWidth = getScreenWidth();
 
 // export function wp (percentage) {
 //   const value = (percentage * screenWidth) / 100;
