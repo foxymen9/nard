@@ -31,7 +31,7 @@ import  ModalPickerImage from '../../utils/ModalPickerImage';
 
 import * as commonColors from '../../styles/commonColors';
 import { screenWidth, screenHeight, statusBar, subWidth, inputMargin } from '../../styles/commonStyles';
-import { userLoginIn, saveLoggin, initialStore } from './actions';
+import { userLoginIn, saveLoggin, initialStore, registerDeviceID } from './actions';
 import { rememberMe } from '../RememberMe/actions';
 import { changeLanguage } from '../LanguageStore/actions';
 import { getApiToken, changeTokenStatus } from '../ParentComponent/actions';
@@ -51,6 +51,8 @@ const skip = require('../../../assets/imgs/login/skip_arrow.png');
 const check = require('../../../assets/imgs/login/check.png');
 const uncheck = require('../../../assets/imgs/login/uncheck.png');
 
+var DeviceInfo = require('react-native-device-info');
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -68,12 +70,16 @@ class Login extends Component {
       alert_flag: false,
       async_flag: false,
       async_user_info: null,
+      device_id: '',
     };
   }
 
   componentWillMount() {
     const { token_status } = this.props;
     const { tokenFlag, async_flag } = this.state;
+
+    let device_uuid = DeviceInfo.getUniqueID();
+    this.setState({device_id: device_uuid});
 
     //Set flag after Asyncstorage data loading
     AsyncStorage.getItem('userInfo').then((value) => {
@@ -124,6 +130,10 @@ class Login extends Component {
           }
           else if (!loggin && !loggout) {
             this.props.saveLoggin();
+            this.props.registerDeviceID(apiToken.api_token, {
+              user_id: userInfoResult.data.client_data.clients_id,
+              subscribe_id: this.state.device_id
+            });
             // Actions.Main();
             Actions.MyServices();
           }
@@ -462,4 +472,4 @@ export default connect(state => ({
   token_status: state.parent_state.token_status,
   apiToken: state.parent_state.apiToken,
   loadingToken: state.parent_state.loadingToken,
-}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout, initialStore, rememberMe })(Login);
+}),{ userLoginIn, changeLanguage, changeTokenStatus, getApiToken, saveLoggin, logout, initialStore, rememberMe, registerDeviceID })(Login);

@@ -7,6 +7,7 @@ const initialState = {
   userInfoResult: null,
   loggin: false,
   loggout: false,
+  deviceInfoResult: null,
 };
 
 export default function auth(state = initialState, action = {}) {
@@ -88,6 +89,20 @@ export default function auth(state = initialState, action = {}) {
           userInfoResult: action.result.data,
         };
     case types.GET_PROFILE_FAILED:
+      return {
+        ...state,
+      }
+    case types.REGISTER_DEVICEID_REQUEST:
+      return {
+        ...state,
+      }
+    case types.REGISTER_DEVICEID_SUCCESS:
+    console.log('DEVICE_RESULT_DATA', action.result.data);
+      return {
+          ...state,
+          deviceInfoResult: action.result.data,
+        };
+    case types.REGISTER_DEVICEID_FAILED:
       return {
         ...state,
       }

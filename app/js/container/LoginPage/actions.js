@@ -54,3 +54,17 @@ export function getProfileData(data, apiToken) {
       
     };
 }
+
+export function registerDeviceID(apiToken, data) {
+  return {
+    types: [types.REGISTER_DEVICEID_REQUEST, types.REGISTER_DEVICEID_SUCCESS, types.REGISTER_DEVICEID_FAILED],
+    promise:
+      axios({
+          method: 'post',
+          url: `${api_url}/index.php?route=api/customer/subscribe&api_token=${apiToken}`,
+          headers: {'Accept': 'application/json'},
+          data: data
+      })
+    
+  };
+}
