@@ -113,20 +113,95 @@ export default class ModalPicker extends BaseComponent {
     renderOption(option) {
       //Saudi Arabia, UAE, Morocco, Spain, Singapore, Palastin
       if (option.dialCode == '+966' || (option.dialCode == '+212' && option.label.indexOf('Western Sahara')) || option.dialCode == '+34' || 
-                option.dialCode == '+65' || option.dialCode == '+970' || option.dialCode == '+971') 
+                option.dialCode == '+65' || option.dialCode == '+970' || option.dialCode == '+971' || option.dialCode == '+973') 
       {
         return (
           <TouchableOpacity key={option.key} onPress={()=>this.onChange(option)}>
             <View style={[styles.optionStyle, this.props.optionStyle, {flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
-                <View style={{flex:0.15}}>
+              <View style={styles.leftContent}>
+                <View>
                   <Image source={option.image} resizeMode='stretch' style={{width: 30, height: 16}}/>  
                 </View>
-                <View style={{flex:0.7, alignItems: 'center'}}>
-                  <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>{option.label}</Text>
-                </View>
-                <View style={{flex:0.15, alignItems:'flex-end'}}>
+                <View style={{alignItems:'flex-end'}}>
                   <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>{option.dialCode}</Text>
                 </View>
+              </View>
+              {/* <View style={{flex:0.15, alignItems:'flex-end'}}>
+                <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>{option.dialCode}</Text>
+              </View>
+              <View style={{flex:0.7, alignItems: 'center'}}>
+                <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>{option.label}</Text>
+              </View> */}
+              {option.dialCode === '+971' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>United Arab Emirates</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>الإمارات العربية المتحدة</Text>
+                  </View>
+                </View>
+              )}
+              {option.dialCode === '+973' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>Bahrain</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>البحرين</Text>
+                  </View>
+                </View>
+              )}
+              {option.dialCode === '+970' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>Palestine</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>فلسطين</Text>
+                  </View>
+                </View>
+              )}
+              {option.dialCode === '+212' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>Morocco</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>المملكة المغربية</Text>
+                  </View>
+                </View>
+              )}
+              {option.dialCode === '+65' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>Singapore</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>سنغافورة</Text>
+                  </View>
+                </View>
+              )}
+              {option.dialCode === '+34' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>Spain</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>إسبانيا</Text>
+                  </View>
+                </View>
+              )}
+              {option.dialCode === '+966' && (
+                <View style={styles.rightContent}>
+                  <View style={{alignItems:'flex-end'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color:'grey', fontSize: 12}]}>Kingdom of Saudi Arabia</Text>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle, {color: '#434343', fontSize: 14}]}>المملكة العربية السعودية</Text>
+                  </View>
+                </View>
+              )}
             </View>
           </TouchableOpacity>)
         }

@@ -60,7 +60,6 @@ class Profile extends Component {
       phone: '',
       email: '',
       content: '',
-      firstName: 'K',
       loading: false,
       alert_flag: false,
     };
@@ -74,7 +73,7 @@ class Profile extends Component {
     const {userInfoResult, currentLanguage} = this.props;
 
     if (userInfoResult) {
-      this.setdDataState(userInfoResult.data, currentLanguage);
+      this.setDataState(userInfoResult.data, currentLanguage);
     }
   }
 
@@ -89,7 +88,7 @@ class Profile extends Component {
     return true;
   }
 
-  setdDataState(userData, currentLanguage) {
+  setDataState(userData, currentLanguage) {
     if (currentLanguage == 'EN') {
       this.setState({company: userData.client_descriptions[1].company_name});
       this.setState({name: userData.client_descriptions[1].title});
@@ -131,7 +130,11 @@ class Profile extends Component {
           }
           else {
             setTimeout(()=> {
-              Alert.alert("SUCCESS",  profileUpdateResult.success);
+              if (currentLanguage == 'EN') {
+                Alert.alert('Congratulation !', 'Your profile updated with success' );
+              } else {
+                Alert.alert('تهانينا !', 'تم تحديث بياناتكم بنجاح' );
+              }
             }, 100);
             
             //get updated profile data again
@@ -149,7 +152,7 @@ class Profile extends Component {
 
   onUpdate() {
     const { currentLanguage, userInfoResult, apiToken } = this.props;
-    const { company, name, phone, email, content, firstname } = this.state;
+    const { company, name, phone, email, content } = this.state;
 
     this.setState({alert_flag: false}); 
 
@@ -166,7 +169,12 @@ class Profile extends Component {
 
   render() {
     const { currentLanguage, userInfoResult } = this.props;
-    let { company, name, phone, email, content, firstname, loading } = this.state;
+    let { company, name, phone, email, content, loading } = this.state;
+
+    let firstName = ''
+    if (userInfoResult) {
+      firstName = userInfoResult.data.client_data.title[0]
+    }
 
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null">
@@ -175,10 +183,9 @@ class Profile extends Component {
           <KeyboardAwareScrollView>
             <View style={ styles.subContainer } >
               <Image source={avatar_img} style={ styles.avatar } resizeMode="contain" >
-                <Text  style={ styles.avatarText }>{this.state.firstName}</Text>
+                <Text  style={ styles.avatarText }>{firstName}</Text>
               </Image>
-              {currentLanguage == 'EN'
-              ?<View style={{flex:0.7}}>
+              <View style={{flex:0.7}}>
                 <Image source={company_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
@@ -258,7 +265,7 @@ class Profile extends Component {
                   </TouchableHighlight>
                 </View>
               </View>
-              :<View style={{flex:0.7}}>
+              {/* <View style={{flex:0.7}}>
                 <Image source={company_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
@@ -338,7 +345,7 @@ class Profile extends Component {
                   </TouchableHighlight>
                 </View>
               </View>
-              }
+              } */}
             </View>
           </KeyboardAwareScrollView>
         </View>

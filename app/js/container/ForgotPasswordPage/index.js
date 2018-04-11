@@ -47,6 +47,8 @@ class ForgotPasswordPage extends Component {
   }
 
   render() {
+    const { currentLanguage } = this.props;
+    console.log('currentLanguage', currentLanguage)
     return (
         <View style={ styles.container } >
           <Image source={ background } style={ styles.background } />
@@ -56,16 +58,16 @@ class ForgotPasswordPage extends Component {
               onPress={ () => this.gotoLoginPage() }
             >
               <View>
-                <Text style={styles.logoText} >Forgot Password</Text>
-                  <TouchableOpacity
-                    activeOpacity={ .5 }
-                    style={ styles.back }
-                    onPress={ () => this.onBack() }
-                  >
-                    <View >
-                      <Image source={ back } resizeMode="contain" style={styles.backIcon} />  
-                    </View>
-                  </TouchableOpacity>
+                <Text style={styles.logoText} >{language.forgotPassword[currentLanguage]}</Text>
+                <TouchableOpacity
+                  activeOpacity={ .5 }
+                  style={ styles.back }
+                  onPress={ () => this.onBack() }
+                >
+                  <View >
+                    <Image source={ back } resizeMode="contain" style={styles.backIcon} />  
+                  </View>
+                </TouchableOpacity>
               </View>
             </TouchableOpacity>
           </View>
@@ -149,4 +151,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
+  currentLanguage: state.language.currentLanguage,
 }),{ })(ForgotPasswordPage);

@@ -8,7 +8,7 @@ const PADDING = 8;
 const BORDER_RADIUS = 5;
 const FONT_SIZE = 16;
 const HIGHLIGHT_COLOR = 'rgba(0,118,255,0.9)';
-const OPTION_CONTAINER_HEIGHT = 250;
+const OPTION_CONTAINER_HEIGHT = 360;
 
 export default StyleSheet.create({
 
@@ -16,6 +16,17 @@ export default StyleSheet.create({
         width: width,
         height: height,
         backgroundColor: 'rgba(0,0,0,0.7)'
+    },
+    leftContent: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flex: 0.25,
+    },
+    rightContent: {
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        flex: 0.6,
+        alignItems: 'flex-start',
     },
 
     optionContainer: {

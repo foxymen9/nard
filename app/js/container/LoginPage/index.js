@@ -252,7 +252,7 @@ class Login extends Component {
                     onPress={ () => this.onRememberMe() }
                   >
                     <Image source={ this.state.rememberMe ? check : uncheck } resizeMode="contain" />
-                    <Text style={ styles.textRememberMe }>{language.rememberMe[currentLanguage]}</Text>
+                    <Text style={ this.state.rememberMe ? styles.textRememberMeCheck : styles.textRememberMe }>{language.rememberMe[currentLanguage]}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     activeOpacity={ .5 }
@@ -396,6 +396,12 @@ const styles = StyleSheet.create({
   },
   textRememberMe: {
     color: commonColors.placeholderTextGray,
+    fontSize: 13,
+    marginLeft: 10,
+    backgroundColor: 'transparent',
+  },
+  textRememberMeCheck: {
+    color: commonColors.lightYellow,
     fontSize: 13,
     marginLeft: 10,
     backgroundColor: 'transparent',
