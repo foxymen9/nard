@@ -56,7 +56,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      email: 'info@nard.sa',
+      email: '',  // info@nard.sa
       rememberMe: false,
       language: true,   //EN -> AR,
       pickerData: null,
@@ -146,8 +146,8 @@ class Login extends Component {
     const { apiToken } = this.props;
     const { email } = this.state;
     if (apiToken) {
-      // const phoneNumber = this.refs.phone.getValue();
-      const phoneNumber = '+966558644773'
+      const phoneNumber = this.refs.phone.getValue();
+      // const phoneNumber = '+966558644773'
       const data = { email: email, telephone: phoneNumber };
       this.props.userLoginIn(data, apiToken.api_token);
     }
