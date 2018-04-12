@@ -60,5 +60,5 @@ export const inputMargin = getInputMargin();
 export const subWidth = screenWidth * 0.8;
 export const textPadding = getTextareaPadding();
 
-export const NORMAL_FONT = 'NotoKufiArabic-Regular';
+export const NORMAL_FONT = Platform.OS === 'ios' ? 'NotoKufiArabic' : 'NotoKufiArabic-Regular';
 export const NORMAL_BOLD_FONT = 'NotoKufiArabic-Bold';
