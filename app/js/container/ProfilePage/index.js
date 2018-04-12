@@ -19,6 +19,7 @@ import {
   Alert,
   Platform,
   BackHandler,
+  ImageBackground,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -182,11 +183,11 @@ class Profile extends Component {
         <View style={ styles.container } >
           <KeyboardAwareScrollView>
             <View style={ styles.subContainer } >
-              <Image source={avatar_img} style={ styles.avatar } resizeMode="contain" >
+              <ImageBackground source={avatar_img} style={ styles.avatar } resizeMode="contain" >
                 <Text  style={ styles.avatarText }>{firstName}</Text>
-              </Image>
+              </ImageBackground>
               <View style={{flex:0.7}}>
-                <Image source={company_img} style={ styles.inputImg } resizeMode="contain" >
+                <ImageBackground source={company_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
                     autoCapitalize="none"
@@ -201,8 +202,8 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ company: text }) }
                     onSubmitEditing={ () => this.refs.name.focus() }
                   />
-                </Image>
-                <Image source={name_img} style={ styles.inputImg } resizeMode="contain" >
+                </ImageBackground>
+                <ImageBackground source={name_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="name"
                     autoCapitalize="none"
@@ -217,8 +218,8 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ name: text }) }
                     onSubmitEditing={ () => this.refs.phone.focus() }
                   />
-                </Image>
-                <Image source={phone_img} style={ styles.inputImg } resizeMode="contain" >
+                </ImageBackground>
+                <ImageBackground source={phone_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="phone"
                     autoCapitalize="none"
@@ -234,8 +235,8 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ phone: text }) }
                     onSubmitEditing={ () => this.refs.email.focus() }
                   />
-                </Image>
-                <Image source={email_img} style={ styles.inputImg } resizeMode="contain" >
+                </ImageBackground>
+                <ImageBackground source={email_img} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="email"
                     autoCapitalize="none"
@@ -251,7 +252,7 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ email: text }) }
                     onSubmitEditing={ () => this.refs.content.focus() }
                   />
-                </Image>
+                </ImageBackground>
                 <View style={styles.buttonWrapper}>
                   <TouchableHighlight
                     onShowUnderlay={()=>this.setState({pressStatus: true})}
@@ -259,14 +260,14 @@ class Profile extends Component {
                     underlayColor={'#fff'}
                     onPress={ () => this.onUpdate() }
                   >
-                    <Image source={ this.state.pressStatus ? pressBtn_img : update_img } style={ styles.button } resizeMode="contain" >
+                    <ImageBackground source={ this.state.pressStatus ? pressBtn_img : update_img } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
-                    </Image>
+                    </ImageBackground>
                   </TouchableHighlight>
                 </View>
               </View>
               {/* <View style={{flex:0.7}}>
-                <Image source={company_img_ar} style={ styles.inputImg } resizeMode="contain" >
+                <ImageBackground source={company_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="company"
                     autoCapitalize="none"
@@ -281,8 +282,8 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ company: text }) }
                     onSubmitEditing={ () => this.refs.name.focus() }
                   />
-                </Image>
-                <Image source={name_img_ar} style={ styles.inputImg } resizeMode="contain" >
+                </ImageBackground>
+                <ImageBackground source={name_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="name"
                     autoCapitalize="none"
@@ -314,8 +315,8 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ phone: text }) }
                     onSubmitEditing={ () => this.refs.email.focus() }
                   />
-                </Image>
-                <Image source={email_img_ar} style={ styles.inputImg } resizeMode="contain" >
+                </ImageBackground>
+                <ImageBackground source={email_img_ar} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="email"
                     autoCapitalize="none"
@@ -331,7 +332,7 @@ class Profile extends Component {
                     onChangeText={ (text) => this.setState({ email: text }) }
                     onSubmitEditing={ () => this.refs.content.focus() }
                   />
-                </Image>
+                </ImageBackground>
                 <View style={styles.buttonWrapper}>
                   <TouchableHighlight
                     onShowUnderlay={()=>this.setState({pressStatus: true})}
@@ -339,9 +340,9 @@ class Profile extends Component {
                     underlayColor={'#fff'}
                     onPress={ () => this.onUpdate() }
                   >
-                    <Image source={ this.state.pressStatus ? pressBtn_img : update_img } style={ styles.button } resizeMode="contain" >
+                    <ImageBackground source={ this.state.pressStatus ? pressBtn_img : update_img } style={ styles.button } resizeMode="contain" >
                       <Text style={ styles.textButton }>{language.update[currentLanguage]}</Text>
-                    </Image>
+                    </ImageBackground>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -367,6 +368,7 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: 'center',
     alignItems:'center',
+    width: 80,
   },
   avatarText: {
     color: commonColors.title,
@@ -384,6 +386,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: subWidth,
     marginTop: 10,
+    height: 60,
   },
   input: {
     fontSize: 14,
@@ -408,6 +411,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: subWidth,
+    height: 60,
   },
   textButton: {
     color: commonColors.title,

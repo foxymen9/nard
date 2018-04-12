@@ -1,8 +1,7 @@
 'use strict';
 
-import React,{
-    PropTypes
-} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 
 import {
     View,
@@ -21,39 +20,7 @@ import BaseComponent from './BaseComponent';
 
 let componentIndex = 0;
 
-const propTypes = {
-    data: PropTypes.array,
-    onChange: PropTypes.func,
-    initValue: PropTypes.string,
-    style: View.propTypes.style,
-    selectStyle: View.propTypes.style,
-    optionStyle: View.propTypes.style,
-    optionTextStyle: Text.propTypes.style,
-    sectionStyle: View.propTypes.style,
-    sectionTextStyle: Text.propTypes.style,
-    cancelStyle: View.propTypes.style,
-    cancelTextStyle: Text.propTypes.style,
-    overlayStyle: View.propTypes.style,
-    cancelText: PropTypes.string
-};
-
-const defaultProps = {
-    data: [],
-    onChange: ()=> {},
-    initValue: 'Select me!',
-    style: {},
-    selectStyle: {},
-    optionStyle: {},
-    optionTextStyle: {},
-    sectionStyle: {},
-    sectionTextStyle: {},
-    cancelStyle: {},
-    cancelTextStyle: {},
-    overlayStyle: {},
-    cancelText: 'cancel'
-};
-
-export default class ModalPicker extends BaseComponent {
+class ModalPicker extends BaseComponent {
 
     constructor() {
 
@@ -262,5 +229,36 @@ export default class ModalPicker extends BaseComponent {
     }
 }
 
-ModalPicker.propTypes = propTypes;
-ModalPicker.defaultProps = defaultProps;
+ModalPicker.propTypes = {
+  data: PropTypes.array,
+  onChange: PropTypes.func,
+  initValue: PropTypes.string,
+  style: View.propTypes.style,
+  selectStyle: View.propTypes.style,
+  optionStyle: View.propTypes.style,
+  optionTextStyle: Text.propTypes.style,
+  sectionStyle: View.propTypes.style,
+  sectionTextStyle: Text.propTypes.style,
+  cancelStyle: View.propTypes.style,
+  cancelTextStyle: Text.propTypes.style,
+  overlayStyle: View.propTypes.style,
+  cancelText: PropTypes.string
+};
+
+ModalPicker.defaultProps = {
+  data: [],
+  onChange: ()=> {},
+  initValue: 'Select me!',
+  style: {},
+  selectStyle: {},
+  optionStyle: {},
+  optionTextStyle: {},
+  sectionStyle: {},
+  sectionTextStyle: {},
+  cancelStyle: {},
+  cancelTextStyle: {},
+  overlayStyle: {},
+  cancelText: 'cancel'
+};
+
+export default ModalPicker

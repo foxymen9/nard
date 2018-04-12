@@ -16,13 +16,13 @@ import {
   AsyncStorage,
   BackHandler,
   Platform,
+  ImageBackground,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import CheckBox from 'react-native-checkbox-heaven';
 import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 import Spinner from 'react-native-loading-spinner-overlay';
 import timer from 'react-native-timer';
@@ -107,7 +107,7 @@ class Main extends Component {
     return (
       <Container currentLanguage={currentLanguage} pageTitle="null" >
           <OrientationLoadingOveraly visible={ loading } />
-          <Image source={ background } style={ styles.background } >
+          <ImageBackground source={ background } style={ styles.background } >
             <View style={ styles.container } >
               <View style={ styles.wrapper_title }>
                 <Text style={ styles.textTitle }>{language.mainPageTitle[currentLanguage]}</Text>
@@ -122,21 +122,21 @@ class Main extends Component {
                   activeOpacity={ .5 }
                   onPress={ () => this.onStartProject() }
                 >
-                  <Image source={ imgYellow } style={ styles.button } resizeMode="contain">
+                  <ImageBackground source={ imgYellow } style={ styles.button } resizeMode="contain">
                     <Text style={ styles.textButton }>{language.startNewProject[currentLanguage]}</Text>
-                  </Image>
+                  </ImageBackground>
                 </TouchableOpacity>
                 <TouchableOpacity
                   activeOpacity={ .5 }
                   onPress={ () => this.onServices() }
                 >
-                  <Image source={ imgBlue } style={ styles.button } resizeMode="contain">
+                  <ImageBackground source={ imgBlue } style={ styles.button } resizeMode="contain">
                     <Text style={ styles.textButton }>{language.services[currentLanguage]}</Text>
-                  </Image>
+                  </ImageBackground>
                 </TouchableOpacity>
               </View>
             </View>
-          </Image>
+          </ImageBackground>
       </Container>
     );
   }
@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     width: subWidth,
+    height: 60,
   },
   textButton: {
     color: commonColors.title,

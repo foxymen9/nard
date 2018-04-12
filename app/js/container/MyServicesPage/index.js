@@ -17,6 +17,7 @@ import {
   AsyncStorage,
   Platform,
   BackHandler,
+  ImageBackground,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -206,7 +207,7 @@ class MyServices extends Component {
     return (
       <View>
         <TouchableHighlight onPress={()=>{this.onItemSelect(rowData, rowID)}}>
-          <Image source={ this.state.rowID == rowID ? rowData.image_select : rowData.image } style={ styles.serviceImage } >
+          <ImageBackground source={ this.state.rowID == rowID ? rowData.image_select : rowData.image } style={ styles.serviceImage } >
             <View style={styles.listView}>
               <Text  style={[styles.serviceTitle, styles.titleStyle]}>{rowData.title}</Text>
               { this.state.rowID != rowID && (
@@ -215,7 +216,7 @@ class MyServices extends Component {
                 <Image source={ arrow } style={ styles.arrow } />
               </View> )}
             </View>
-          </Image>
+          </ImageBackground>
         </TouchableHighlight>
         <View>
           {listSubView}
@@ -253,7 +254,7 @@ class MyServices extends Component {
     return (
       <View>
         <TouchableHighlight onPress={()=>{this.onItemSelect(rowData, rowID)}}>
-          <Image source={ this.state.rowID == rowID ? rowData.image_select : rowData.image } style={ styles.serviceImage } >
+          <ImageBackground source={ this.state.rowID == rowID ? rowData.image_select : rowData.image } style={ styles.serviceImage } >
             <View style={styles.listView}>
               { this.state.rowID != rowID ?
               <View style={styles.rightWrapper}>
@@ -263,7 +264,7 @@ class MyServices extends Component {
               :<View style={{width: 50}} />}
               <Text  style={[styles.serviceTitle, styles.titleStyle_ar]}>{rowData.title}</Text>
             </View>
-          </Image>
+          </ImageBackground>
         </TouchableHighlight>
         <View>
           {listSubView}

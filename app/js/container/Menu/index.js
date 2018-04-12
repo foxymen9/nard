@@ -13,6 +13,7 @@ import {
     Linking,
     Keyboard,
     AsyncStorage,
+    ImageBackground,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -202,15 +203,15 @@ class Menu extends Component {
         <View style={styles.title}>
           { loggin
           ? <View>
-              <Image source={ avatar } style={ styles.avatar } resizeMode="contain">
+              <ImageBackground source={ avatar } style={ styles.avatar } resizeMode="contain">
                 <Text  style={ styles.avatarText }>{this.state.firstName}</Text>
-              </Image>
+              </ImageBackground>
               <Text  style={ styles.userNameText }>{this.state.userName}:</Text>
             </View>
           : <View>
-              <Image source={ avatar } style={ styles.avatar } resizeMode="contain">
+              <ImageBackground source={ avatar } style={ styles.avatar } resizeMode="contain">
                 <Text  style={ styles.avatarText }>G</Text>
-              </Image>
+              </ImageBackground>
               <Text  style={ styles.userNameText }>Guest</Text>
             </View>
           }
@@ -253,6 +254,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: statusBar,
     justifyContent: 'center',
+    width: 50,
+    height: 50,
     alignItems:'center',
   },
   avatarText: {

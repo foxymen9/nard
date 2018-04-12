@@ -133,13 +133,11 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
     fontFamily: NORMAL_FONT,
   },
   titleText_ar: {
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
     textAlign: 'right',
     fontFamily: NORMAL_FONT,
   },

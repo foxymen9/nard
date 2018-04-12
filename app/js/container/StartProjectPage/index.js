@@ -19,6 +19,7 @@ import {
   ScrollView,
   Platform,
   BackHandler,
+  ImageBackground,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -217,7 +218,7 @@ class StarProject extends Component {
           <KeyboardAwareScrollView>
             {currentLanguage == 'EN'
             ?<View style={ styles.subContainer } >
-              <Image source={name} style={ styles.inputImg } resizeMode="contain">
+              <ImageBackground source={name} style={ styles.inputImg } resizeMode="contain">
                 <TextInput
                   ref="name"
                   autoCapitalize="none"
@@ -232,8 +233,8 @@ class StarProject extends Component {
                   onChangeText={ (text) => this.setState({ name: text }) }
                   onSubmitEditing={ () => this.refs.phone.focus() }
                 />
-              </Image>
-              <Image source={phone} style={ styles.inputImg } resizeMode="contain" >
+              </ImageBackground>
+              <ImageBackground source={phone} style={ styles.inputImg } resizeMode="contain" >
                 <TextInput
                   ref="phone"
                   autoCapitalize="none"
@@ -249,8 +250,8 @@ class StarProject extends Component {
                   onChangeText={ (text) => this.setState({ phone: text }) }
                   onSubmitEditing={ () => this.refs.email.focus() }
                 />
-              </Image>
-              <Image source={email} style={ styles.inputImg }  resizeMode="contain">
+              </ImageBackground>
+              <ImageBackground source={email} style={ styles.inputImg }  resizeMode="contain">
                 <TextInput
                   ref="email"
                   autoCapitalize="none"
@@ -266,9 +267,9 @@ class StarProject extends Component {
                   onChangeText={ (text) => this.setState({ email: text }) }
                   onSubmitEditing={ () => this.refs.content.focus() }
                 />
-              </Image>
+              </ImageBackground>
               {Platform.OS === 'ios' ?
-              <Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
+              <ImageBackground source={department_img} style={ styles.inputImg } resizeMode="contain" >
                 <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
                   <View style={styles.modalDropdown}>
                     <View style={styles.dropdown}>
@@ -289,8 +290,8 @@ class StarProject extends Component {
                     />
                   </View>
                 </TouchableOpacity>
-              </Image>
-              :<Image source={department_img} style={ styles.inputImg } resizeMode="contain" >
+              </ImageBackground>
+              :<ImageBackground source={department_img} style={ styles.inputImg } resizeMode="contain" >
                 <ModalPicker
                     ref={'picker_android'}
                     data={this.state.service_android}
@@ -301,8 +302,8 @@ class StarProject extends Component {
                       </View>
                     </View>
                 </ModalPicker>
-              </Image>}
-              <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
+              </ImageBackground>}
+              <ImageBackground source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper}>
                   <TextInput
                     ref="content"
@@ -322,7 +323,7 @@ class StarProject extends Component {
                     numberOfLines={50}
                   />
                 </View>
-              </Image>
+              </ImageBackground>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight
                   activeOpacity={ .5 }
@@ -331,14 +332,14 @@ class StarProject extends Component {
                   underlayColor={'#fff'}
                   onPress={ () => this.onStartProject() }
                 >
-                  <Image source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button }  resizeMode="contain">
+                  <ImageBackground source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button }  resizeMode="contain">
                     <Text style={ styles.textButton }>{language.startNewProject[currentLanguage]}</Text>
-                  </Image>
+                  </ImageBackground>
                 </TouchableHighlight>
               </View>
             </View>
             :<View style={ styles.subContainer } >
-              <Image source={name_ar} style={ styles.inputImg } resizeMode="contain">
+              <ImageBackground source={name_ar} style={ styles.inputImg } resizeMode="contain">
                 <TextInput
                   ref="name"
                   autoCapitalize="none"
@@ -353,8 +354,8 @@ class StarProject extends Component {
                   onChangeText={ (text) => this.setState({ name: text }) }
                   onSubmitEditing={ () => this.refs.phone.focus() }
                 />
-              </Image>
-              <Image source={phone_ar} style={ styles.inputImg } resizeMode="contain" >
+              </ImageBackground>
+              <ImageBackground source={phone_ar} style={ styles.inputImg } resizeMode="contain" >
                 <TextInput
                   ref="phone"
                   autoCapitalize="none"
@@ -370,8 +371,8 @@ class StarProject extends Component {
                   onChangeText={ (text) => this.setState({ phone: text }) }
                   onSubmitEditing={ () => this.refs.email.focus() }
                 />
-              </Image>
-              <Image source={email_ar} style={ styles.inputImg }  resizeMode="contain">
+              </ImageBackground>
+              <ImageBackground source={email_ar} style={ styles.inputImg }  resizeMode="contain">
                 <TextInput
                   ref="email"
                   autoCapitalize="none"
@@ -387,9 +388,9 @@ class StarProject extends Component {
                   onChangeText={ (text) => this.setState({ email: text }) }
                   onSubmitEditing={ () => this.refs.content.focus() }
                 />
-              </Image>
+              </ImageBackground>
               {Platform.OS === 'ios' ?
-              <Image source={department_img_ar} style={ styles.inputImg }  resizeMode="contain" >
+              <ImageBackground source={department_img_ar} style={ styles.inputImg }  resizeMode="contain" >
                 <TouchableOpacity  onPress={()=>{this.refs.picker.show()}}>
                   <View style={styles.modalDropdown_ar}>
                     <View style={styles.dropdown_ar}>
@@ -410,8 +411,8 @@ class StarProject extends Component {
                     />
                   </View>
                 </TouchableOpacity>
-              </Image>
-              :<Image source={department_img_ar} style={ styles.inputImg } resizeMode="contain" >
+              </ImageBackground>
+              :<ImageBackground source={department_img_ar} style={ styles.inputImg } resizeMode="contain" >
                 <ModalPicker
                     ref={'picker_android'}
                     data={this.state.service_android}
@@ -422,8 +423,8 @@ class StarProject extends Component {
                       </View>
                     </View>
                 </ModalPicker>
-              </Image>}
-              <Image source={content} style={ styles.inputImgContent }  resizeMode="contain" >
+              </ImageBackground>}
+              <ImageBackground source={content} style={ styles.inputImgContent }  resizeMode="contain" >
                 <View style={styles.contentWrapper_ar}>
                   <TextInput
                     ref="content"
@@ -443,7 +444,7 @@ class StarProject extends Component {
                     numberOfLines={50}
                   />
                 </View>
-              </Image>
+              </ImageBackground>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight
                   activeOpacity={ .5 }
@@ -452,9 +453,9 @@ class StarProject extends Component {
                   underlayColor={'#fff'}
                   onPress={ () => this.onStartProject() }
                 >
-                  <Image source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button }  resizeMode="contain">
+                  <ImageBackground source={ this.state.pressStatus ? pressBtn : submit } style={ styles.button }  resizeMode="contain">
                     <Text style={ styles.textButton }>{language.startNewProject[currentLanguage]}</Text>
-                  </Image>
+                  </ImageBackground>
                 </TouchableHighlight>
               </View>
             </View>
@@ -485,6 +486,7 @@ const styles = StyleSheet.create({
   inputImg: {
     justifyContent: 'center',
     width: subWidth,
+    height: 60,
     marginTop: 10,
   },
   modalDropdown: {
@@ -556,7 +558,7 @@ const styles = StyleSheet.create({
     color: commonColors.text,
     alignSelf: 'stretch',
     marginTop: 15,
-    height: 50,
+    height: 100,
   },
   buttonWrapper: {
     flex: 1,
@@ -567,6 +569,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: subWidth,
+    height: 60,
     marginTop: 10,
   },
   textButton: {

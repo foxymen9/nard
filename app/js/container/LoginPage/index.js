@@ -7,6 +7,7 @@ import {
   Text,
   View,
   Image,
+  ImageBackground,
   Dimensions,
   TextInput,
   TouchableOpacity,
@@ -21,10 +22,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import CheckBox from 'react-native-checkbox-heaven';
 import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
-import Spinner from 'react-native-loading-spinner-overlay';
-import timer from 'react-native-timer';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PhoneInput from 'react-native-phone-input';
 import  ModalPickerImage from '../../utils/ModalPickerImage';
@@ -51,7 +49,7 @@ const skip = require('../../../assets/imgs/login/skip_arrow.png');
 const check = require('../../../assets/imgs/login/check.png');
 const uncheck = require('../../../assets/imgs/login/uncheck.png');
 
-var DeviceInfo = require('react-native-device-info');
+const DeviceInfo = require('react-native-device-info');
 
 class Login extends Component {
   constructor(props) {
@@ -212,7 +210,7 @@ class Login extends Component {
                 <Image source={ logo } style={ styles.logo } resizeMode="center" />
               </View>
               <View style= { styles.inputContainer }>
-                <Image source={email} style={ styles.inputImg } resizeMode="contain" >
+                <ImageBackground source={email} style={ styles.inputImg } resizeMode="contain" >
                   <TextInput
                     ref="email"
                     autoCapitalize="none"
@@ -228,8 +226,8 @@ class Login extends Component {
                     onChangeText={ (text) => this.setState({ email: text }) }
                     onSubmitEditing={ () => this.refs.phone.focus() }
                   />
-                </Image>
-                <Image source={phone} style={ styles.inputImg }  resizeMode="contain" >
+                </ImageBackground>
+                <ImageBackground source={email} style={ styles.inputImg } resizeMode="contain" >
                   <View style={styles.phoneWrapper }>
                     <PhoneInput 
                       ref='phone' 
@@ -244,7 +242,7 @@ class Login extends Component {
                       cancelText='Cancel'
                     />
                   </View>
-                </Image>
+                </ImageBackground>
                 {currentLanguage == "EN" ?
                 <View style={ styles.textWrapper }>
                   <TouchableOpacity
@@ -286,9 +284,9 @@ class Login extends Component {
                   activeOpacity={ .5 }
                   onPress={ () => this.onLogin() }
                 >
-                  <Image source={ login_img } style={ styles.lognButton } resizeMode="contain">
+                  <ImageBackground source={ login_img } style={ styles.lognButton } resizeMode="contain">
                     <Text style={ styles.textButton }>{language.login_text[currentLanguage]}</Text>
-                  </Image>
+                  </ImageBackground>
                 </TouchableOpacity>
               </View>
               <View style={ styles.bottomContainer }>
@@ -365,6 +363,7 @@ const styles = StyleSheet.create({
   inputImg: {
     justifyContent: 'center',
     width: subWidth,
+    height: 60,
     marginTop: 10,
   },
   input: {
@@ -447,6 +446,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: subWidth,
+    height: 60,
   },
   textButton: {
     color: commonColors.title,

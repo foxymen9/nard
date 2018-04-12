@@ -18,6 +18,7 @@ import {
   ScrollView,
   Platform,
   BackHandler,
+  ImageBackground,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -95,9 +96,9 @@ class OffersDetail extends Component {
                     underlayColor={'#fff'}
                     onPress={ () => this.onApply() }
                   >
-                    <Image source={ this.state.pressStatus ? pressBtn : apply } style={ styles.button } resizeMode="contain">
+                    <ImageBackground source={ this.state.pressStatus ? pressBtn : apply } style={ styles.button } resizeMode="contain">
                       <Text style={ styles.textButton }>{language.apply[currentLanguage]}</Text>
-                    </Image>
+                    </ImageBackground>
                   </TouchableHighlight>
                 </View>
               </ScrollView>
@@ -119,9 +120,9 @@ class OffersDetail extends Component {
                     underlayColor={'#fff'}
                     onPress={ () => this.onApply() }
                   >
-                    <Image source={ this.state.pressStatus ? pressBtn : apply } style={ styles.button } resizeMode="contain">
+                    <ImageBackground source={ this.state.pressStatus ? pressBtn : apply } style={ styles.button } resizeMode="contain">
                       <Text style={ styles.textButton }>{language.apply[currentLanguage]}</Text>
-                    </Image>
+                    </ImageBackground>
                   </TouchableHighlight>
                 </View>
               </ScrollView>
@@ -215,6 +216,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: subWidth,
+    height: 60,
     marginTop: 10,
   },
   textButton: {

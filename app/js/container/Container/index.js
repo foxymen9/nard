@@ -110,8 +110,7 @@ class Container extends Component {
                 >
                 {pageTitle == 'null' ?
                   <View>
-                    <Image source={ logo } resizeMode="center" style={ styles.logo } >
-                    </Image>
+                    <Image source={ logo } resizeMode="center" style={ styles.logo } />
                     <TouchableOpacity
                       activeOpacity={ .5 }
                       style={ styles.menu }
