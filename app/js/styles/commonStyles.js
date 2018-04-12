@@ -59,3 +59,5 @@ export const navBar = 80;
 export const inputMargin = getInputMargin();
 export const subWidth = screenWidth * 0.8;
 export const textPadding = getTextareaPadding();
+
+export const NORMAL_FONT = 'NotoKufiArabic';

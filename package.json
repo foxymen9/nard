@@ -46,6 +46,11 @@
     "redux-thunk": "^2.2.0",
     "underscore": "^1.8.3"
   },
+  "rnpm": {
+    "assets": [
+      "./app/assets/fonts"
+    ]
+  },
   "jest": {
     "preset": "react-native"
   }

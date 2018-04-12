@@ -25,7 +25,7 @@ import { saveMenuSelectedID } from './actions';
 import { initialStore } from "../ProfilePage/actions";
 import language from '../../utils/language/language';
 
-import { screenWidth, screenHeight, statusBar } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, NORMAL_FONT } from '../../styles/commonStyles';
 import * as commonColors from '../../styles/commonColors';
 
 const avatar = require('../../../assets/imgs/menu/avatar.png');
@@ -259,6 +259,7 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 25,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   userNameText: {
     marginLeft: 20,
@@ -283,6 +284,7 @@ const styles = StyleSheet.create({
   },
   listViewText: {
     color: commonColors.title,
+    fontFamily: NORMAL_FONT,
   },
   menu: {
     right: 0,

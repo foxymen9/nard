@@ -24,7 +24,7 @@ import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, subWidth } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, subWidth, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -199,12 +199,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: 'transparent',
     marginLeft: 20,
+    fontFamily: NORMAL_FONT,
   },
   title_ar: {
     color: '#000',
     fontSize: 16,
     backgroundColor: 'transparent',
     marginRight: 20,
+    fontFamily: NORMAL_FONT,
   },
 });
 

@@ -29,7 +29,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 import {updateProfile, initialStore} from './actions';
@@ -372,6 +372,7 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 40,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   subContainer: {
     flex: 1,
@@ -389,12 +390,14 @@ const styles = StyleSheet.create({
     color: commonColors.text,
     alignSelf: 'stretch',
     marginLeft: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   input_ar: {
     fontSize: 14,
     color: commonColors.text,
     alignSelf: 'stretch',
     marginRight: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   buttonWrapper: {
     flex: 1,
@@ -410,6 +413,7 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 14,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
 });
 

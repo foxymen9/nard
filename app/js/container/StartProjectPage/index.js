@@ -31,7 +31,7 @@ import SimplePicker from 'react-native-simple-picker';
 import ModalPicker from '../../utils/ModalPicker';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 import { saveMenuSelectedID } from '../Menu/actions';
@@ -518,21 +518,25 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     color: '#000',
+    fontFamily: NORMAL_FONT,
   },
   dropdownText_ar: {
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   input: {
     fontSize: 14,
     color: commonColors.text,
     alignSelf: 'stretch',
     marginLeft: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   input_ar: {
     fontSize: 14,
     color: commonColors.text,
     alignSelf: 'stretch',
     marginRight: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   inputImgContent: {
     width: subWidth,
@@ -569,6 +573,7 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 14,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
 });
 

@@ -27,7 +27,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     backgroundColor: 'transparent',
     marginBottom: 5,
+    fontFamily: NORMAL_FONT,
   },
   offerTitle_ar: {
     color: commonColors.title,
@@ -253,17 +254,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginBottom: 5,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   offerSubTitle: {
     color: commonColors.title,
     fontSize: 18,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   offerSubTitle_ar: {
     color: commonColors.title,
     fontSize: 18,
     backgroundColor: 'transparent',
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   arrow: {
   },

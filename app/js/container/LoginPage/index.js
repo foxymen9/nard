@@ -30,7 +30,7 @@ import PhoneInput from 'react-native-phone-input';
 import  ModalPickerImage from '../../utils/ModalPickerImage';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, subWidth, inputMargin } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, subWidth, inputMargin, NORMAL_FONT } from '../../styles/commonStyles';
 import { userLoginIn, saveLoggin, initialStore, registerDeviceID } from './actions';
 import { rememberMe } from '../RememberMe/actions';
 import { changeLanguage } from '../LanguageStore/actions';
@@ -253,7 +253,9 @@ class Login extends Component {
                     onPress={ () => this.onRememberMe() }
                   >
                     <Image source={ this.state.rememberMe ? check : uncheck } resizeMode="contain" />
-                    <Text style={ this.state.rememberMe ? styles.textRememberMeCheck : styles.textRememberMe }>{language.rememberMe[currentLanguage]}</Text>
+                    <Text style={ this.state.rememberMe ? styles.textRememberMe : styles.textRememberMe }>
+                      {language.rememberMe[currentLanguage]}
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     activeOpacity={ .5 }
@@ -370,12 +372,14 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     alignSelf: 'stretch',
     marginLeft: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   input_ar: {
     fontSize: 14,
     color: commonColors.title,
     alignSelf: 'stretch',
     marginRight: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   phoneWrapper: {
     marginLeft: inputMargin,
@@ -400,18 +404,21 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginLeft: 10,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   textRememberMeCheck: {
     color: commonColors.lightYellow,
     fontSize: 13,
     marginLeft: 10,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   textRememberMeAr: {
     color: commonColors.placeholderTextGray,
     fontSize: 13,
     marginRight: 10,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   textForgotPassword: {
     color: commonColors.placeholderTextGray,
@@ -419,6 +426,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     backgroundColor: 'transparent',
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   textForgotPasswordAr: {
     color: commonColors.placeholderTextGray,
@@ -427,6 +435,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     textAlign: 'right',
     marginRight: 10,
+    fontFamily: NORMAL_FONT,
   },
   loginButtonWrapper: {
     marginTop: 20,
@@ -443,6 +452,7 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 14,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   bottomContainer: {
     flex: 0.4,
@@ -458,6 +468,7 @@ const styles = StyleSheet.create({
   skipText: {
     fontSize: 15,
     color: commonColors.title,
+    fontFamily: NORMAL_FONT,
   },
   siteWrapper: {
     position: 'absolute',
@@ -467,6 +478,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: commonColors.title,
     fontSize: 14,
+    fontFamily: NORMAL_FONT,
   }
 });
 

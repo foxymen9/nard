@@ -27,7 +27,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -182,12 +182,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: commonColors.title,
     lineHeight: 20,
+    fontFamily: NORMAL_FONT,
   },
   boldText: {
     fontWeight: 'bold',
     fontSize: 16,
     color: commonColors.title,
     lineHeight: 20,
+    fontFamily: NORMAL_FONT,
   },
   subContainer: {
     width: screenWidth,

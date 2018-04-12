@@ -31,7 +31,7 @@ import SimplePicker from 'react-native-simple-picker';
 import ModalPicker from '../../utils/ModalPicker';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -537,12 +537,14 @@ const styles = StyleSheet.create({
     color: commonColors.text,
     alignSelf: 'stretch',
     marginLeft: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   input_ar: {
     fontSize: 14,
     color: commonColors.text,
     alignSelf: 'stretch',
     marginRight: inputMargin,
+    fontFamily: NORMAL_FONT,
   },
   modalDropdown: {
     backgroundColor:  'transparent', 
@@ -577,6 +579,7 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     color: '#000',
+    fontFamily: NORMAL_FONT,
   },
   inputImgContent: {
     width: subWidth,
@@ -614,6 +617,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   profile: {
     width: subWidth,
@@ -622,13 +626,16 @@ const styles = StyleSheet.create({
   },
   textBold: {
     fontWeight: 'bold',
+    fontFamily: NORMAL_FONT,
   },
   text: {
     lineHeight: 20,
+    fontFamily: NORMAL_FONT,
   },
   text_ar: {
     lineHeight: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   }
 });
 

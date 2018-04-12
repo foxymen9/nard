@@ -22,7 +22,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import PhoneInput from 'react-native-phone-input';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, NORMAL_FONT } from '../../styles/commonStyles';
 import Menu from '../Menu';
 import language from '../../utils/language/language';
 
@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 19,
     marginTop: 20,
+    fontFamily: NORMAL_FONT,
   },
   menu: {
     right: 0,

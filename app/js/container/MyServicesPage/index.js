@@ -26,7 +26,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import OrientationLoadingOveraly from 'react-native-orientation-loading-overlay';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -371,6 +371,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: commonColors.title,
+    fontFamily: NORMAL_FONT,
   },
   serviceImage: {
     width: screenWidth,
@@ -394,15 +395,18 @@ const styles = StyleSheet.create({
   },
   serviceTitle: {
     color: commonColors.title,
-    fontSize: 26,
+    fontSize: 22,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   titleStyle: {
     width: screenWidth * 0.85 - 60,
+    fontFamily: NORMAL_FONT,
   },
   titleStyle_ar: {
     width: screenWidth * 0.85 - 60,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   arrow: {
     marginLeft: 25,
@@ -428,12 +432,14 @@ const styles = StyleSheet.create({
     color: commonColors.title,
     fontSize: 16,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   serviceSubTitleDate: {
     color: commonColors.title,
     fontSize: 14,
     marginTop:5,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
   subArrow: {
     marginLeft: 25,

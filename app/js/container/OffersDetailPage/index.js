@@ -27,7 +27,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, subWidth } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, subWidth, NORMAL_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -149,26 +149,26 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
+    fontFamily: NORMAL_FONT,
   },
   titleText_ar: {
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   boldText: {
     fontWeight: 'bold',
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
+    fontFamily: NORMAL_FONT,
   },
   boldText_ar: {
     fontWeight: 'bold',
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   subContainer: {
     width: screenWidth,
@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
     color: commonColors.grayTitleText,
     lineHeight: 20,
     marginBottom: 10,
+    fontFamily: NORMAL_FONT,
   },
   contentTitleText_ar: {
     fontWeight: 'bold',
@@ -195,17 +196,20 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 10,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   contentText_ar: {
     fontSize: 14,
     color: commonColors.grayTitleText,
     lineHeight: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   contentText: {
     fontSize: 14,
     color: commonColors.grayTitleText,
     lineHeight: 20,
+    fontFamily: NORMAL_FONT,
   },
   button: {
     justifyContent: 'center',
@@ -217,6 +221,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     backgroundColor: 'transparent',
+    fontFamily: NORMAL_FONT,
   },
 });
 
