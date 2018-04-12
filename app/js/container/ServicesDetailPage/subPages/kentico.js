@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 const tag_icon = require('../../../../assets/imgs/services_detail/tag_icon.png');
-import { NORMAL_FONT } from '../../../styles/commonStyles';
+import { NORMAL_FONT, NORMAL_BOLD_FONT } from '../../../styles/commonStyles';
 
 class KenticoPage extends Component {
   constructor(props) {
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     color: '#848484',
     lineHeight: 20,
     marginBottom: 20,
+    fontFamily: NORMAL_FONT,
   },
   content_ar: {
     flex: 1,
@@ -67,25 +68,24 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   title: {
     flex: 1,
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   title_ar: {
     flex: 1,
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
     textAlign: 'right',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   tag: {
     flexDirection: 'row',

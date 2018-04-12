@@ -421,7 +421,7 @@ const styles = StyleSheet.create({
   },
   textForgotPassword: {
     color: commonColors.placeholderTextGray,
-    fontSize: 13,
+    fontSize: 14,
     fontStyle: 'italic',
     backgroundColor: 'transparent',
     textAlign: 'right',
@@ -429,7 +429,7 @@ const styles = StyleSheet.create({
   },
   textForgotPasswordAr: {
     color: commonColors.placeholderTextGray,
-    fontSize: 13,
+    fontSize: 14,
     fontStyle: 'italic',
     backgroundColor: 'transparent',
     textAlign: 'right',

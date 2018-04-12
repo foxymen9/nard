@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 const tag_icon = require('../../../../assets/imgs/services_detail/tag_icon.png');
-import { NORMAL_FONT } from '../../../styles/commonStyles';
+import { NORMAL_FONT, NORMAL_BOLD_FONT } from '../../../styles/commonStyles';
 
 class WebSitePage extends Component {
   constructor(props) {
@@ -229,7 +229,7 @@ class WebSitePage extends Component {
     );
 
     return (
-      <View>
+      <View style={styles.container}>
         {currentLanguage == 'EN' ? data_en : data_ar }
       </View>
     );
@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
     color: '#848484',
     lineHeight: 20,
     marginBottom: 20,
+    fontFamily: NORMAL_FONT,
   },
   content_ar: {
     fontSize: 13,
@@ -249,23 +250,25 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   title: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   title_ar: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
     textAlign: 'right',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
+  },
+  tags: {
+    width: '100%',
   },
   tag: {
     flexDirection: 'row',

@@ -388,6 +388,7 @@ const styles = StyleSheet.create({
   },
   rightWrapper: {
     flexDirection: 'row',
+    alignItems: 'center',
     width: 50,
   },
   rightSubWrapper: {

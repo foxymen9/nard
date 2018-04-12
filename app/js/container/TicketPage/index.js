@@ -32,7 +32,7 @@ import SimplePicker from 'react-native-simple-picker';
 import ModalPicker from '../../utils/ModalPicker';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding, NORMAL_FONT } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, inputMargin, subWidth, textPadding, NORMAL_FONT, NORMAL_BOLD_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -628,15 +628,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   textBold: {
-    fontWeight: 'bold',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   text: {
-    lineHeight: 20,
+    lineHeight: 30,
     fontFamily: NORMAL_FONT,
   },
   text_ar: {
-    lineHeight: 20,
+    lineHeight: 30,
     textAlign: 'right',
     fontFamily: NORMAL_FONT,
   }

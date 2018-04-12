@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux';
 const tag_icon = require('../../../../assets/imgs/services_detail/tag_icon.png');
 
-import { NORMAL_FONT } from '../../../styles/commonStyles';
+import { NORMAL_FONT, NORMAL_BOLD_FONT } from '../../../styles/commonStyles';
 
 class EcommercePage extends Component {
   constructor(props) {
@@ -41,37 +41,37 @@ class EcommercePage extends Component {
             <View style={styles.tag}>
               <Image source={ tag_icon } style={ styles.icon} resizeMod="contain" />
               <Text style={styles.content}>
-                <Text style={{fontWeight: 'bold'}}>Selling Online :</Text> NARD offers an affordable account-based system allowing just about anyone with an email address to securely send and receive online payments with a credit card or a bank account.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>Selling Online :</Text> NARD offers an affordable account-based system allowing just about anyone with an email address to securely send and receive online payments with a credit card or a bank account.
               </Text>
             </View>
             <View style={styles.tag}>
               <Image source={ tag_icon } style={ styles.icon} resizeMod="contain" />
               <Text style={styles.content}>
-                <Text style={{fontWeight: 'bold'}}>Manage one or more businesses :</Text>  A Business account on your ecommerce web site allows a member to make and receive secure credit card and e-wallet payments. One can not only manage a business but also send money, exchange currency, earn money through referrals and do so much more.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>Manage one or more businesses :</Text>  A Business account on your ecommerce web site allows a member to make and receive secure credit card and e-wallet payments. One can not only manage a business but also send money, exchange currency, earn money through referrals and do so much more.
               </Text>
             </View>
             <View style={styles.tag}>
               <Image source={ tag_icon } style={ styles.icon} resizeMod="contain" />
               <Text style={styles.content}>
-                <Text style={{fontWeight: 'bold'}}>Raise money :</Text> Our ecommerce web sites can be designed with a donation account. This is especially handy for a worthy cause like raising money for charity or a social cause.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>Raise money :</Text> Our ecommerce web sites can be designed with a donation account. This is especially handy for a worthy cause like raising money for charity or a social cause.
               </Text>
             </View>
             <View style={styles.tag}>
               <Image source={ tag_icon } style={ styles.icon} resizeMod="contain" />
               <Text style={styles.content}>
-                <Text style={{fontWeight: 'bold'}}>Making Payments :</Text> Stop signing cheques. The affordable ecommerce web design by NARD allows you to open a Payment account online. Simply log on and make payments in an instant!
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>Making Payments :</Text> Stop signing cheques. The affordable ecommerce web design by NARD allows you to open a Payment account online. Simply log on and make payments in an instant!
               </Text>
             </View>
             <View style={styles.tag}>
               <Image source={ tag_icon } style={ styles.icon} resizeMod="contain" />
               <Text style={styles.content}>
-                <Text style={{fontWeight: 'bold'}}>Banking Activities :</Text> Making deposits, withdrawing money and availing refunds is a breeze with a comprehensive ecommerce web sites design by NARD.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>Banking Activities :</Text> Making deposits, withdrawing money and availing refunds is a breeze with a comprehensive ecommerce web sites design by NARD.
               </Text>
             </View>
             <View style={styles.tag}>
               <Image source={ tag_icon } style={ styles.icon} resizeMod="contain" />
               <Text style={styles.content}>
-                <Text style={{fontWeight: 'bold'}}>Administrative Activities :</Text> Our online platforms also allow you to manage administrative operations like sending, receiving and cancelling invoices.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>Administrative Activities :</Text> Our online platforms also allow you to manage administrative operations like sending, receiving and cancelling invoices.
               </Text>
             </View>
           </View>
@@ -269,37 +269,37 @@ class EcommercePage extends Component {
           <View style={styles.tags}>
             <View style={styles.tag_ar}>
               <Text style={styles.content_ar}>
-                <Text style={{fontWeight: 'bold'}}>البيع عبر الإنترنت :</Text> تقدم «نرد» بأسعار ميسرة نظاما يستند على إقامة حساب إلكتروني، مما يتيح لأي فرد لديه عنوان بريد إلكتروني إرسال واستقبال مبالغ بشكل آمن عبر الإنترنت باستخدام بطاقة ائتمان أو حساب مصرفي.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>البيع عبر الإنترنت :</Text> تقدم «نرد» بأسعار ميسرة نظاما يستند على إقامة حساب إلكتروني، مما يتيح لأي فرد لديه عنوان بريد إلكتروني إرسال واستقبال مبالغ بشكل آمن عبر الإنترنت باستخدام بطاقة ائتمان أو حساب مصرفي.
               </Text>
               <Image source={ tag_icon } style={ styles.icon_ar} resizeMod="contain" />
             </View>
             <View style={styles.tag_ar}>
               <Text style={styles.content_ar}>
-                <Text style={{fontWeight: 'bold'}}>إدارة نشاط تجاري واحد أو أكثر :</Text>  وجود حساب لنشاطك التجاري على موقعك للتجارة الإلكترونية يتيح للعضو أن يعمل ويتلقى بطاقة ائتمان ومحفظة نقود إلكترونية مؤمنتين. وفضلا عن إدارة نشاط تجاري ما، يستطيع الشخص أيضا إرسال نقود وتبديل عملات وكسب 
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>إدارة نشاط تجاري واحد أو أكثر :</Text>  وجود حساب لنشاطك التجاري على موقعك للتجارة الإلكترونية يتيح للعضو أن يعمل ويتلقى بطاقة ائتمان ومحفظة نقود إلكترونية مؤمنتين. وفضلا عن إدارة نشاط تجاري ما، يستطيع الشخص أيضا إرسال نقود وتبديل عملات وكسب 
               </Text>
               <Image source={ tag_icon } style={ styles.icon_ar} resizeMod="contain" />
             </View>
             <View style={styles.tag_ar}>
               <Text style={styles.content_ar}>
-                <Text style={{fontWeight: 'bold'}}>جمع أموال :</Text> مواقع التجارة الإلكترونية التي نصممها يمكن أن تشمل حسابا للتبرعات، ويتم إتاحة هذا الحساب، على وجه الخصوص، لأسباب مهمة مثل جمع التبرعات لمؤسسة خيرية أو قضية اجتماعية.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>جمع أموال :</Text> مواقع التجارة الإلكترونية التي نصممها يمكن أن تشمل حسابا للتبرعات، ويتم إتاحة هذا الحساب، على وجه الخصوص، لأسباب مهمة مثل جمع التبرعات لمؤسسة خيرية أو قضية اجتماعية.
               </Text>
               <Image source={ tag_icon } style={ styles.icon_ar} resizeMod="contain" />
             </View>
             <View style={styles.tag_ar}>
               <Text style={styles.content_ar}>
-                <Text style={{fontWeight: 'bold'}}>سداد مبالغ :</Text> توقف عن توقيع شيكات. تصميم التجارة الإلكترونية ذو السعر الميسور الذي صممته «نرد» سيتيح لك فتح حسابا للدفع على الإنترنت. ببساطة، ادخل على الحساب وادفع في لحظة!
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>سداد مبالغ :</Text> توقف عن توقيع شيكات. تصميم التجارة الإلكترونية ذو السعر الميسور الذي صممته «نرد» سيتيح لك فتح حسابا للدفع على الإنترنت. ببساطة، ادخل على الحساب وادفع في لحظة!
               </Text>
               <Image source={ tag_icon } style={ styles.icon_ar} resizeMod="contain" />
             </View>
             <View style={styles.tag_ar}>
               <Text style={styles.content_ar}>
-                <Text style={{fontWeight: 'bold'}}>الأنشطة المصرفية :</Text> تقدم «نرد» بأسعار ميسرة نظاما يستند على إقامة حساب إلكتروني، مما يتيح لأي فرد لديه عنوان بريد إلكتروني إرسال واستقبال مبالغ بشكل آمن عبر الإنترنت باستخدام بطاقة ائتمان أو حساب مصرفي.
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>الأنشطة المصرفية :</Text> تقدم «نرد» بأسعار ميسرة نظاما يستند على إقامة حساب إلكتروني، مما يتيح لأي فرد لديه عنوان بريد إلكتروني إرسال واستقبال مبالغ بشكل آمن عبر الإنترنت باستخدام بطاقة ائتمان أو حساب مصرفي.
               </Text>
               <Image source={ tag_icon } style={ styles.icon_ar} resizeMod="contain" />
             </View>
             <View style={styles.tag_ar}>
               <Text style={styles.content_ar}>
-                <Text style={{fontWeight: 'bold'}}>الأنشطة الإدارية :</Text> كما تتيح لك منصاتنا على الإنترنت إدارة العمليات الإدارية مثل إرسال فواتير وتلقي فواتير وإلغاء الفواتير
+                <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>الأنشطة الإدارية :</Text> كما تتيح لك منصاتنا على الإنترنت إدارة العمليات الإدارية مثل إرسال فواتير وتلقي فواتير وإلغاء الفواتير
               </Text>
               <Image source={ tag_icon } style={ styles.icon_ar} resizeMod="contain" />
             </View>
@@ -509,6 +509,7 @@ const styles = StyleSheet.create({
     color: '#848484',
     lineHeight: 20,
     marginBottom: 20,
+    fontFamily: NORMAL_FONT,
   },
   content_ar: {
     flex: 1,
@@ -517,25 +518,24 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   title: {
     flex: 1,
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   title_ar: {
     flex: 1,
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
     textAlign: 'right',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   tag: {
     flexDirection: 'row',

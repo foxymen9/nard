@@ -12,6 +12,7 @@
     "react-native": "^0.51.0",
     "react-native-device-info": "^0.21.5",
     "react-native-extra-dimensions-android": "^0.21.0",
+    "react-native-iphone-x-helper": "^1.0.2",
     "react-native-key-value-store": "^1.0.1",
     "react-native-orientation-loading-overlay": "^0.1.4",
     "react-native-simple-picker": "^1.4.3",

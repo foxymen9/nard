@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 const tag_icon = require('../../../../assets/imgs/services_detail/tag_icon.png');
-import { NORMAL_FONT } from '../../../styles/commonStyles';
+import { NORMAL_FONT, NORMAL_BOLD_FONT } from '../../../styles/commonStyles';
 
 class SeoPage extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class SeoPage extends Component {
             This mode of advertising helps you promote your product or service and reduce dependence on the sales team. You can get queries and new business inquiries right in your inbox. Also, SEO services are customized for your business hence it provides ease in establishing a niche and targeting the right audience.
           </Text>
           <Text style={styles.content}>
-            <Text style={{fontWeight: 'bold'}}>For example,</Text> a buyer in Europe might not know about a business or brand name providing web site designing services in Saudi Arabia. Therefore, he or she will search for a keyword / phrase like, 'Web Designer in Saudi Arabia or Affordable Web Designing services in Saudi Arabia'. Now, the search engines will identify these phrases and list down the relevant web sites that are optimized with these keywords.
+            <Text style={{ fontFamily: NORMAL_BOLD_FONT }}>For example,</Text> a buyer in Europe might not know about a business or brand name providing web site designing services in Saudi Arabia. Therefore, he or she will search for a keyword / phrase like, 'Web Designer in Saudi Arabia or Affordable Web Designing services in Saudi Arabia'. Now, the search engines will identify these phrases and list down the relevant web sites that are optimized with these keywords.
           </Text>
           <Text style={styles.content}>
             Hence, a web site company in Saudi Arabia can reach out to the buyer in Europe as it has identified these phrases and built an effective web site around it.
@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     color: '#848484',
     lineHeight: 20,
     marginBottom: 20,
+    fontFamily: NORMAL_FONT,
   },
   content_ar: {
     flex: 1,
@@ -227,25 +228,24 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 20,
     textAlign: 'right',
+    fontFamily: NORMAL_FONT,
   },
   title: {
     flex: 1,
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   title_ar: {
     flex: 1,
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#1C92D0',
     lineHeight: 20,
     marginBottom: 10,
     textAlign: 'right',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   tag: {
     flexDirection: 'row',

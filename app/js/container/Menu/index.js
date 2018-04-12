@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   menu: {
     right: 0,
     paddingRight: 20,
-    paddingTop: 40,
+    paddingTop: 20,
     position: 'absolute',
   },
   menuIcon: {

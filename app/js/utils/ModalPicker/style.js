@@ -44,7 +44,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         color: '#333',
         fontSize: FONT_SIZE,
-        fontFamily: 'NotoKufiArabic',
+        fontFamily: 'NotoKufiArabic-Regular',
     },
 
     cancelStyle: {
@@ -58,7 +58,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         color: '#333',
         fontSize: FONT_SIZE,
-        fontFamily: 'NotoKufiArabic',
+        fontFamily: 'NotoKufiArabic-Regular',
     },
 
     optionStyle: {
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontSize: FONT_SIZE,
         color: HIGHLIGHT_COLOR,
-        fontFamily: 'NotoKufiArabic',
+        fontFamily: 'NotoKufiArabic-Regular',
     },
 
     sectionStyle: {
@@ -83,6 +83,6 @@ export default StyleSheet.create({
     sectionTextStyle: {
         textAlign: 'center',
         fontSize: FONT_SIZE,
-        fontFamily: 'NotoKufiArabic',
+        fontFamily: 'NotoKufiArabic-Regular',
     }
 });

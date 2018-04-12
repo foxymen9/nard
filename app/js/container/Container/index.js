@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
   navBar: {
     backgroundColor: commonColors.title,
     flexDirection: 'row',
+    alignItems: 'center',
     paddingTop: statusBar,
     height: navBar-2,
     width: screenWidth,
@@ -189,13 +190,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: 19,
-    marginTop: 20,
     fontFamily: NORMAL_FONT,
   },
   menu: {
     right: 0,
     paddingRight: 20,
-    paddingTop: 20,
+    paddingTop: statusBar,
     position: 'absolute',
     width: 50,
     height: 50,
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   back: {
     left: 0,
     paddingLeft: 20,
-    paddingTop: 20,
+    paddingTop: statusBar,
     position: 'absolute',
     width: 50,
     height: 50,

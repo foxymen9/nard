@@ -3,7 +3,7 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
-
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 import ExtraDimensions from 'react-native-extra-dimensions-android';
 
 export const { width: screenWidthIOS, height: screenHeightIOS } = Dimensions.get('window');
@@ -54,10 +54,11 @@ export function getTextareaPadding() {
     return 30;
 }
 
-export const statusBar = 20;
-export const navBar = 80;
+export const statusBar = Platform.OS === 'ios' ? ifIphoneX(20, 10) : 10;
+export const navBar = Platform.OS === 'ios' ? ifIphoneX(80, 70) : 70;
 export const inputMargin = getInputMargin();
 export const subWidth = screenWidth * 0.8;
 export const textPadding = getTextareaPadding();
 
-export const NORMAL_FONT = 'NotoKufiArabic';
+export const NORMAL_FONT = 'NotoKufiArabic-Regular';
+export const NORMAL_BOLD_FONT = 'NotoKufiArabic-Bold';

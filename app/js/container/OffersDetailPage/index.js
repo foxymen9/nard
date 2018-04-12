@@ -28,7 +28,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import * as commonColors from '../../styles/commonColors';
-import { screenWidth, screenHeight, statusBar, navBar, subWidth, NORMAL_FONT } from '../../styles/commonStyles';
+import { screenWidth, screenHeight, statusBar, navBar, subWidth, NORMAL_FONT, NORMAL_BOLD_FONT } from '../../styles/commonStyles';
 import language from '../../utils/language/language';
 import Container from '../Container';
 
@@ -159,17 +159,15 @@ const styles = StyleSheet.create({
     fontFamily: NORMAL_FONT,
   },
   boldText: {
-    fontWeight: 'bold',
     fontSize: 16,
     color: commonColors.title,
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   boldText_ar: {
-    fontWeight: 'bold',
     fontSize: 16,
     color: commonColors.title,
     textAlign: 'right',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   subContainer: {
     width: screenWidth,
@@ -183,21 +181,19 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.9,
   },
   contentTitleText: {
-    fontWeight: 'bold',
     fontSize: 14,
     color: commonColors.grayTitleText,
     lineHeight: 20,
     marginBottom: 10,
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   contentTitleText_ar: {
-    fontWeight: 'bold',
     fontSize: 14,
     color: commonColors.grayTitleText,
     lineHeight: 20,
     marginBottom: 10,
     textAlign: 'right',
-    fontFamily: NORMAL_FONT,
+    fontFamily: NORMAL_BOLD_FONT,
   },
   contentText_ar: {
     fontSize: 14,
