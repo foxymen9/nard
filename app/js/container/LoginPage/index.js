@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
   },
   languageIcon: {
     height: 30,
-    marginTop: 5,
+    marginTop: 15,
     width: 30,
   },
   menuIcon: {
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
   },
   siteWrapper: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 30,
   },
   siteText: {
     backgroundColor: 'transparent',
