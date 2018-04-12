@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textTitle: {
-    fontSize: 14,
+    fontSize: 15,
     textAlign: 'center',
     color: commonColors.title,
     backgroundColor: 'transparent',
@@ -169,13 +169,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   textContent: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     color: commonColors.title,
   },
   textContentNormal: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'normal',
     color: commonColors.title,
   },

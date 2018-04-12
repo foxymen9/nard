@@ -8,9 +8,9 @@ const language = {
     "mobileNumber": {"EN": "Mobile Number", "AR": "رقم الجوال"},
     //Main Page
     "startProject": {"EN": "Start a new project", "AR": "بدء مشروع جديد"},
-    "services": {"EN": "Services", "AR": "خدمات"},
+    "services": {"EN": "Services", "AR": "خدماتنا"},
     "mainPageTitle": {"EN": "WEBSITE DEVELOPMENT, MOBILEAPPS, BRANDING, ONLINE MARKETING", 
-                        "AR": "تصميم المواقع/تطبيقات الجوال/تصميم الشعارات/ التسويق الإلكتروني"},
+                        "AR": "تصميم المواقع / تطبيقات الجوال / تصميم الشعارات / التسويق الإلكتروني"},
     "mainPageContent_b": {"EN": "PIONEER OF WEBSITES DEVELOPMENT", "AR": "رواد تصميم المواقع في"},
     "mainPageContent_n": {"EN": " IN KINGDOM OF SAUDI ARABIA", "AR": " المملكة العربية السعودية"},
     //My Services Page
@@ -19,14 +19,14 @@ const language = {
     "serviceName": {"EN": "Service Name", "AR": "إسم الخدمة"},
     "totalCount": {"EN": "Total Count", "AR": "إجمالي الخدمات"},
     "hostingText": {"EN": "HOSTING", "AR": "الإستضافة"},
-    "domainText": {"EN": "DOMAIN", "AR": "إسم النطاق"},
+    "domainText": {"EN": "DOMAIN", "AR": "النطاق"},
     "smsText": {"EN": "SMS", "AR": "الرسائل القصيرة"},
     "sslText": {"EN": "SSL & CDN", "AR": "الحماية CDN & SSL"},
     "chatText": {"EN": "LIVE CHATTING", "AR": "الدعم المباشر"},
     "kenticoText": {"EN": "KENTICO CMS & EMS", "AR": "Kentico كينتيكو"},
     "amcText": {"EN": "ANNUAL MAINTENANCE", "AR": "تطبيقات الجوال"},
-    "capacityText": {"EN": "Capacity", "AR": "سعة"},
-    "expiredDateText": {"EN": "Expiration Date", "AR": "تاريخ إنتهاء الصلاحية"},
+    "capacityText": {"EN": "Capacity", "AR": "السعة"},
+    "expiredDateText": {"EN": "Expiration Date", "AR": "إنتهاء الخدمة"},
     //Menu
     "menuHome": {"EN": "Home", "AR": "الصفحة الرئيسية"},
     "menuOurServices": {"EN": "My Services", "AR": "خدماتي"},
@@ -41,11 +41,11 @@ const language = {
     "startProject": {"EN": "START A PROJECT", "AR": "بدء مشروع جديد"},
     "fullName": {"EN": "Full Name", "AR": "الإسم الكامل"},
     "phone": {"EN": "Telephone Number", "AR": "رقم الجوال"},
-    "department_txt": {"EN": "Select a service", "AR": "إختر القسم "},
+    "department_txt": {"EN": "Select a service", "AR": "إختر الخدمة"},
     "content": {"EN": "Enter your text...", "AR": "أكتب رسالتك"},
     "startNewProject": {"EN": "Start a new project", "AR": "بدء مشروع جديد"},
     //Ticket Page
-    "ticket": {"EN": "TICKETS", "AR": "تذاكر"},
+    "ticket": {"EN": "TICKETS", "AR": " الدعم الفني"},
     "submit": {"EN": "Submit", "AR": "تقديم"},
     //Profile Page
     "company": {"EN": "Company Name", "AR": "إسم المنشأة"},
@@ -57,9 +57,9 @@ const language = {
     "offerSubTitle": {"EN": "We will add 30% discount for new hostry", "AR": "تخفيض 50%  لطلب استضافة جديدة"},
     //Offers Detail Page
     "offersDetail": {"EN": "OFFER DETAILS", "AR": "تفاصيل العرض"},
-    "apply": {"EN": "Apply", "AR": "إرسال"},
+    "apply": {"EN": "Apply", "AR": "طلب العرض"},
     //Services Page
-    "sWebsite": {"EN": "Website", "AR": "المواقع الإلكتروني"},
+    "sWebsite": {"EN": "Website", "AR": "تصميم المواقع"},
     "sEcommerce": {"EN": "E-commerce", "AR": "التجارة الإلكترونية"},
     "sLogoDesign": {"EN": "Logo Design", "AR": "تصميم الشعارات"},
     "sMultimediaCD": {"EN": "Multimedia CD", "AR": "الوسائط المتعددة"},
