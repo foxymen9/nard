@@ -148,7 +148,8 @@ class Login extends Component {
     const { apiToken } = this.props;
     const { email } = this.state;
     if (apiToken) {
-      const phoneNumber = this.refs.phone.getValue();
+      // const phoneNumber = this.refs.phone.getValue();
+      const phoneNumber = '+966558644773'
       const data = { email: email, telephone: phoneNumber };
       this.props.userLoginIn(data, apiToken.api_token);
     }

@@ -149,13 +149,19 @@ class Menu extends Component {
   }
 
  _renderRow (rowData, sectionID, rowID, highlightRow) {
-   const { menuSelectedID } = this.props;
+   const { menuSelectedID, currentLanguage } = this.props;
     return (
       <TouchableOpacity onPress={()=>{highlightRow(sectionID, rowID); this.onItemSelect(rowData, rowID)}}>
-        <View style={rowID == menuSelectedID ? styles.listViewSelect : styles.listView}>
-          <Text  style={styles.listViewText}>{rowData}</Text>
-          <Image source={ arrow } style={ styles.listArrow } resizeMode="contain" />
-        </View>
+        {currentLanguage == 'EN' ?
+          <View style={rowID == menuSelectedID ? styles.listViewSelect : styles.listView}>
+            <Text  style={styles.listViewText}>{rowData}</Text>
+            <Image source={ arrow } style={ styles.listArrow } resizeMode="contain" />
+          </View> :
+          <View style={rowID == menuSelectedID ? styles.listViewSelect : styles.listView}>
+            <Image source={ arrow } style={ styles.listArrowAr } resizeMode="contain" />
+            <Text  style={styles.listViewText}>{rowData}</Text>
+          </View> 
+        }
       </TouchableOpacity>
     )
   }
@@ -287,6 +293,9 @@ const styles = StyleSheet.create({
   menuIcon: {
     height: 30,
     width: 30,
+  },
+  listArrowAr: {
+    transform: [{scaleX: -1}]
   }
 });
 

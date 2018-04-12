@@ -34,7 +34,7 @@ const language = {
     "menuEditProfile": {"EN": "My Account", "AR": "حسابي"},
     "menuTicket": {"EN": "Support Ticket", "AR": "الدعم الفني"},
     "menuVisitNard": {"EN": "Visit Nard.sa", "AR": "زيارة Nard.sa"},
-    "menuLanguage": {"EN": "Language : العربية", "AR": "اللغة : EN"},
+    "menuLanguage": {"EN": "العربية", "AR": "ENGLISH"},
     "menuLogout": {"EN": "Log out", "AR": "تسجيل الخروج"},
     "menuLogin": {"EN": "Login page", "AR": "صفحة تسجيل الدخول"},
     //Start a Project Page
