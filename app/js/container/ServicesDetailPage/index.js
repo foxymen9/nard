@@ -181,13 +181,13 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
+    lineHeight: 25,
     fontFamily: NORMAL_FONT,
   },
   boldText: {
     fontSize: 16,
     color: commonColors.title,
-    lineHeight: 20,
+    lineHeight: 25,
     fontFamily: NORMAL_BOLD_FONT,
   },
   subContainer: {
